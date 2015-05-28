@@ -1,37 +1,16 @@
-# Java
-*.class
-*.jar
-*.war
-*.ear
-
-# Eclipse
+.class
+.jar
 .project
 .classpath
 .settings
 
-# Idea
-.idea
-*.iml
-*.iws
-*.ipr
-
-# OS
-Thumbs.db
-.DS_Store
-
-# Gradle
-.gradle
-!gradle-wrapper.jar
-
-# Maven
-target
-
-# Build
-out
-build
-bin
-
-# Other
-*.log
-*.swp
-*.bak
+target/
+**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
