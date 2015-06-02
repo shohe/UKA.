@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+#project{
+	width: 1200px;
+	height: 400px;
+	margin-left: 50px;
+	margin-right: 50px;
+	background-color: gray;
+}
+
+#l_column{
+	width: 750px;
+	float: left;
+}
+
+#r_column{
+	width: 450px;
+	float: left;
+}

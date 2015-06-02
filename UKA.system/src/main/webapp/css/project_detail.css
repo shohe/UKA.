@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+#project{
+	width: 1200px;
+	height: 400px;
+	margin-left: 50px;
+	margin-right: 50px;
+	background-color: gray;
+}
+
+#l_column{
+	width: 750px;
+	float: left;
+}
+
+#r_column{
+	width: 450px;
+	float: left;
+}
+
+#comment{
+	width: 1200px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+#project_value{
+	width: 700px;
+	height: 100px;
+	margin-top: 100px;
+	float: left;
+}
+
+#comment{
+	width: 700px;
+	height: 200px;
+	margin-top: 50px;
+	text-align: right;
+	clear: both;
+	float: left;
+}
+
+#comment_content{
+	width: 700px;
+	height: 100px;
+}
+
+/*コメントボタン　デザイン*/
+.comment_submit {
+  background: #dedbde;
+  background-image: -webkit-linear-gradient(top, #dedbde, #969a9c);
+  background-image: -moz-linear-gradient(top, #dedbde, #969a9c);
+  background-image: -ms-linear-gradient(top, #dedbde, #969a9c);
+  background-image: -o-linear-gradient(top, #dedbde, #969a9c);
+  background-image: linear-gradient(to bottom, #dedbde, #969a9c);
+  -webkit-border-radius: 11;
+  -moz-border-radius: 11;
+  border-radius: 11px;
+  font-family: Arial;
+  color: #050505;
+  font-size: 15px;
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+}
+
+.comment_submit:hover {
+  text-decoration: none;
+}

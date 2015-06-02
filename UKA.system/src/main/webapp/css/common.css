@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+body{
+	width: 1300px;
+	height: auto;
+	margin: 0 auto;
+	background-color: white;
+	vertical-align: baseline;
+}
