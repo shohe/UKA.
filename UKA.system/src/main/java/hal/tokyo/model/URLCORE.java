@@ -24,16 +24,20 @@ public enum URLCORE {
 	 * @param urlCore
 	 * @return
 	 */
-	public static String getJsp(String url) {
-		String jspPath = "/JSP/index.jsp";
+	public static String[] getJspWithServlet(String url) {
+		String[] jspPath = {"/JSP/index.jsp", "top/"};
 		if(LIST.getURL().equals(url)) {
-			jspPath = "/JSP/list.jsp";
+			jspPath[0] = "/JSP/list.jsp";
+			jspPath[1] = "/ListServlet";
 		} else if(DETAIL.getURL().equals(url)) {
-			jspPath = "/JSP/detail.jsp";
+			jspPath[0] = "/JSP/detail.jsp";
+			jspPath[1] = "/DetailServlet";
 		} else if(POST.getURL().equals(url)) {
-			jspPath = "/JSP/post.jsp";
+			jspPath[0] = "/JSP/post.jsp";
+			jspPath[1] = "/PostServlet";
 		} else if(ERROR.getURL().equals(url)) {
-			jspPath = "/JSP/error.jsp";
+			jspPath[0] = "/JSP/error.jsp";
+			jspPath[1] = "/ErrorServlet";
 		}
 		return jspPath;
 	}
@@ -52,9 +56,9 @@ public enum URLCORE {
 		
 		splitURL = reformURL.split("/", 0);
 		String pageURL = (splitURL.length > 2) ? "/UKA_system/"+splitURL[2]+"/" : "/UKA_system/";
-		Access access = new Access(reformURL, getJsp(pageURL));
-		if(splitURL.length == 4) access.setMethod(splitURL[3]);
-		
+		Access access = new Access(reformURL, getJspWithServlet(pageURL));
+		if(splitURL.length > 3) access.setMethod(splitURL[3]);
+
 		return access;
 	}
 }
