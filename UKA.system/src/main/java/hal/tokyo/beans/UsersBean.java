@@ -1,7 +1,7 @@
 package hal.tokyo.beans;
 
 /**
- * ƒ†[ƒU[î•ñBean
+ * ãƒ¦ãƒ¼ã‚¶æƒ…å ±ãƒ†ãƒ¼ãƒ–ãƒ«Bean
  * 
  * @author Uka system
  */
