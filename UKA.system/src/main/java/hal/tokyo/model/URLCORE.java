@@ -25,7 +25,7 @@ public enum URLCORE {
 	 * @return
 	 */
 	public static String[] getJspWithServlet(String url) {
-		String[] jspPath = {"/JSP/index.jsp", "/TopServlet"};
+		String[] jspPath = {"/JSP/index.jsp", "top/"};
 		if(LIST.getURL().equals(url)) {
 			jspPath[0] = "/JSP/list.jsp";
 			jspPath[1] = "/ListServlet";
@@ -57,8 +57,8 @@ public enum URLCORE {
 		splitURL = reformURL.split("/", 0);
 		String pageURL = (splitURL.length > 2) ? "/UKA_system/"+splitURL[2]+"/" : "/UKA_system/";
 		Access access = new Access(reformURL, getJspWithServlet(pageURL));
-		if(splitURL.length == 4) access.setMethod(splitURL[3]);
-		
+		if(splitURL.length > 3) access.setMethod(splitURL[3]);
+
 		return access;
 	}
 }

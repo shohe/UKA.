@@ -34,12 +34,7 @@ public class RootServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getRequestURI();
 		Access access = URLCORE.access(url);
-		
-		// servletに飛ばす
-		request.setAttribute("access", access);
-		ServletContext servletContext = getServletContext();
-		RequestDispatcher dispatcher = servletContext.getRequestDispatcher(access.getServlet());
-		dispatcher.forward(request, response);
+		response.sendRedirect(access.getServlet());
 	}
 
 	/**

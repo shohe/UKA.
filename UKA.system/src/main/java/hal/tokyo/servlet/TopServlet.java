@@ -1,10 +1,15 @@
 package hal.tokyo.servlet;
 
 import hal.tokyo.model.Access;
+import hal.tokyo.model.URLCORE;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class TopServlet
  */
-@WebServlet("/TopServlet")
+@WebServlet("/top/*")
 public class TopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +36,9 @@ public class TopServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Access access = (Access) request.getAttribute("access");
+		String url = request.getRequestURI();
+		Access access = URLCORE.access(url);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(access.getJsp());
 		dispatcher.forward(request, response);
 	}
