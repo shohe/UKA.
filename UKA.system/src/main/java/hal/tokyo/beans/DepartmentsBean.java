@@ -1,14 +1,13 @@
 package hal.tokyo.beans;
 
-import java.io.Serializable;
-
 /**
- * 部署テーブル用Bean
- * 
- * @author Uka system
- *
- */
-public class DepartmentsBean implements Serializable{
+*
+* 驛ｨ鄂ｲ繝�繝ｼ繝悶Ν
+*
+* @author UKA.System
+*
+*/
+public class DepartmentsBean{
 	private String department_Id;
 	private String department_Name;
 	public String getDepartment_Id() {

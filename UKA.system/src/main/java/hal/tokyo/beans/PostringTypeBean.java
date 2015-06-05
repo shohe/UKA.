@@ -1,5 +1,13 @@
 package hal.tokyo.beans;
 
+/**
+*
+* 投稿タイプテーブルBean
+*
+* @author UKA.System
+*
+*/
+
 public class PostringTypeBean {
 	private int posting_Id;
 	private String posting_Type_Name;

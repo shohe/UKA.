@@ -1,5 +1,13 @@
 package hal.tokyo.beans;
 
+/**
+*
+* コメントテーブルBean
+*
+* @author UKA.System
+*
+*/
+
 public class View {
 	private int view_Id;
 	private String user_Id;

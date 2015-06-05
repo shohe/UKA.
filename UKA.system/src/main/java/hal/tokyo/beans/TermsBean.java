@@ -1,5 +1,13 @@
 package hal.tokyo.beans;
 
+/**
+*
+* 達成条件テーブルBean
+*
+* @author UKA.System
+*
+*/
+
 public class TermsBean {
 	private int posting_Id;
 	private String terms_Period;

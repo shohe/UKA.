@@ -1,10 +1,12 @@
 package hal.tokyo.beans;
 
 /**
- * 投稿テーブル用Bean
- * 
- * @author Uka system
- */
+*
+* 謚慕ｨｿ繝�繝ｼ繝悶ΝBean
+*
+* @author UKA.System
+*
+*/
 public class PostingsBean {
 	private int posting_Id;
 	private String user_Id;
