@@ -1,7 +1,39 @@
 <%@ page pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp" />
 <body>
-	<div id="bog_topic_box"></div>
+	<div id="bog_topic_box">
+		<div id="big_topic_left">
+			<div class="topic_graph">
+				<canvas id="doughnut_chart0" height="280" width="380"></canvas>
+				<div class="doughnut_data">
+					<div class="doughnut_data_p">80%</div>
+				</div>
+			</div>
+			<div class="topic_value">
+				<div class="topic_value_left">残り期間：<span class="big_topic_span">15</span>日</div>
+				<div class="topic_value_right"><span class="big_topic_span"><i class="fa fa-male"></i> 58</span>人が評価しています。</div>
+			</div>
+		</div>
+		<div id="big_topic_right">
+			<div class="top">
+				タイトルタイトルタイトルた。タイトルタイトルタイトルた。タイトルタイトルタイトルた。
+				タイトルタイトルタイトルた。タイトルタイトルタイトルた。タイトルタイトルタイトルた。
+				タイトルタイトルタイトルた。タイトルタイトルタイトルた。タイトルタイトルタイトルた。
+				天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。
+				天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。
+				天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。
+			</div>
+			<div class="bottom">
+				<div class="topic_user">
+					<div class="user_pic"><img src="#" alt="ユーザ画像" /></div>
+					<div class="user_info">
+						近藤武蔵 : システム部<br/>
+						<span class="user_comment">ぽよはスペイン語でチキンって意味らしいよ。。近藤武蔵です。ハゲではないです。</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div id="topic_box_wrap">
 		<!-- TOPIC -->
@@ -13,7 +45,7 @@
 				結局僕らにできることなんて何もない
 			</div>
 			<div class="topic_user">
-				<div class="user_pic"><img src="<%=request.getContextPath()%>/img/yotsuba.jpg" alt="ユーザ画像" /></div>
+				<div class="user_pic"><img src="#" alt="ユーザ画像" /></div>
 				<div class="user_info">
 					近藤武蔵 : システム部<br/>
 					<span class="user_comment">ぽよはスペイン語でチキンって意味らしいよ。。近藤武蔵です。ハゲではないです。</span>
