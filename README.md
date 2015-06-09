@@ -1,10 +1,10 @@
-# UKA.
+﻿# UKA.
 
 HAL TOKYO CASE STUDY
 ---
 team Tamago-Club
 * ohtani
-* endo
+* enfumidayo
 * kumagai
 * takaki
 * nitta
