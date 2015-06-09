@@ -16,6 +16,9 @@ public class UsersDao {
 	/** Connection **/
 	private Connection con;
 
+	/**
+	 * コンストラクタ
+	 */
 	public UsersDao(){
 
 
@@ -57,6 +60,8 @@ public class UsersDao {
 			table.add(record);
 		}
 
+		findAll.close();
+
 		return table;
 
 	}
@@ -96,27 +101,43 @@ public class UsersDao {
 			table.add(record);
 		}
 
+		findById.close();
+
 		return table;
 
 	}
 
 
 	/**
-	 * ユーザーテーブル特定IDのデータ取得
+	 * データの登録
 	 *
 	 * @author UKA.System
 	 *
-	 * @return table
+	 * @param mailaddress
+	 * @param password
+	 * @param name
+	 * @param profileComment
+	 * @param department_Id
+	 * @param image
+	 * @param status
+	 * @return result
 	 * @throws SQLException
 	 */
-	public List<UsersBean> insert(String mailaddress,String password,String name,String profileComment,String department_Id,String image,int status) throws SQLException{
+	public int insert(String mailaddress,String password,String name,String profileComment,String department_Id,String image,int status) throws SQLException{
 
-		PreparedStatement findById = con.prepareStatement("select * from users where mailaddress = ? and password = ?");
+		PreparedStatement insert = con.prepareStatement("insert into users values(?,?,?,?,?,?,?);");
 
-		findById.setString(1, mailaddress);
-		findById.setString(2, password);
+		insert.setString(1, mailaddress);
+		insert.setString(2, password);
+		insert.setString(3, name);
+		insert.setString(4, profileComment);
+		insert.setString(5, department_Id);
+		insert.setString(6, image);
+		insert.setInt(7, status);
 
-		ResultSet result = findById.executeQuery();
+		int result = insert.executeUpdate();
+
+		/*
 
 		ArrayList<UsersBean> table = new ArrayList<UsersBean>();
 
@@ -135,7 +156,82 @@ public class UsersDao {
 			table.add(record);
 		}
 
+
+
 		return table;
+
+		*/
+
+		insert.close();
+
+		return result;
+
+	}
+
+
+	public int update(String mailaddress,String password,String name,String profileComment,String department_Id,String image,int status) throws SQLException{
+
+		PreparedStatement update = con.prepareStatement("update users set mailaddress = ?, password = ?, name = ?, profileComment = ?, department_Id = ?, image = ?, status = ?");
+
+		update.setString(1, mailaddress);
+		update.setString(2, password);
+		update.setString(3, name);
+		update.setString(4, profileComment);
+		update.setString(5, department_Id);
+		update.setString(6, image);
+		update.setInt(7, status);
+
+		int result = update.executeUpdate();
+
+		update.close();
+
+		return result;
+
+	}
+
+	/**
+	 * データの削除
+	 *
+	 * @author UKA.System
+	 *
+	 *
+	 * @param mailaddress
+	 * @return result
+	 * @throws SQLException
+	 */
+	public int delete(String mailaddress) throws SQLException{
+
+		PreparedStatement delete = con.prepareStatement("delete from users where mailaddress = ?");
+
+		delete.setString(1, mailaddress);
+
+		int result = delete.executeUpdate();
+
+		delete.close();
+
+		return result;
+
+	}
+
+	/**
+	 * UsersDaoのコミット
+	 *
+	 * @throws SQLException
+	 */
+	public void commit() throws SQLException{
+
+		con.commit();
+
+	}
+
+	/**
+	 * UsersDaoのクローズ
+	 *
+	 * @throws SQLException
+	 */
+	public void close() throws SQLException{
+
+		con.close();
 
 	}
 
