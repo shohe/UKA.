@@ -17,6 +17,70 @@ body{
 	margin-bottom: 30px;
 }
 
+#big_topic_left {
+	width: 50%;
+	height: 100%;
+	background: #dee7eb;
+	float: left;
+}
+
+#big_topic_left .topic_graph {
+	margin: 0 auto;
+	margin-top: 15px;
+}
+
+#big_topic_left .doughnut_data_p {
+	top: 65px;
+}
+
+#big_topic_left .topic_value {
+	width: 60%;
+	height: 50px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.topic_value_left, .topic_value_right {
+	width: 50%;
+	height: 100%;
+	font-size: 12px;
+	float: left;
+}
+
+.big_topic_span {
+	font-size: 25px;
+}
+
+#big_topic_right {
+	width: 50%;
+	height: 100%;
+	background: rgb(60, 123, 168);
+	float: left;
+}
+
+#big_topic_right .top {
+	width: 470px;
+	height: 160px;
+	padding: 10px 30px;
+	font-size: 14px;
+  	font-weight: bold;
+  	color: #fff;
+  	text-align: left;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+#big_topic_right .bottom {
+	width: 540px;
+	height: auto;
+	padding: 10px 30px;
+	color: #fff;
+}
+
+#big_topic_right .user_comment {
+	color: #fff;
+}
+
 #topic_box_wrap {
 	width: 1200px;
 	margin: 0 auto;
