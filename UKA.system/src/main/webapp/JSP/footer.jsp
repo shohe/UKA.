@@ -51,7 +51,7 @@
 			<li id="footer_li_r"><a href="#" id="l_uka">開発チームについて</a></li>
 		</ul>
 		<p>
-			Copylight
+			Copylight　ああああ
 		</p>
 	</div>
 </div>
