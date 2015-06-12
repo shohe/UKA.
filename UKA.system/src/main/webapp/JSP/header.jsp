@@ -6,11 +6,17 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8" />
 	<meta http-equiv="Content-Style-Type" content="text/css"; charset="UTF-8" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<style type="text/css">
 		<%@ include file="/css/reset.css" %>
 		<%@ include file="/css/font.css" %>
+		<%@ include file="/css/common.css" %>
 		<%@ include file="/css/header.css" %>
 	</style>
+	<script type="text/javascript"><%@ include file="/js/jquery/jquery-2.1.4.min.js" %></script>
+	<script type="text/javascript"><%@ include file="/js/chart/Chart.js" %></script>
+	<script type="text/javascript"><%@ include file="/js/chart/chartData.js" %></script>
+	
 <title>header</title>
 </head>
 
