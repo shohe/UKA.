@@ -7,32 +7,76 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>UKA.system Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  
+  
   <dependencies>
+  	<!-- junit -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>3.8.1</version>
+	    <scope>test</scope>
     </dependency>
+    
+    
+    <!-- servlet -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.0.1</version>
-      <scope>provided</scope>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>3.0.1</version>
+	    <scope>provided</scope>
     </dependency>
     <dependency>
 		<groupId>javax.servlet</groupId>
 		<artifactId>jstl</artifactId>
 		<version>1.2</version>
 	</dependency>
+	
+	
+	<!-- mysql -->
 	<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.35</version>
-</dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.35</version>
+	</dependency>
+	
+	
+	<!-- jstl -->
+    <dependency>
+    	<groupId>javax.servlet</groupId>
+    	<artifactId>jstl</artifactId>
+    	<version>1.2</version>
+    </dependency>
+    
+    
+    <!-- Spring dependencies -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+		<version>4.1.6.RELEASE</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+		<version>4.1.6.RELEASE</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>4.1.6.RELEASE</version>
+	</dependency>
   </dependencies>
+  
+  
+  
   <build>
+  	<!-- file -->
     <finalName>UKA.system</finalName>
+    
+    
+    <!-- plugin -->
     <plugins>
         <plugin>
             <groupId>org.mortbay.jetty</groupId>
@@ -56,6 +100,7 @@
           </configuration>
       	</plugin>
     </plugins>
-
   </build>
+  
+  
 </project>
