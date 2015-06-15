@@ -38,7 +38,8 @@ public enum URLCORE {
 		} else if(ERROR.getURL().equals(url)) {
 			jspPath[0] = "/JSP/error.jsp";
 			jspPath[1] = "/ErrorServlet";
-		}
+			
+		} 
 		return jspPath;
 	}
 	
