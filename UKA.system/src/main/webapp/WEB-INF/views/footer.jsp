@@ -1,19 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8" />
-	<meta http-equiv="Content-Style-Type" content="text/css"; charset="UTF-8" />
-	<style type="text/css">
-		<%@ include file="/css/reset.css" %>
-		<%@ include file="/css/common.css" %>
-		<%@ include file="/css/footer.css" %>
-	</style>
-<title>Insert title here</title>
-</head>
-<body>
-<title>footer</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="footer">
 	<div id="l_footer">
 		<div id="l_column">

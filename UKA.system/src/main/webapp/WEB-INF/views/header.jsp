@@ -7,23 +7,21 @@
 	<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8" />
 	<meta http-equiv="Content-Style-Type" content="text/css"; charset="UTF-8" />
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<style type="text/css">
-		<%@ include file="/css/reset.css" %>
-		<%@ include file="/css/font.css" %>
-		<%@ include file="/css/common.css" %>
-		<%@ include file="/css/header.css" %>
-	</style>
-	<script type="text/javascript"><%@ include file="/js/jquery/jquery-2.1.4.min.js" %></script>
-	<script type="text/javascript"><%@ include file="/js/chart/Chart.js" %></script>
-	<script type="text/javascript"><%@ include file="/js/chart/chartData.js" %></script>
-	
-<title>header</title>
+	<link rel="stylesheet" href="<c:url value="/resources/css/reset.css" />">
+	<link rel="stylesheet" href="<c:url value="/resources/css/font.css" />">
+	<link rel="stylesheet" href="<c:url value="/resources/css/common.css" />">
+	<link rel="stylesheet" href="<c:url value="/resources/css/header.css" />">
+	<link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">	
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery-2.1.4.min.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/chart/Chart.min.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/chart/chartData.js" />"></script>
+<title>UKA.</title>
 </head>
 
 <body>
 	<div id="header_line"></div>
 	<div id="logo">
-		<div id="logo_img"><!-- <img src="#" alt="logo"> --></div>
+		<div id="logo_img"><img src="<c:url value="/resources/img/" />" alt="logo"></div>
 		<div class="logo_title" id="uka">UKA.</div>
 		<div class="logo_title" id="uka_text">nipponham business experts Ltd.</div>
 	</div>
