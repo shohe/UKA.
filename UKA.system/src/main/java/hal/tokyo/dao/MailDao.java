@@ -25,16 +25,14 @@ public class MailDao {
 		this.con = con;
 	}
 	
-	public int Mailinsert(String newRecord, String newRecord2) throws SQLException {
-		// stockテーブルupdate文
-		System.out.println("update突入");
-		System.out.println(newRecord);
-		System.out.println(newRecord2);
+	public int Mailinsert(String id, String title, String content) throws SQLException {
+		System.out.println("dao到達");
 		PreparedStatement update = con
-				.prepareStatement("update stock SET order_stock_count =? WHERE stock_product_id = ?");
-		update.setString(1, newRecord2);
-		update.setString(2, newRecord);
-		System.out.println("update1完了");
+				.prepareStatement("insert into administrator_mail (user_id,title,content) into (?,?,?);");
+		update.setString(1, id);
+		update.setString(2, title);
+		update.setString(3, content);
+		System.out.println("insert完了");
 		return update.executeUpdate();
 	}
 
