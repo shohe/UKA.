@@ -12,10 +12,25 @@
 <input type="text" name="user_id"/><br />
 めーる送信する対象の投稿ID:<br />
 <input type="text" name="post_id"/><br />
-たいとる:<br />
-<input type="text" name="title"/><br />
-ないよう:<br />
-<input type="text" name="content"/><br />
+たいとる(100文字以内です。):<br />
+<input type="text" maxlength="100" name="title"/><br />
+ないよう(1000文字以内です。):<br />
+
+<textarea name="content" cols="40" maxlength="1000" rows="5" wrap="physical" onKeyup="
+  o=document.getElementById('slen');
+  n=this.value.replace(/\s|　/gm,'').length;
+  o.value=n;
+  o.innerHTML=n;
+  o.style.color=(n>100)?'red':'blue';
+  document.getElementById('mes1').innerHTML=(n>1000)?'文字　文字制限を越えています。1000文字以内で入力してください。':'文字';
+  document.getElementById('mes2').innerHTML=(n>1000)?'':'　あと'+(1000-n)+'文字です。';
+">
+</textarea>
+<br /> <span id="slen"></span>
+<span id="mes1" style="font-size:12px">　</span>
+<span id="mes2" style="font-size:12px"></span>
+<br />
+
 <input type="submit" name="insert" value="insert"/>
 </form>
 

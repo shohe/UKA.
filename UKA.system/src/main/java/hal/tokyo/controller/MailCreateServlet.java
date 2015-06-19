@@ -34,7 +34,13 @@ public class MailCreateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("servletとうたつ");
+		
+		request.setCharacterEncoding("utf-8");
+		//HTTPレスポンスの文字コード設定
+		response.setContentType("text/html");
+		response.setCharacterEncoding("utf-8");
+		
+		System.out.println("管理者メールservletとうたつ");
 		String jspName = "/WEB-INF/viws/mailstart.jsp";
 		MailDao dao = null;
 
