@@ -5,6 +5,7 @@ import hal.tokyo.dao.UsersDao;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +39,8 @@ public class RegistModel extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		String jspName = "/WEB-INF/viws/regist.jsp";
 
 		UsersDao ud = new UsersDao();
 
@@ -75,7 +78,10 @@ public class RegistModel extends HttpServlet {
 
 			}
 
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher(jspName);
 
+				dispatcher.forward(request, response);
 
 
 		} catch (SQLException e) {
