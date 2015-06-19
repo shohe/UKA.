@@ -1,0 +1,31 @@
+.top_project_search {padding-left: 15px;}
+.top_project_search .top {
+    height: 80px;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: rgb(38, 88, 135);
+    line-height: 2em;
+}
+.messageTable {
+    width: 370px;
+}
+
+.messageTable table {width: 100%;}
+.messageTable table td{font-size: 13px; color: #444; font-weight: bold; padding: 5px 0;}
+.messageTable table i{font-size: 13px; color: rgb(153, 38, 66); margin-left: 7px;}
+.table_left {text-align: left;}
+#shubetsu {font-size: 12px; width: 340px;}
+#kenmei {font-size: 12px; width: 340px;}
+#naiyou {font-size: 12px; width: 340px; height: 80px;}
+.messageTable td button {font-size: 12px; width: 200px; margin-top: 25px; height: 40px;}
+#file-0a{color: #fff;}
+.form-inline .input-group>.form-control {
+  width: 340px;
+}
+.messageTable td button {
+  font-size: 12px;
+  width: 200px;
+  margin-top: 0px;
+  height: 34px;
+}
