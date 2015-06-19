@@ -235,4 +235,15 @@ public class UsersDao {
 
 	}
 
+	/**
+	 * UsersDaoのロールバック
+	 *
+	 * @throws SQLException
+	 */
+	public void rollback() throws SQLException{
+
+		con.rollback();
+
+	}
+
 }
