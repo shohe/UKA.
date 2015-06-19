@@ -62,7 +62,7 @@ public class RegistModel extends HttpServlet {
 			password = request.getParameter("password");
 			name = request.getParameter("name");
 			profileComment = request.getParameter("profileComment");
-			department_Id = 0;
+			department_Id = Integer.parseInt(request.getParameter("department_Id"));
 			image = "ないよ";
 			status = 0;
 

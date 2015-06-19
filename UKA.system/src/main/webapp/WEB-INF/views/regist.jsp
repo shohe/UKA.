@@ -12,17 +12,17 @@
 <div class="row headline"><!-- Begin Headline -->
     <div class="top_project_search">
         <div class="top">新規登録</div>
-        <form class="form-inline" method="post" action="RegistModel">
+        <form class="form-inline" method="post" action="regist_confirm_con">
         <div class="messageTable">
             <table>
                 <tr><td class="table_left">部署名<i class="fa fa-asterisk"></i></td></tr>
                 <tr><td>
-                    <select id="shubetsu" class="form-control">
-                      <option>お選びください。</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                    <select id="shubetsu" class="form-control" name="department_Id">
+                      <option value="1">お選びください。</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
                     </select>
                 </td></tr>
                 <tr><td class="table_left">名前<i class="fa fa-asterisk"></i></td></tr>
@@ -32,7 +32,7 @@
                 <tr><td class="table_left">パスワード<i class="fa fa-asterisk"></i></td></tr>
                 <tr><td><input type="text" id="kenmei" name="password" class="form-control" placeholder="半角英数字8文字以上16文字以下"></td></tr>
                 <tr><td class="table_left">パスワード（確認）<i class="fa fa-asterisk"></i></td></tr>
-                <tr><td><input type="text" id="kenmei" class="form-control" placeholder="コピー&amp;ペーストはおやめ下さい。"></td></tr>
+                <tr><td><input type="text" id="kenmei" name="password_c" class="form-control" placeholder="コピー&amp;ペーストはおやめ下さい。"></td></tr>
                 <tr><td class="table_left">サムネイル画像</td></tr>
                 <tr><td><input id="file-0a" class="file" type="file" multiple data-min-file-count="0"></td></tr>
                 <tr><td class="table_left">プロフィールコメント（一言）</td></tr>
