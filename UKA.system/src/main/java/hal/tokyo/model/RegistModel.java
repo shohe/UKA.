@@ -1,4 +1,4 @@
-package hal.tokyo.controller;
+package hal.tokyo.model;
 
 import hal.tokyo.dao.UsersDao;
 
