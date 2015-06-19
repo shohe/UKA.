@@ -95,6 +95,9 @@ public class PostingsDao {
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
 		
+		while(rs.next()){
+			Bean.set
+		}
 		
 		
 		return Bean;
