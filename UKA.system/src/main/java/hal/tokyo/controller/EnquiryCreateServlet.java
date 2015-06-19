@@ -1,5 +1,7 @@
 package hal.tokyo.controller;
 
+import hal.tokyo.dao.MailDao;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -11,20 +13,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import hal.tokyo.beans.Administrator_MAILBean;
-import hal.tokyo.dao.MailDao;
-
 /**
- * Servlet implementation class MailCreateServlet
+ * Servlet implementation class EnquiryCreateServlet
  */
-@WebServlet("/MailCreateServlet")
-public class MailCreateServlet extends HttpServlet {
+@WebServlet("/EnquiryCreateServlet")
+public class EnquiryCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MailCreateServlet() {
+    public EnquiryCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +33,22 @@ public class MailCreateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("servletとうたつ");
-		String jspName = "/WEB-INF/viws/mailstart.jsp";
+		System.out.println("Enquiry Servletとうたつ");
+		String jspName = "/WEB-INF/viws/enquirystart.jsp";
 		MailDao dao = null;
 
 		try {			
-			String user_id = request.getParameter("user_id");
-			String post_id = request.getParameter("post_id");
-			String title = request.getParameter("title");
+			String id = request.getParameter("user_id");
+			String enq = request.getParameter("enq");
 			String content = request.getParameter("content");
 			
-			System.out.println(user_id);
-			System.out.println(post_id);
-			System.out.println(title);
+			System.out.println(id);
+			System.out.println(enq);
 			System.out.println(content);
 			System.out.println("daoに行く手前");
 			dao = new MailDao();		
 
-			dao.Mailinsert(user_id,post_id,title,content);
+			dao.Enqinsert(id,enq,content);
 			dao.commit();
 			jspName = "mailok";
 		} catch (NamingException | SQLException e) {
@@ -63,6 +60,9 @@ public class MailCreateServlet extends HttpServlet {
 				request.getRequestDispatcher(jspName);
 
 			dispatcher.forward(request, response);
+		
+	
+		
 		
 	}
 

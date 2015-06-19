@@ -7,13 +7,16 @@
 </head>
 <body>
 
-<form action="MailCreateServlet" method="get">
-ゆーざーID:<br />
+<form action="EnquiryCreateServlet" method="get">
+ゆーざID:<br />
 <input type="text" name="user_id"/><br />
-めーる送信する対象の投稿ID:<br />
-<input type="text" name="post_id"/><br />
-たいとる:<br />
-<input type="text" name="title"/><br />
+お問い合わせ種別:<br />
+<SELECT name="enq">
+        <OPTION value="" selected>----</OPTION>
+        <OPTION value="1">くれーむ</OPTION>
+        <OPTION value="2">あいてどる</OPTION>
+        <OPTION value="3">わぁんないっす</OPTION>
+      </SELECT>
 ないよう:<br />
 <input type="text" name="content"/><br />
 <input type="submit" name="insert" value="insert"/>
