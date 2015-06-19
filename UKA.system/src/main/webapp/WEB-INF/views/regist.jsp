@@ -37,7 +37,7 @@
                 <tr><td><input id="file-0a" class="file" type="file" multiple data-min-file-count="0"></td></tr>
                 <tr><td class="table_left">プロフィールコメント（一言）</td></tr>
                 <tr><td>
-                    <textarea class="form-control"  id="naiyou" name="department_Id" rows="10" maxlength="20" placeholder="20文字まで。">よろしくお願い致します。</textarea>
+                    <textarea class="form-control"  id="naiyou" name="profileComment" rows="10" maxlength="20" placeholder="20文字まで。">よろしくお願い致します。</textarea>
                 </td></tr>
                 <tr><td><button type="submit" class="btn btn-primary">確認画面へ</button></td></tr>
             </table>

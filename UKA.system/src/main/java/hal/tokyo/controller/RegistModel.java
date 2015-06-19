@@ -39,8 +39,10 @@ public class RegistModel extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 
-		String jspName = "/WEB-INF/viws/regist.jsp";
+		String jspName = "/WEB-INF/views/regist.jsp";
 
 		UsersDao ud = new UsersDao();
 
@@ -48,7 +50,7 @@ public class RegistModel extends HttpServlet {
 		String password;
 		String name;
 		String profileComment;
-		String department_Id;
+		int department_Id;
 		String image;
 		int status;
 
@@ -60,7 +62,7 @@ public class RegistModel extends HttpServlet {
 			password = request.getParameter("password");
 			name = request.getParameter("name");
 			profileComment = request.getParameter("profileComment");
-			department_Id = request.getParameter("department_Id");
+			department_Id = 0;
 			image = "ないよ";
 			status = 0;
 
