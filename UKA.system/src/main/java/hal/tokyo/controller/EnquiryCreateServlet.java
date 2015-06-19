@@ -33,6 +33,12 @@ public class EnquiryCreateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		request.setCharacterEncoding("utf-8");
+		//HTTPレスポンスの文字コード設定
+		response.setContentType("text/html");
+		response.setCharacterEncoding("utf-8");
+		
 		System.out.println("Enquiry Servletとうたつ");
 		String jspName = "/WEB-INF/viws/enquirystart.jsp";
 		MailDao dao = null;
