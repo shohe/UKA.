@@ -5,22 +5,12 @@ import java.util.regex.Pattern;
 
 /**
  *
- * 登録内容チェック
+ * パラメータ内容をチェックするクラス
  *
  * @author UKA.System
  *
  */
 public class RegistValueCheck {
-
-	/*
-	private String mailAddress;
-	private String password;
-	private String name;
-	private String profileComment;
-	private int department_Id;
-	private String image;
-	private int status;
-	*/
 
 	/**
 	 *数字チェック
@@ -92,7 +82,7 @@ public class RegistValueCheck {
 	}
 
 	/**
-	 * NULLチェック
+	 * NULL・空チェック
 	 *
 	 * @param value
 	 * @return
@@ -117,7 +107,52 @@ public class RegistValueCheck {
 	 */
 	public boolean StringCount(String value,int count){
 
-		if(value.length() <= count){
+		if(value.length() < count){
+
+			return false;
+
+		}else{
+
+			return true;
+
+		}
+
+	}
+
+
+	/**
+	 * メールアドレス形式チェック
+	 *
+	 * @param value
+	 * @return
+	 */
+	public boolean MailaddressFormCheck(String value){
+
+        Pattern p = Pattern.compile("[\\w\\.\\-]+@(?:[\\w\\-]+\\.)+[\\w\\-]+");
+        Matcher m = p.matcher(value);
+
+        if(m.matches()){
+
+        	return true;
+
+        }else{
+
+        	return false;
+
+        }
+
+	}
+
+	/**
+	 * パスワードと確認用が同じかのチェック
+	 *
+	 * @param password
+	 * @param password_c
+	 * @return
+	 */
+	public boolean PasswordSameCheck(String password,String password_c){
+
+		if(password.equals(password_c)){
 
 			return true;
 

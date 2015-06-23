@@ -21,6 +21,7 @@
                     <tr>
                         <td class="table_left">パスワード<i class="fa fa-asterisk"></i>:&nbsp;&nbsp;<input type="hidden" name="password" value="${password }" >${password }
                         <%  %>
+                        <!--
                             <i class="fa fa-asterisk" style="font-size:10px;color:#444;margin:0;"></i>
                             <i class="fa fa-asterisk" style="font-size:10px;color:#444;margin:0;"></i>
                             <i class="fa fa-asterisk" style="font-size:10px;color:#444;margin:0;"></i>
@@ -31,6 +32,7 @@
                             <i class="fa fa-asterisk" style="font-size:10px;color:#444;margin:0;"></i>
                             <i class="fa fa-asterisk" style="font-size:10px;color:#444;margin:0;"></i>
                             <i class="fa fa-asterisk" style="font-size:10px;color:#444;margin:0;"></i>
+                       -->
                         </td>
                     </tr>
                     <tr><td class="table_left">サムネイル画像:</td></tr>
