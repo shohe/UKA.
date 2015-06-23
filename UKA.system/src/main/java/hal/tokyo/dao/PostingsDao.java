@@ -26,7 +26,7 @@ public class PostingsDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public PostingsBean getPostings(int posting_id) throws SQLException{
+	public PostingsBean getPostings() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
 				"SELECT user_id , date , possession_vote , posting_type_id , status , title , posting_content_id "
 				+ "FROM POSTINGS JOIN POSTING_TYPE ON POSTING.posting_type_id = POSTING_TYPE.posting_type_id"
@@ -53,22 +53,27 @@ public class PostingsDao {
 	public PostingsBean sortChar(String SearchChar) throws SQLException{
 		
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT post.user_id , post.date , post.possession_vote , posttype.posting_type_name , post.status , "
-				+ "post.title , postcon.posting_content　"
-				+ "FROM POSTINGS post , POSTING_CONTENT postcon  , POSTING_TYPE posttype "
-				+ "WHERE post.posting_id = ?");
+				"SELECT postings.title, departments.department_name, users.name, "
+				+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote "
+				+ "FROM postings "
+				+ "JOIN terms ON terms.terms_id = postings.terms_id "
+				+ "JOIN users ON users.mailaddress = postings.user_id "
+				+ "JOIN departments ON departments.department_id = users.department_id "
+				+ "WHERE postings.title LIKE  '%"+ SearchChar +"%'");
 		pstm.setString(1, SearchChar);
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
 		
 		while(rs.next()){
-			Bean.setUser_Id(rs.getString("user_Id"));
-			Bean.setData(rs.getString("data"));
-			Bean.setPossesion_Vote(rs.getInt("possesion_Vote"));
-			Bean.setPosting_Type_Id(rs.getInt("posting_Type_Id"));
-			Bean.setStatus(rs.getInt("status"));
 			Bean.setTitle(rs.getString("title"));
-			Bean.setPosting_Content_Id(rs.getInt("posting_Content_Id"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			
+			
 		}
 		
 		return Bean;
@@ -96,7 +101,11 @@ public class PostingsDao {
 		PostingsBean Bean = new PostingsBean();
 		
 		while(rs.next()){
-			Bean.set
+			Bean.setName(rs.getString("name"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setTitle(rs.getString("title"));
+			Bean.setPosting_Content(rs.getString("posting_content"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 		}
 		
 		
