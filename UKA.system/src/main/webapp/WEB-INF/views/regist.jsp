@@ -26,7 +26,8 @@
                     </select>
                 </td></tr>
                 <tr><td class="table_left">名前<i class="fa fa-asterisk"></i></td></tr>
-                <tr><td><input type="text" id="kenmei" name="name" class="form-control" placeholder="例) 大谷昇平"></td></tr>
+                <tr><td><input type="text" id="kenmei" name="name" class="form-control" placeholder="例) 大谷昇平" value="${name }"></td></tr>
+                <tr><td>${name_msg}</td></tr>
                 <tr><td class="table_left">メールアドレス（ID）<i class="fa fa-asterisk">&nbsp;&nbsp;弊社ドメインのみ許可。</i></td></tr>
                 <tr><td><input type="text" id="kenmei" name="mailaddress" class="form-control" placeholder="例) mail@example.com"></td></tr>
                 <tr><td class="table_left">パスワード<i class="fa fa-asterisk"></i></td></tr>
