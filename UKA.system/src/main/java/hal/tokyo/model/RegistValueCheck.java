@@ -53,7 +53,10 @@ public class RegistValueCheck {
 	 */
 	public boolean StringMatchSymbol (String value){
 
-        Pattern p = Pattern.compile("^[^\\p{Punct}、-◯]+$");
+		String han = "\\p{Punct}";
+		String zen = "！”＃＄％＆’（）＝～｜‘｛＋＊｝＜＞？＿－＾￥＠「；：」、。・";
+
+        Pattern p = Pattern.compile("^[^"+han+zen+"]+$");
         Matcher m = p.matcher(value);
 
         if(m.find()){
