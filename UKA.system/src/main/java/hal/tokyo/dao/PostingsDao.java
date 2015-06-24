@@ -9,8 +9,7 @@ import java.sql.SQLException;
 
 public class PostingsDao {
 
-	/** Con
-	 * nection **/
+	/** Connection **/
 	private Connection con;
 	/**
 	 * コンストラクタ
@@ -112,7 +111,7 @@ public class PostingsDao {
 				"SELECT users.name, departments.department_name, postings.title, product_content.posting_content ,terms.achievement_percentage "
 				+ "FROM postings JOIN terms ON postings.POSTING_TYPE_ID = terms.POSTING_TYPE_ID JOIN users ON postings.user_id = users.mailaddress "
 				+ "JOIN departments ON departments.department_id = users.department_id JOIN product_content "
-				+ "ON product_content.posting_content_id = postings.posting_content_id ORDER BY achievement_percentage DESC");
+				+ "ON product_content.posting_content_id = postings.posting_content_id WHERE postings.status = 1 ORDER BY achievement_percentage DESC");
 		
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
@@ -146,7 +145,7 @@ public class PostingsDao {
 				+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
 				+ "JOIN users ON users.mailaddress = postings.user_id "
 				+ "JOIN departments ON departments.department_id = users.department_id "
-				+ "having timelimit > 0 ORDER BY timelimit ;");
+				+ "having timelimit > 0  AND postings.status = 1 ORDER BY timelimit ;");
 		
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
