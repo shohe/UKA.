@@ -2,7 +2,7 @@ package hal.tokyo.beans;
 
 /**
  * ユーザ情報テーブルBean
- * 
+ *
  * @author Uka system
  */
 public class UsersBean{
@@ -11,7 +11,7 @@ public class UsersBean{
 	private String password;
 	private String name;
 	private String profileComment;
-	private String department_Id;
+	private int department_Id;
 	private String image;
 	private int status;
 	public String getMailAddress() {
@@ -38,10 +38,10 @@ public class UsersBean{
 	public void setProfileComment(String profileComment) {
 		this.profileComment = profileComment;
 	}
-	public String getDepartment_Id() {
+	public int getDepartment_Id() {
 		return department_Id;
 	}
-	public void setDepartment_Id(String department_Id) {
+	public void setDepartment_Id(int department_Id) {
 		this.department_Id = department_Id;
 	}
 	public String getImage() {
@@ -56,6 +56,6 @@ public class UsersBean{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
-	
+
+
 }

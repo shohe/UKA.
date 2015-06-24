@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#logo{
+	width: 1200px;
+	height: 100px;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding: 0px;
+}
+
+#g_nav{
+	width: 1200px;
+	margin-left: 50px;
+	margin-right: 50px;
+	background-color: yellow;
+}
+
+#menu{
+	font-size: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right:10px; 
+}

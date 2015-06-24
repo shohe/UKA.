@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+	      <Resource 
+      		name="jdbc/ukasystem"
+      		auth="Container"
+      		type="javax.sql.DataSource"
+      		username="root"
+      		password=""
+      		driverClassName="com.mysql.jdbc.Driver"
+      		url="jdbc:mysql:///ukasystem"
+      		maxActive="4"
+      		maxIdle="4"
+      		defaultAutoCommit="false"
+      		removeAbandoned="true" />
+</context>
