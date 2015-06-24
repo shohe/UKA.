@@ -33,6 +33,14 @@ public class EnquiryCreateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
 		
 		request.setCharacterEncoding("utf-8");
 		//HTTPレスポンスの文字コード設定
@@ -40,7 +48,7 @@ public class EnquiryCreateServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		
 		System.out.println("Enquiry Servletとうたつ");
-		String jspName = "/WEB-INF/viws/enquirystart.jsp";
+		String jspName = "/WEB-INF/views/enquirystart.jsp";
 		MailDao dao = null;
 
 		try {			
@@ -60,23 +68,13 @@ public class EnquiryCreateServlet extends HttpServlet {
 		} catch (NamingException | SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
-			jspName = "/WEB-INF/viws/mailok.jsp";
+			jspName = "/WEB-INF/views/mailok.jsp";
 		}
 		RequestDispatcher dispatcher =
 				request.getRequestDispatcher(jspName);
 
 			dispatcher.forward(request, response);
 		
-	
-		
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

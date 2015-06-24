@@ -64,7 +64,15 @@ public class MailDao {
 	 * @throws SQLException
 	 */
 	public void commit() throws SQLException {
+		System.out.println("commit到達...");
 		con.commit();
+		System.out.println("commit完了");
+	}
+	
+	public void rollback() throws SQLException {
+		System.out.println("commit到達...");
+		con.rollback();
+		System.out.println("commit完了");
 	}
 
 }

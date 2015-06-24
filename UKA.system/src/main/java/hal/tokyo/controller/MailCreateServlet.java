@@ -20,36 +20,45 @@ import hal.tokyo.dao.MailDao;
 @WebServlet("/MailCreateServlet")
 public class MailCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MailCreateServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public MailCreateServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		request.setCharacterEncoding("utf-8");
 		//HTTPレスポンスの文字コード設定
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
-		
+
 		System.out.println("管理者メールservletとうたつ");
-		String jspName = "/WEB-INF/viws/mailstart.jsp";
+		String jspName = "/WEB-INF/views/error.jsp";
 		MailDao dao = null;
 
+		String user_id = request.getParameter("user_id");
+		String post_id = request.getParameter("post_id");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+
+
+
 		try {			
-			String user_id = request.getParameter("user_id");
-			String post_id = request.getParameter("post_id");
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
-			
+
 			System.out.println(user_id);
 			System.out.println(post_id);
 			System.out.println(title);
@@ -60,23 +69,32 @@ public class MailCreateServlet extends HttpServlet {
 			dao.Mailinsert(user_id,post_id,title,content);
 			dao.commit();
 			jspName = "mailok";
-		} catch (NamingException | SQLException e) {
-			// TODO 自動生成された catch ブロック
+		} catch (SQLException e) {
 			e.printStackTrace();
-			jspName = "/WEB-INF/viws/mailok.jsp";
+			try{
+				if(dao != null){
+					dao.rollback();
+				}
+			}catch(SQLException e1){
+				e1.printStackTrace();
+				jspName = "/WEB-INF/views/error.jsp";
+			}
+		}	catch(NamingException e){
+				e.printStackTrace();
+		}	finally	{
+				try{
+					if(dao != null){
+						dao.close();
+					}
+				}catch(SQLException e){
+					e.printStackTrace();
+					jspName = "/WEB-INF/views/error.jsp";
+				}
 		}
 		RequestDispatcher dispatcher =
 				request.getRequestDispatcher(jspName);
 
-			dispatcher.forward(request, response);
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		dispatcher.forward(request, response);
 	}
 
 }
