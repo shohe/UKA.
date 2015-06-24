@@ -9,7 +9,8 @@ import java.sql.SQLException;
 
 public class PostingsDao {
 
-	/** Connection **/
+	/** Con
+	 * nection **/
 	private Connection con;
 	/**
 	 * コンストラクタ
@@ -28,39 +29,14 @@ public class PostingsDao {
 	 */
 	public PostingsBean getPostings() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT user_id , date , possession_vote , posting_type_id , status , title , posting_content_id "
-				+ "FROM POSTINGS JOIN POSTING_TYPE ON POSTING.posting_type_id = POSTING_TYPE.posting_type_id"
-				+ "WHERE posting_id = ?");
-		pstm.setInt(1, posting_id);
-		
-		ResultSet rs = pstm.executeQuery();
-		PostingsBean Bean = new PostingsBean();
-		
-		while(rs.next()){
-			Bean.setUser_Id(rs.getString("user_id"));
-			Bean.setData(rs.getString("date"));
-			Bean.setPossesion_Vote(rs.getInt("possesion_Vote"));
-			Bean.setPosting_Type_Id(rs.getInt("posting_Type_Id"));
-			Bean.setStatus(rs.getInt("status"));
-			Bean.setTitle(rs.getString("title"));
-			Bean.setPosting_Content_Id(rs.getInt("posting_Content_Id"));
-		}
-		
-		return Bean;
-	}
-	
-	//文字で検索
-	public PostingsBean sortChar(String SearchChar) throws SQLException{
-		
-		PreparedStatement pstm = con.prepareStatement(
 				"SELECT postings.title, departments.department_name, users.name, "
 				+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote "
 				+ "FROM postings "
 				+ "JOIN terms ON terms.terms_id = postings.terms_id "
 				+ "JOIN users ON users.mailaddress = postings.user_id "
-				+ "JOIN departments ON departments.department_id = users.department_id "
-				+ "WHERE postings.title LIKE  '%"+ SearchChar +"%'");
-		pstm.setString(1, SearchChar);
+				+ "JOIN departments ON departments.department_id = users.department_id"
+				+ "AND postings.status = 1");
+		
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
 		
@@ -72,8 +48,36 @@ public class PostingsDao {
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
-			
-			
+		}
+		
+		return Bean;
+	}
+	
+	//文字で検索
+	//statusは１が生存 ０が死亡
+	public PostingsBean sortChar(String SearchChar) throws SQLException{
+		
+		PreparedStatement pstm = con.prepareStatement(
+				"SELECT postings.title, departments.department_name, users.name, "
+				+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote "
+				+ "FROM postings "
+				+ "JOIN terms ON terms.terms_id = postings.terms_id "
+				+ "JOIN users ON users.mailaddress = postings.user_id "
+				+ "JOIN departments ON departments.department_id = users.department_id "
+				+ "WHERE postings.title LIKE  '%"+ SearchChar +"%' OR product_content.posting_content LIKE '%"+ SearchChar +"%'"
+				+ "AND postings.status = 1");
+		pstm.setString(1, SearchChar);
+		ResultSet rs = pstm.executeQuery();
+		PostingsBean Bean = new PostingsBean();
+		
+		while(rs.next()){
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));	
 		}
 		
 		return Bean;
@@ -82,10 +86,23 @@ public class PostingsDao {
 	//新着順
 	public PostingsBean sortNew() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"select * from POSTINGS ORDER BY date DESC");
+					"SELECT users.name, departments.department_name, postings.title, product_content.posting_content ,terms.achievement_percentage , users.image"
+						+ "FROM postings JOIN terms ON postings.POSTING_TYPE_ID = terms.POSTING_TYPE_ID JOIN users ON postings.user_id = users.mailaddress "
+						+ "JOIN departments ON departments.department_id = users.department_id JOIN product_content "
+						+ "ON product_content.posting_content_id = postings.posting_content_id WHERE postings.status = 1 ORDER BY date DESC"
+				);
 		
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
+		while(rs.next()){
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));	
+		}
 		return Bean;
 	}
 	
@@ -95,7 +112,7 @@ public class PostingsDao {
 				"SELECT users.name, departments.department_name, postings.title, product_content.posting_content ,terms.achievement_percentage "
 				+ "FROM postings JOIN terms ON postings.POSTING_TYPE_ID = terms.POSTING_TYPE_ID JOIN users ON postings.user_id = users.mailaddress "
 				+ "JOIN departments ON departments.department_id = users.department_id JOIN product_content "
-				+ "ON product_content.posting_content_id = postings.posting_content_id ORDER BY  achievement_percentage DESC");
+				+ "ON product_content.posting_content_id = postings.posting_content_id ORDER BY achievement_percentage DESC");
 		
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
@@ -113,30 +130,83 @@ public class PostingsDao {
 	}
 	
 	//締切はどうするか
+	/*
+	 * メモ
+	 * 現在の日付を取得
+	 * 投稿日と締切期限を取得
+	 * 現在の日付-(投稿日+締切期限)で残り時間を取得
+	 * */
 	public PostingsBean sortNearDeadline() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"select * from POSTINGS ORDER BY possesion_Vote");
+				"SELECT postings.title, departments.department_name, "
+				+ "users.name, users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote , "
+				+ "DATEDIFF( DATE_ADD( (postings.date), INTERVAL( "
+				+ "SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id )  DAY ), "
+				+ "CURRENT_DATE( ) ) AS timelimit "
+				+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
+				+ "JOIN users ON users.mailaddress = postings.user_id "
+				+ "JOIN departments ON departments.department_id = users.department_id "
+				+ "having timelimit > 0 ORDER BY timelimit ;");
 		
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
+		while(rs.next()){
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));	
+		}
 		return Bean;
 	}
 	
 	//評価数が高い
 	public PostingsBean sortHigh() throws SQLException{
-		PreparedStatement pstm = con.prepareStatement("select * from POSTINGS ORDER BY possesion_Vote");
+		PreparedStatement pstm = con.prepareStatement(
+				"SELECT postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote "
+						+ "FROM postings "
+						+ "JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id  ORDER BY possesion_Vote");
 		
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
+		while(rs.next()){
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));	
+		}
 		return Bean;
 	}
 	
 	//評価数が低い
 	public PostingsBean sortLow() throws SQLException{
-		PreparedStatement pstm = con.prepareStatement("select * from POSTINGS ORDER BY possesion_Vote DESC");
+		PreparedStatement pstm = con.prepareStatement(
+				"SELECT postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote "
+						+ "FROM postings "
+						+ "JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id  ORDER BY possesion_Vote DESC");
 		
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
+		while(rs.next()){
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));	
+		}
 		return Bean;
 	}
 }
