@@ -12,14 +12,14 @@
     <div class="row headline"><!-- Begin Headline -->
         <div class="top_project_search">
             <div class="top">確認画面</div>
-            <form class="form-inline" method="post" action="RegistModel">
+            <form class="form-inline" method="post" action="./regist_insert">
             <div class="messageTable">
                 <table>
-                    <tr><td class="table_left">部署名<i class="fa fa-asterisk" ></i>:&nbsp;&nbsp;<input type="hidden" name="department_Id" value="${department_Id}" >${department_Id}</td></tr>
+                    <tr><td class="table_left">部署名<i class="fa fa-asterisk" ></i>:&nbsp;&nbsp;<input type="hidden" name="department_Id" value="${department_Id }" >${department_Id}</td></tr>
                     <tr><td class="table_left">名前<i class="fa fa-asterisk" style="margin-right:15px;"></i>:&nbsp;&nbsp;<input type="hidden" name="name" value="${name }" >${name}</td></tr>
                     <tr><td class="table_left">メールアドレス（ID）<i class="fa fa-asterisk"></i>:&nbsp;&nbsp;<input type="hidden" name="mailaddress" value="${mailaddress }"  >${mailaddress }</td></tr>
                     <tr>
-                        <td class="table_left">パスワード<i class="fa fa-asterisk"></i>:&nbsp;&nbsp;<input type="hidden" name="password" value="${password }" >${password }
+                        <td class="table_left">パスワード<i class="fa fa-asterisk"></i>:&nbsp;&nbsp;<input type="hidden" name="password" value="${password }" >${password_a }
                         <%  %>
                         <!--
                             <i class="fa fa-asterisk" style="font-size:10px;color:#444;margin:0;"></i>

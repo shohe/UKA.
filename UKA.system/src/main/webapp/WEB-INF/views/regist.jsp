@@ -17,7 +17,7 @@
             <table>
                 <tr><td class="table_left">部署名<i class="fa fa-asterisk"></i></td></tr>
                 <tr><td>
-                    <select id="shubetsu" class="form-control" name="department_Id">
+                    <select id="shubetsu" class="form-control" name="department_Id" >
                       <option value="1">お選びください。</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -32,10 +32,11 @@
                 <tr><td><input type="text" id="kenmei" name="mailaddress" class="form-control" placeholder="例) mail@example.com" value="${mailaddress }"></td></tr>
                 <tr><td>${mailaddress_msg}</td></tr>
                 <tr><td class="table_left">パスワード<i class="fa fa-asterisk"></i></td></tr>
-                <tr><td><input type="text" id="kenmei" name="password" class="form-control" placeholder="半角英数字8文字以上16文字以下"></td></tr>
+                <tr><td><input type="password" id="kenmei" name="password" class="form-control" placeholder="半角英数字8文字以上16文字以下"></td></tr>
                 <tr><td>${password_msg}</td></tr>
                 <tr><td class="table_left">パスワード（確認）<i class="fa fa-asterisk"></i></td></tr>
-                <tr><td><input type="text" id="kenmei" name="password_c" class="form-control" placeholder="コピー&amp;ペーストはおやめ下さい。"></td></tr>
+                <tr><td><input type="password" id="kenmei" name="password_c" class="form-control" placeholder="コピー&amp;ペーストはおやめ下さい。"></td></tr>
+                <tr><td>${password_c_msg}</td></tr>
                 <tr><td class="table_left">サムネイル画像</td></tr>
                 <tr><td><input id="file-0a" class="file" type="file" multiple data-min-file-count="0"></td></tr>
                 <tr><td class="table_left">プロフィールコメント（一言）</td></tr>
