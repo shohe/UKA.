@@ -31,7 +31,7 @@ public class PostingsDao {
 				"SELECT user_id , date , possession_vote , posting_type_id , status , title , posting_content_id "
 				+ "FROM POSTINGS JOIN POSTING_TYPE ON POSTING.posting_type_id = POSTING_TYPE.posting_type_id"
 				+ "WHERE posting_id = ?");
-		pstm.setInt(1, posting_id);
+		//pstm.setInt(1, posting_id);
 		
 		ResultSet rs = pstm.executeQuery();
 		PostingsBean Bean = new PostingsBean();
@@ -43,7 +43,7 @@ public class PostingsDao {
 			Bean.setPosting_Type_Id(rs.getInt("posting_Type_Id"));
 			Bean.setStatus(rs.getInt("status"));
 			Bean.setTitle(rs.getString("title"));
-			Bean.setPosting_Content_Id(rs.getInt("posting_Content_Id"));
+			//Bean.setPosting_Content_Id(rs.getInt("posting_Content_Id"));
 		}
 		
 		return Bean;
