@@ -1,131 +1,196 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/header.jsp" %>
-<body>
-	<div id="bog_topic_box">
-		<div id="big_topic_left">
-			<div class="topic_graph">
-				<canvas id="doughnut_chart0" height="280" width="380"></canvas>
-				<div class="doughnut_data">
-					<div class="doughnut_data_p">80%</div>
-				</div>
-			</div>
-			<div class="topic_value">
-				<div class="topic_value_left">残り期間：<span class="big_topic_span">15</span>日</div>
-				<div class="topic_value_right"><span class="big_topic_span"><i class="fa fa-male"></i> 58</span>人が評価しています。</div>
-			</div>
-		</div>
-		<div id="big_topic_right">
-			<div class="top">
-			<a href="TransitionSummary">ああああああ</a>
-				タイトルタイトルタイトルた。タイトルタイトルタイトルた。タイトルタイトルタイトルた。
-				タイトルタイトルタイトルた。タイトルタイトルタイトルた。タイトルタイトルタイトルた。
-				タイトルタイトルタイトルた。タイトルタイトルタイトルた。タイトルタイトルタイトルた。
-				天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。
-				天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。
-				天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。天然パーマに悪い奴はいない。
-			</div>
-			<div class="bottom">
-				<div class="topic_user">
-					<div class="user_pic"><img src="#" alt="ユーザ画像" /></div>
-					<div class="user_info">
-						近藤武蔵 : システム部<br/>
-						<span class="user_comment">ぽよはスペイン語でチキンって意味らしいよ。。近藤武蔵です。ハゲではないです。</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+    <div class="row headline"><!-- Begin Headline -->
+     	<!-- Slider Carousel
+        ================================================== -->
+        <div class="span8">
+            <a href="#">
+            <div class="top_project">
+                <div class="top_graph">
+                    <input type="text" class="knob" value="85" data-width="240" data-height="240" data-fgColor="#3c8dbc" data-readonly="true"/>
+                </div>
+                <div class="top_box">
+                    <div class="top_user"><!-- top user -->
+                        <div class="col-sm-12">
+                            <div class="col-xs-4 col-sm-3">
+                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/stillnotdavid/128.jpg" alt="user image." />
+                            </div>
+                            <div class="col-xs-4 col-sm-9 user_comment">
+                                <span>開発部 : 大谷昇平</span><br/>
+                                仕事大好きです!よろしくお願いします:)
+                            </div>
+                        </div>
+                    </div><!-- /top user -->
 
-	<div id="topic_box_wrap">
-		<!-- TOPIC -->
-		<div class="topic_box">
-			<div class="topic_title">
-				ストレスはハゲる原因になるが
-				ストレスをためないように気を配ると
-				そこでまたストレスがたまるので
-				結局僕らにできることなんて何もない
-			</div>
-			<div class="topic_user">
-				<div class="user_pic"><img src="#" alt="ユーザ画像" /></div>
-				<div class="user_info">
-					近藤武蔵 : システム部<br/>
-					<span class="user_comment">ぽよはスペイン語でチキンって意味らしいよ。。近藤武蔵です。ハゲではないです。</span>
-				</div>
-			</div>
-			<div class="topic_body">
-				<div class="topic_graph">
-					<canvas id="doughnut_chart" height="280" width="380"></canvas>
-					<div class="doughnut_data">
-						<div class="doughnut_data_p">80%</div>
-						<div class="doughnut_data_d">残り期間 : 15日</div>
-					</div>
-				</div>
-				<div class="topic_value">
-					<i class="fa fa-male"></i>
-					<span class="topic_value_text">58人の人が評価しています。</span>
-				</div>
-			</div>
-		</div>
-		<!-- /TOPIC -->
+                    <div class="top_info"><!-- top info -->
+                        <div class="col-sm-6"><i class="fa fa-calendar"></i>残り期間:<span>30</span>日</div>
+                        <div class="col-sm-6"><i class="fa fa-male"></i><span>86</span>人が評価しています。</div>
+                    </div><!-- /top info -->
+                </div>
+            </div>
+            </a>
+        </div>
 
-		<!-- TOPIC -->
-		<div class="topic_box topic_center">
-			<div class="topic_title">
-				ほぼ100%の確率でビニール傘を置き忘れてくる自分が嫌い
-			</div>
-			<div class="topic_user">
-				<div class="user_pic"><img src="#" alt="ユーザ画像" /></div>
-				<div class="user_info">
-					秋葉原規之 : システム部<br/>
-					<span class="user_comment">マッチョな人がすきなタイプ。秋葉原規之です。あ、ゲイじゃないです。</span>
-				</div>
-			</div>
-			<div class="topic_body">
-				<div class="topic_graph">
-					<canvas id="doughnut_chart2" height="280" width="380"></canvas>
-					<div class="doughnut_data">
-						<div class="doughnut_data_p">30%</div>
-						<div class="doughnut_data_d">残り期間 : 45日</div>
-					</div>
-				</div>
-				<div class="topic_value">
-					<i class="fa fa-male"></i>
-					<span class="topic_value_text">16人の人が評価しています。</span>
-				</div>
-			</div>
-		</div>
-		<!-- /TOPIC -->
+        <!-- Headline Text
+        ================================================== -->
+        <div class="span3 margin-left20">
+        	<h3>燃料電池自動車の本格普及に向けた新プロジェクト</h3>
+            <p class="lead">
+                燃料電池自動車（FCV）の本格的な普及に向け、燃料電池の飛躍的な高性能化・低コスト化、
+                生産性の抜本的な向上を実現するため新たな研究開発プロジェクトに着手します。
+            </p>
+        </div>
+    </div><!-- End Headline -->
 
-		<!-- TOPIC -->
-		<div class="topic_box">
-			<div class="topic_title">
-				私と仕事どっちが大事なのかという女には
-				ジャーマンスープレックスなんだよな
-				本当にもう
-			</div>
-			<div class="topic_user">
-				<div class="user_pic"><img src="#" alt="ユーザ画像" /></div>
-				<div class="user_info">
-					星姫星 : システム部<br/>
-					<span class="user_comment">星姫星（ほし きてぃ）と言います☆ 珍しい名前ですので、覚えてくれたら嬉しぃな☆キラッ</span>
-				</div>
-			</div>
-			<div class="topic_body">
-				<div class="topic_graph">
-					<canvas id="doughnut_chart3" height="280" width="380"></canvas>
-					<div class="doughnut_data">
-						<div class="doughnut_data_p">60%</div>
-						<div class="doughnut_data_d">残り期間 : 26日</div>
-					</div>
-				</div>
-				<div class="topic_value">
-					<i class="fa fa-male"></i>
-					<span class="topic_value_text">40人の人が評価しています。</span>
-				</div>
-			</div>
-		</div>
-		<!-- /TOPIC -->
-	</div>
-</body>
+    <div class="row gallery-row"><!-- Begin Gallery Row -->
+
+    	<div class="span12">
+            <h5 class="title-bg">プロジェクト一覧</h5>
+
+        <!-- Gallery Thumbnails
+        ================================================== -->
+
+            <div class="row clearfix no-margin">
+            <ul class="gallery-post-grid holder">
+
+                    <!-- Gallery Item 1 -->
+                    <a href="#"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    人事の仕事が一括管理できる、人事システムを作ろう！
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row user_info">
+                                  <div class="col-sm-12">
+                                      <div class="col-xs-4 col-sm-3">
+                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg" alt="user image." />
+                                      </div>
+                                      <div class="col-xs-4 col-sm-9 user_comment">
+                                          <span>人事部 : 新田寮</span><br/>
+                                          仕事大好きです!よろしくお願いします:)
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="text-center">
+                                    <input type="text" class="knob" value="60" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+                                    <div class="knob-label">
+                                        <i class="fa fa-calendar"></i><span>残り期間:15日</span>
+                                    </div>
+                                    <div class="knob-label">
+                                        <i class="fa fa-male"></i><span>58人が評価しています。</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li></a>
+
+                    <!-- Gallery Item 2 -->
+                    <a href="#"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    人事の仕事が一括管理できる、人事システムを作ろう！
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row user_info">
+                                  <div class="col-sm-12">
+                                      <div class="col-xs-4 col-sm-3">
+                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/pixeliris/128.jpg" alt="user image." />
+                                      </div>
+                                      <div class="col-xs-4 col-sm-9 user_comment">
+                                          <span>マーケティング部 : 小坂めぐる</span><br/>
+                                          仕事大好きです!よろしくお願いします:)
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="text-center">
+                                    <input type="text" class="knob" value="38" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+                                    <div class="knob-label">
+                                        <i class="fa fa-calendar"></i><span>残り期間:15日</span>
+                                    </div>
+                                    <div class="knob-label">
+                                        <i class="fa fa-male"></i><span>58人が評価しています。</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li></a>
+
+                    <!-- Gallery Item 3 -->
+                    <a href="#"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    人事の仕事が一括管理できる、人事システムを作ろう！
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row user_info">
+                                  <div class="col-sm-12">
+                                      <div class="col-xs-4 col-sm-3">
+                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/tonypeterson/128.jpg" alt="user image." />
+                                      </div>
+                                      <div class="col-xs-4 col-sm-9 user_comment top_usr_com">
+                                          <span>経理部 : 熊谷冬馬</span><br/>
+                                          仕事大好きです!よろしくお願いします:)
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="text-center">
+                                    <input type="text" class="knob" value="76" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+                                    <div class="knob-label">
+                                        <i class="fa fa-calendar"></i><span>残り期間:15日</span>
+                                    </div>
+                                    <div class="knob-label">
+                                        <i class="fa fa-male"></i><span>58人が評価しています。</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li></a>
+
+                    <!-- Gallery Item 4 -->
+                    <a href="#"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    人事の仕事が一括管理できる、人事システムを作ろう！
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row user_info">
+                                  <div class="col-sm-12">
+                                      <div class="col-xs-4 col-sm-3">
+                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="user image." />
+                                      </div>
+                                      <div class="col-xs-4 col-sm-9 user_comment">
+                                          <span>総務部 : 遠藤史哉</span><br/>
+                                          仕事大好きです!よろしくお願いします:)
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="text-center">
+                                    <input type="text" class="knob" value="92" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+                                    <div class="knob-label">
+                                        <i class="fa fa-calendar"></i><span>残り期間:15日</span>
+                                    </div>
+                                    <div class="knob-label">
+                                        <i class="fa fa-male"></i><span>58人が評価しています。</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li></a>
+
+
+                </ul>
+                </div>
+            </div>
+
+    </div><!-- End Gallery Row -->
 <%@ include file="/WEB-INF/views/footer.jsp" %>

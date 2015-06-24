@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class UsersDao {
 
@@ -21,7 +23,25 @@ public class UsersDao {
 	 */
 	public UsersDao(){
 
+		try {
 
+			InitialContext context;
+				context = new InitialContext();
+			DataSource ds;
+				ds = (DataSource) context
+						.lookup("java:comp/env/jdbc/ukasystem");
+
+			con = ds.getConnection();
+
+		} catch (NamingException e) {
+
+			e.printStackTrace();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
 
 	}
 
@@ -53,7 +73,7 @@ public class UsersDao {
 			record.setPassword(result.getString("password"));
 			record.setName(result.getString("name"));
 			record.setProfileComment(result.getString("profileComment"));
-			record.setDepartment_Id(result.getString("department_Id"));
+			record.setDepartment_Id(result.getInt("department_Id"));
 			record.setImage(result.getString("image"));
 			record.setStatus(result.getInt("status"));
 
@@ -94,7 +114,7 @@ public class UsersDao {
 			record.setPassword(result.getString("password"));
 			record.setName(result.getString("name"));
 			record.setProfileComment(result.getString("profileComment"));
-			record.setDepartment_Id(result.getString("department_Id"));
+			record.setDepartment_Id(result.getInt("department_Id"));
 			record.setImage(result.getString("image"));
 			record.setStatus(result.getInt("status"));
 
@@ -123,15 +143,16 @@ public class UsersDao {
 	 * @return result
 	 * @throws SQLException
 	 */
-	public int insert(String mailaddress,String password,String name,String profileComment,String department_Id,String image,int status) throws SQLException{
+	public int insert(String mailaddress,String password,String name,String profileComment,int department_Id,String image,int status) throws SQLException{
 
-		PreparedStatement insert = con.prepareStatement("insert into users values(?,?,?,?,?,?,?);");
+		PreparedStatement insert =
+				con.prepareStatement("insert into users values(?,?,?,?,?,?,?);");
 
 		insert.setString(1, mailaddress);
 		insert.setString(2, password);
 		insert.setString(3, name);
 		insert.setString(4, profileComment);
-		insert.setString(5, department_Id);
+		insert.setInt(5, department_Id);
 		insert.setString(6, image);
 		insert.setInt(7, status);
 
@@ -169,7 +190,7 @@ public class UsersDao {
 	}
 
 
-	public int update(String mailaddress,String password,String name,String profileComment,String department_Id,String image,int status) throws SQLException{
+	public int update(String mailaddress,String password,String name,String profileComment,int department_Id,String image,int status) throws SQLException{
 
 		PreparedStatement update = con.prepareStatement("update users set mailaddress = ?, password = ?, name = ?, profileComment = ?, department_Id = ?, image = ?, status = ?");
 
@@ -177,7 +198,7 @@ public class UsersDao {
 		update.setString(2, password);
 		update.setString(3, name);
 		update.setString(4, profileComment);
-		update.setString(5, department_Id);
+		update.setInt(5, department_Id);
 		update.setString(6, image);
 		update.setInt(7, status);
 
@@ -232,6 +253,17 @@ public class UsersDao {
 	public void close() throws SQLException{
 
 		con.close();
+
+	}
+
+	/**
+	 * UsersDaoのロールバック
+	 *
+	 * @throws SQLException
+	 */
+	public void rollback() throws SQLException{
+
+		con.rollback();
 
 	}
 
