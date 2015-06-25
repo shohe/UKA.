@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="hal.tokyo.dao.*" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -59,9 +60,12 @@
                     <form class="" action="" method="post">
                         <div class="left">
                             <!-- out -->
-                            <input type="text" class="form-control" id="Email-Form" placeholder="メールアドレス">
-                            <input type="password" class="form-control" id="Password-Form" placeholder="パスワード">
-
+                            <%
+                            	String mailaddress =  (String)session.getAttribute("MailAddress");
+                            	out.println("<p>");
+                            	out.println(mailaddress + "さん");
+                            	out.println("</p>");
+                            %>
                             <!-- in -->
                             <!-- <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 一般社員
@@ -72,7 +76,7 @@
                             </ul> -->
                         </div>
                         <div class="right">
-                            <button type="submit" class="btn btn-default">ログイン</button>
+                            <button type="submit" class="btn btn-default">ログアウト</button>
                         </div>
                     </form>
                 </div>
@@ -80,10 +84,10 @@
           <nav>
               <ul>
                 <a href="<c:url value="/" />"><li class="navi">ホーム</li></a>
-                <a href="<c:url value="/post" />"><li class="navi">プロジェクトを投稿する</li></a>
+                <a href="#"><li class="navi">プロジェクトを投稿する</li></a>
                 <a href="#"><li class="navi">プロジェクトを探す</li></a>
                 <a href="#"><li class="navi">UKA.とは？</li></a>
-                <a href="<c:url value="/message" />"><li class="navi">管理人にメッセージ</li></a>
+                <a href="#"><li class="navi">管理人にメッセージ</li></a>
                 <a href="<c:url value="/regist" />"><li class="navi">新規登録</li></a>
               </ul>
           </nav>

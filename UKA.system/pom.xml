@@ -7,8 +7,8 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>UKA.system Maven Webapp</name>
   <url>http://maven.apache.org</url>
-
-
+  
+  
   <dependencies>
   	<!-- junit -->
     <dependency>
@@ -17,8 +17,8 @@
 	    <version>3.8.1</version>
 	    <scope>test</scope>
     </dependency>
-
-
+    
+    
     <!-- servlet -->
     <dependency>
 	    <groupId>javax.servlet</groupId>
@@ -31,24 +31,24 @@
 		<artifactId>jstl</artifactId>
 		<version>1.2</version>
 	</dependency>
-
-
+	
+	
 	<!-- mysql -->
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
 	    <version>5.1.35</version>
 	</dependency>
-
-
+	
+	
 	<!-- jstl -->
     <dependency>
     	<groupId>javax.servlet</groupId>
     	<artifactId>jstl</artifactId>
     	<version>1.2</version>
     </dependency>
-
-
+    
+    
     <!-- Spring dependencies -->
 	<dependency>
 		<groupId>org.springframework</groupId>
@@ -67,16 +67,22 @@
 		<artifactId>spring-webmvc</artifactId>
 		<version>4.1.6.RELEASE</version>
 	</dependency>
-
+	
+	<!-- Commons -->
+	<dependency>
+	    <groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+	    <version>1.2.2</version>
+	</dependency>
   </dependencies>
-
-
-
+  
+  
+  
   <build>
   	<!-- file -->
     <finalName>UKA.system</finalName>
-
-
+    
+    
     <!-- plugin -->
     <plugins>
         <plugin>
@@ -102,6 +108,6 @@
       	</plugin>
     </plugins>
   </build>
-
-
+  
+  
 </project>
