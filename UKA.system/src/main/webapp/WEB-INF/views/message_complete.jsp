@@ -7,7 +7,7 @@
 <div class="row headline"><!-- Begin Headline -->
     <div class="top_project_search">
         <div class="top">メッセージ送信完了</div>
-        <form class="form-inline" method="get" action="index.htm">
+        <form class="form-inline" method="get" action="messageDone">
         <div class="messageTable">
             <table>
                 <tr><td>

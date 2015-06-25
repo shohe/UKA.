@@ -7,7 +7,7 @@
 <div class="row headline"><!-- Begin Headline -->
     <div class="top_project_search">
         <div class="top">メッセージ確認</div>
-        <form class="form-inline" method="get" action="message_complete.htm">
+        <form class="form-inline" method="post" action="messageComplete">
         <div class="messageTable">
             <table>
                 <tr><td>お問い合わせ種別名</td></tr>

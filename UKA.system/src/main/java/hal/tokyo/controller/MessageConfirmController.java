@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MessageConfirmController {
 	/**
 	 * Message Confirm  JSP
-	 * 確認画面
+	 * 確認画面だす
 	 * @return
 	 */
 	@RequestMapping("/messageConfirm")
@@ -23,11 +23,25 @@ public class MessageConfirmController {
 	
 	/**
 	 * Message Complete  JSP
-	 * 完了画面
+	 * 完了画面だす
 	 * @return
 	 */
 	@RequestMapping("/messageComplete")
 	public ModelAndView gotoComplete(/*TODO: パラメータ受け取り*/) {
+		ModelAndView mv = new ModelAndView("message_complete");
+		/**
+		 * TODO: パラメータ付与処理など
+		 */
+		return mv;
+	}
+	
+	/**
+	 * Message Complete  JSP
+	 * 完了画面だす
+	 * @return
+	 */
+	@RequestMapping("/messageDone")
+	public ModelAndView gotoCompleteIndex(/*TODO: パラメータ受け取り*/) {
 		ModelAndView mv = new ModelAndView("index");
 		/**
 		 * TODO: パラメータ付与処理など
