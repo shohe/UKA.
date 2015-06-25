@@ -18,9 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PostController {
-	
-	@Autowired
-	ServletContext context;
 	 
 	@RequestMapping(value="/post", method=RequestMethod.GET)
 	public ModelAndView getPost() {
@@ -50,6 +47,9 @@ public class PostController {
 		ModelAndView mv = new ModelAndView("post_complete");
 		return mv;
 	}
+	
+	@Autowired
+	ServletContext context;
 	
 	@RequestMapping(value="/thankYou", method=RequestMethod.POST)
 	public ModelAndView getPostComp() {
