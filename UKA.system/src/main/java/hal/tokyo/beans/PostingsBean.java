@@ -22,9 +22,14 @@ public class PostingsBean {
 	private int achievement_vote;
 	private String image;
 	private String profilecomment;
-	
-	
-	
+	private int timelimit;
+
+	public int getTimelimit() {
+		return timelimit;
+	}
+	public void setTimelimit(int timelimit) {
+		this.timelimit = timelimit;
+	}
 	public int getAchievement_vote() {
 		return achievement_vote;
 	}
@@ -109,7 +114,7 @@ public class PostingsBean {
 	public void setAchievement_percentage(int achievement_percentage) {
 		this.achievement_percentage = achievement_percentage;
 	}
-	
-	
+
+
 
 }

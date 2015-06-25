@@ -8,5 +8,14 @@
 </head>
 <body>
 	<h1>プロジェクト一覧.</h1>
+
+	<form action = "SearchTest" method ="post">
+		<input type="text" name="search">
+		<input type="button">
+		<input type="button">
+		<input type="button">
+		<input type="button">
+		<input type="submit">
+	</form>
 </body>
 </html>
