@@ -92,7 +92,7 @@ public class RegistConfirmController {
 			mv.addObject("mailaddress", mailaddress);
 			mv.addObject("name", name);
 			mv.addObject("password", password);
-			mv.addObject("passwor_a", rc.HidePassword(password));
+			mv.addObject("password_a", rc.HidePassword(password));
 			mv.addObject("profileComment", profileComment);
 			return mv;
 

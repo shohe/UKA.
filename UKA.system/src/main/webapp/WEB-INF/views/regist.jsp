@@ -12,7 +12,7 @@
 <div class="row headline"><!-- Begin Headline -->
     <div class="top_project_search">
         <div class="top">新規登録</div>
-        <form class="form-inline" method="post" action="regist_confirm_con">
+        <form class="form-inline" method="post" action="regist_confirm_con" enctype="multipart/form-data">
         <div class="messageTable">
             <table>
                 <tr><td class="table_left">部署名<i class="fa fa-asterisk"></i></td></tr>
@@ -38,7 +38,7 @@
                 <tr><td><input type="password" id="kenmei" name="password_c" class="form-control" placeholder="コピー&amp;ペーストはおやめ下さい。"></td></tr>
                 <tr><td>${password_c_msg}</td></tr>
                 <tr><td class="table_left">サムネイル画像</td></tr>
-                <tr><td><input id="file-0a" class="file" type="file" multiple data-min-file-count="0"></td></tr>
+                <tr><td><input id="file-0a" class="file" type="file" multiple data-min-file-count="0" name="thumbnail"></td></tr>
                 <tr><td class="table_left">プロフィールコメント（一言）</td></tr>
                 <tr><td>
                     <textarea class="form-control"  id="naiyou" name="profileComment" rows="10" maxlength="20" placeholder="20文字まで。">${profileComment }</textarea>

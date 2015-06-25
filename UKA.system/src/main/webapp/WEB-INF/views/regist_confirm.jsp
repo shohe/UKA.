@@ -12,7 +12,7 @@
     <div class="row headline"><!-- Begin Headline -->
         <div class="top_project_search">
             <div class="top">確認画面</div>
-            <form class="form-inline" method="post" action="./regist_insert">
+            <form class="form-inline" method="post" action="regist_insert_con">
             <div class="messageTable">
                 <table>
                     <tr><td class="table_left">部署名<i class="fa fa-asterisk" ></i>:&nbsp;&nbsp;<input type="hidden" name="department_Id" value="${department_Id }" >${department_Id}</td></tr>
