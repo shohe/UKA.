@@ -83,7 +83,7 @@
                 <a href="#"><li class="navi">プロジェクトを投稿する</li></a>
                 <a href="#"><li class="navi">プロジェクトを探す</li></a>
                 <a href="#"><li class="navi">UKA.とは？</li></a>
-                <a href="#"><li class="navi">管理人にメッセージ</li></a>
+                <a href="<c:url value="/message" />"><li class="navi">管理人にメッセージ</li></a>
                 <a href="<c:url value="/regist" />"><li class="navi">新規登録</li></a>
               </ul>
           </nav>
