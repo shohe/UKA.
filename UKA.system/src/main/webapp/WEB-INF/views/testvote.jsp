@@ -6,7 +6,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	hello
-	${iuy}
+
+てすとでつくる投票ぺーじ
+<form action="TestVote" method="post">
+投稿ID:<br />
+<input type="text" name="post_id"/><br />
+<input type="submit" name="insert" value="投稿"/>
+</form>
+
+
 </body>
 </html>

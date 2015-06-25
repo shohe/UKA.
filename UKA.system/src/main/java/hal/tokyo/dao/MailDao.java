@@ -37,13 +37,13 @@ public class MailDao {
 		return update.executeUpdate();
 	}
 	
-	public int Enqinsert(String id, String enq, String content) throws SQLException {
+	public int Enqinsert(String enq_id, String kenmei, String naiyou) throws SQLException {
 		System.out.println("Enqのインサートdao到達");
 		PreparedStatement update = con
-				.prepareStatement("insert into enquiry_mail (user_id,enquiry_type_id,enquiry_content) values (?,?,?);");
-		update.setString(1, id);
-		update.setString(2, enq);
-		update.setString(3, content);
+				.prepareStatement("insert into enquiry_mail (user_id,enquiry_type_id,enquiry_title,enquiry_content) values ('testman',?,?,?);");
+		update.setString(1, enq_id);
+		update.setString(2, kenmei);
+		update.setString(3, naiyou);
 		System.out.println("insert完了");
 		return update.executeUpdate();
 	}
@@ -64,7 +64,15 @@ public class MailDao {
 	 * @throws SQLException
 	 */
 	public void commit() throws SQLException {
+		System.out.println("commit到達...");
 		con.commit();
+		System.out.println("commit完了");
+	}
+	
+	public void rollback() throws SQLException {
+		System.out.println("commit到達...");
+		con.rollback();
+		System.out.println("commit完了");
 	}
 
 }
