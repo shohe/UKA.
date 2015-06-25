@@ -8,18 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MessageConfirmController {
-	/**
-	 * Message Confirm  JSP
-	 * 確認画面だす
-	 * @return
-	 */
-	@RequestMapping("/messageConfirm")
-	public ModelAndView gotoConfirm(
+public class MessageTest {
+	@RequestMapping("/messagssse")
+	public ModelAndView showMessage(
 			@RequestParam("enq_id") String enq_id,
 			@RequestParam("kenmei") String kenmei,
 			@RequestParam("naiyou") String naiyou) {
-		//ModelAndView mv = new ModelAndView("message_confirm");
+
 		EnquiryNullChecker enc = new EnquiryNullChecker();
 		//error messages
 		String enc_kenmei = "";
@@ -48,34 +43,6 @@ public class MessageConfirmController {
 
 		}
 
-	
 	}
-	
-	/**
-	 * Message Complete  JSP
-	 * 完了画面だす
-	 * @return
-	 */
-	@RequestMapping("/messageComplete")
-	public ModelAndView gotoComplete(/*TODO: パラメータ受け取り*/) {
-		ModelAndView mv = new ModelAndView("message_complete");
-		/**
-		 * TODO: パラメータ付与処理など
-		 */
-		return mv;
-	}
-	
-	/**
-	 * Message Complete  JSP
-	 * 完了画面だす
-	 * @return
-	 */
-	@RequestMapping("/messageDone")
-	public ModelAndView gotoCompleteIndex(/*TODO: パラメータ受け取り*/) {
-		ModelAndView mv = new ModelAndView("index");
-		/**
-		 * TODO: パラメータ付与処理など
-		 */
-		return mv;
-	}
+
 }

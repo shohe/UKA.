@@ -7,12 +7,15 @@
 <div class="row headline"><!-- Begin Headline -->
     <div class="top_project_search">
         <div class="top">メッセージ確認</div>
-        <form class="form-inline" method="post" action="messageComplete">
+        <form class="form-inline" method="post" action="EnquiryCreateServlet">
         <div class="messageTable">
             <table>
                 <tr><td>お問い合わせ種別名</td></tr>
+                <tr><td><input type="hidden" name=enq_id value="${enq_id}">${enq_id}</td></tr>
                 <tr><td>お問い合わせ件名</td></tr>
+                <tr><td><input type="hidden" name=kenmei value="${kenmei}">${kenmei}</td></tr>
                 <tr><td>お問い合わせ内容</td></tr>
+                <tr><td><input type="hidden" name=naiyou value="${naiyou}">${naiyou}</td></tr>
                 <tr><td><button type="submit" class="btn btn-primary">送信する。</button></td></tr>
             </table>
         </div>
