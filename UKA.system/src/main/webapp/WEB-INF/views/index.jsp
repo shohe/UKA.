@@ -36,7 +36,7 @@
         <!-- Headline Text
         ================================================== -->
         <div class="span3 margin-left20">
-        	<h3><a href="TransitionSummary">aaaaaaaa</a>燃料電池自動車の本格普及に向けた新プロジェクト</h3>
+        	<h3>燃料電池自動車の本格普及に向けた新プロジェクト</h3>
             <p class="lead">
                 燃料電池自動車（FCV）の本格的な普及に向け、燃料電池の飛躍的な高性能化・低コスト化、
                 生産性の抜本的な向上を実現するため新たな研究開発プロジェクトに着手します。
@@ -126,7 +126,7 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    しすてむ！！
+                                    人事の仕事が一括管理できる、人事システムを作ろう！
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -137,17 +137,17 @@
                                       </div>
                                       <div class="col-xs-4 col-sm-9 user_comment top_usr_com">
                                           <span>経理部 : 熊谷冬馬</span><br/>
-                                          女の子大好きです!よろしくお願いします:)
+                                          仕事大好きです!よろしくお願いします:)
                                       </div>
                                   </div>
                                 </div>
                                 <div class="text-center">
-                                    <input type="text" class="knob" value="0" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+                                    <input type="text" class="knob" value="76" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
                                     <div class="knob-label">
-                                        <i class="fa fa-calendar"></i><span>残り期間:1日</span>
+                                        <i class="fa fa-calendar"></i><span>残り期間:15日</span>
                                     </div>
                                     <div class="knob-label">
-                                        <i class="fa fa-male"></i><span>0人が評価しています。</span>
+                                        <i class="fa fa-male"></i><span>58人が評価しています。</span>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@
                                       </div>
                                       <div class="col-xs-4 col-sm-9 user_comment">
                                           <span>総務部 : 遠藤史哉</span><br/>
-                                          大好きです!
+                                          仕事大好きです!よろしくお願いします:)
                                       </div>
                                   </div>
                                 </div>

@@ -80,7 +80,7 @@
           <nav>
               <ul>
                 <a href="<c:url value="/" />"><li class="navi">ホーム</li></a>
-                <a href="#"><li class="navi">プロジェクトを投稿する</li></a>
+                <a href="<c:url value="/post" />"><li class="navi">プロジェクトを投稿する</li></a>
                 <a href="#"><li class="navi">プロジェクトを探す</li></a>
                 <a href="#"><li class="navi">UKA.とは？</li></a>
                 <a href="#"><li class="navi">管理人にメッセージ</li></a>
