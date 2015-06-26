@@ -16,6 +16,7 @@ public class IdeaDetailViewBean {
 	private String name;
 	private String department_name;
 	private String profilecomment;
+	private int achievement_percentage;
 	private int timelimit;
 
 	public String getTitle() {
@@ -72,6 +73,14 @@ public class IdeaDetailViewBean {
 
 	public void setProfilecomment(String profilecomment) {
 		this.profilecomment = profilecomment;
+	}
+
+	public int getAchievement_percentage() {
+		return achievement_percentage;
+	}
+
+	public void setAchievement_percentage(int achievement_percentage) {
+		this.achievement_percentage = achievement_percentage;
 	}
 
 	public int getTimelimit() {

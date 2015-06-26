@@ -44,6 +44,8 @@ public class IdeaDetailView {
 						ideaDetailViewBean.getDepartment_name());
 				modelAndView.addObject("profilecomment",
 						ideaDetailViewBean.getProfilecomment());
+				modelAndView.addObject("achievement_percentage",
+						ideaDetailViewBean.getAchievement_percentage());
 				modelAndView.addObject("timelimit",
 						ideaDetailViewBean.getTimelimit());
 				return modelAndView;
