@@ -5,6 +5,7 @@ import hal.tokyo.model.RegistCheck;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -23,6 +24,7 @@ public class RegistConfirmController {
 									@RequestParam("name") String name,
 									@RequestParam("password") String password,
 									@RequestParam("password_c") String password_c,
+									@RequestParam("thumbnail") MultipartFile thumbnail,
 									@RequestParam("profileComment") String profileComment) {
 
 		/** 今は使わない **/
