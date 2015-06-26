@@ -10,6 +10,7 @@ package hal.tokyo.beans;
 public class PostingsBean {
 	private int posting_Id;
 	private String user_Id;
+	private int post_id;
 	private String data;
 	private int possesion_Vote;
 	private int posting_Type_Id;
@@ -24,6 +25,13 @@ public class PostingsBean {
 	private String profilecomment;
 	private int timelimit;
 
+
+	public int getPost_id() {
+		return post_id;
+	}
+	public void setPost_id(int post_id) {
+		this.post_id = post_id;
+	}
 	public int getTimelimit() {
 		return timelimit;
 	}
