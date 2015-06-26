@@ -97,7 +97,7 @@ public class PostingsDao {
 	public ArrayList<PostingsBean> searchChar(String SearchChar) throws SQLException{
 
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, departments.department_name, users.name, "
+				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
 				+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
 				+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 				+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
@@ -122,6 +122,7 @@ public class PostingsDao {
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
 			table.add(Bean);
 		}
 

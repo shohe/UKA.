@@ -27,21 +27,6 @@ public class IndexController {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		System.out.println("index controller通過");
-
-
-		for ( PostingsBean postingsBean  :  result ) {
-			System.out.println("名前:"+ postingsBean.getName());
-			System.out.println("タイトル:"+ postingsBean.getTitle());
-			System.out.println("部署名:"+ postingsBean.getDepartment_name());
-			System.out.println("パーセント:"+ postingsBean.getAchievement_percentage());
-			System.out.println("イメージ:"+ postingsBean.getImage());
-			System.out.println("プロフィールコメント:"+ postingsBean.getProfilecomment());
-			System.out.println("投票数:"+ postingsBean.getAchievement_vote());
-			System.out.println("期限:"+postingsBean.getTimelimit());
-		}
-
-
 		mv.addObject("result", result);
 		return mv;
 	}
