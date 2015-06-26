@@ -18,19 +18,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PostController {
-	 
+
 	@RequestMapping(value="/post", method=RequestMethod.GET)
 	public ModelAndView getPost() {
 		ModelAndView mv = new ModelAndView("post");
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/post", method=RequestMethod.POST)
 	public ModelAndView postPost(
 			@RequestParam("text[]") String[] texts,
 			@RequestParam("title[]") String[] titles,
 			@RequestParam("file[]") MultipartFile[] files) throws IOException {
-		
+
 		for (int i=0; i<texts.length; i++) {
 			MultipleData fileBean = new MultipleData();
 			fileBean.setDescription(texts[i]);
@@ -43,20 +43,20 @@ public class PostController {
 				fileBean.upload();
 			}
 		}
-		
+
 		ModelAndView mv = new ModelAndView("post_complete");
 		return mv;
 	}
-	
+
 	@Autowired
 	ServletContext context;
-	
+
 	@RequestMapping(value="/thankYou", method=RequestMethod.POST)
 	public ModelAndView getPostComp() {
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
-	
+
 	private String createUploadPath() {
 		String path = context.getRealPath("/");
 		String[] paths = path.split("/", 0);
@@ -70,7 +70,7 @@ public class PostController {
 		}
 		return path;
 	}
-	
+
 	private String getFileExtention(String file) {
 		String result = String.valueOf(Calendar.getInstance().getTimeInMillis());
 		return result+file;

@@ -5,6 +5,7 @@ import hal.tokyo.model.RegistCheck;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -18,11 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class RegistConfirmController {
 
 	@RequestMapping("/regist_confirm_con")
-	public ModelAndView showMessage(@RequestParam("department_Id") String department_Id,
+	public ModelAndView showMessage(@RequestParam("department_Id") int department_Id,
 									@RequestParam("mailaddress") String mailaddress,
 									@RequestParam("name") String name,
 									@RequestParam("password") String password,
 									@RequestParam("password_c") String password_c,
+									@RequestParam("thumbnail") MultipartFile thumbnail,
 									@RequestParam("profileComment") String profileComment) {
 
 		/** 今は使わない **/
@@ -76,6 +78,7 @@ public class RegistConfirmController {
 			mv.addObject("name_msg", rc_name);
 			mv.addObject("mailaddress_msg", rc_mailaddress);
 			mv.addObject("password_msg", rc_password);
+			mv.addObject("password_c_msg", rc_password_c);
 			mv.addObject("profileComment_msg", rc_profileComment);
 
 			return mv;
@@ -90,8 +93,8 @@ public class RegistConfirmController {
 			mv.addObject("department_Id", department_Id);
 			mv.addObject("mailaddress", mailaddress);
 			mv.addObject("name", name);
-			mv.addObject("password", rc.HidePassword(password));
-			mv.addObject("passwor_c", password_c);
+			mv.addObject("password", password);
+			mv.addObject("password_a", rc.HidePassword(password));
 			mv.addObject("profileComment", profileComment);
 			return mv;
 
