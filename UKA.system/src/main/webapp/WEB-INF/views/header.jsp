@@ -56,25 +56,40 @@
                 <div class="logo_title" id="uka">UKA.</div>
                 <div class="logo_title" id="uka_text">nipponham business experts Ltd.</div>
                 <div id="login-form">
-                    <form class="" action="" method="post">
-                        <div class="left">
-                            <!-- out -->
-                            <input type="text" class="form-control" id="Email-Form" placeholder="メールアドレス">
-                            <input type="password" class="form-control" id="Password-Form" placeholder="パスワード">
+                <%
 
-                            <!-- in -->
-                            <!-- <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                一般社員
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">管理者</a></li>
-                            </ul> -->
-                        </div>
-                        <div class="right">
-                            <button type="submit" class="btn btn-default">ログイン</button>
-                        </div>
-                    </form>
+
+                	out.println("<form class='' action='LoginServlet' method='post'>");
+                    out.println("<div class='left'>");
+                            //out
+
+                            if(session.getAttribute("Status") == "true"){
+                            	String mailaddress =  (String)session.getAttribute("Name");
+                            	out.println("<p>");
+                            	out.println(mailaddress + "さん");
+                            	out.println("</p>");
+                            }else{
+                            	out.println("<input type='text' class='form-control' id='Email-Form'  name='Email' placeholder='メールアドレス'>");
+                            	out.println("<input type='password' class='form-control' id='Password-Form' name='Password' placeholder='パスワード'>");
+                            }
+                            //in
+                            // <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            //    一般社員
+                            //    <span class="caret"></span>
+                            //</button>
+                            //<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            //    <li><a href="#">管理者</a></li>
+                            //</ul>
+                        out.println("</div>");
+                        out.println("<div class='right'>");
+                        if(session.getAttribute("Status") == "true"){
+                            out.println("<button type='submit' class='btn btn-default' name='login' value='logout'>ログアウト</button>");
+                        }else{
+                        	out.println("<button type='submit' class='btn btn-default' name='login' value='login'>ログイン</button>");
+                        }
+                        out.println("</div>");
+                    out.println("</form>");
+                    %>
                 </div>
           </div>
           <nav>
@@ -86,6 +101,6 @@
                 <a href="#"><li class="navi">管理人にメッセージ</li></a>
                 <a href="<c:url value="/regist" />"><li class="navi">新規登録</li></a>
               </ul>
-          </nav>
-        </div><!-- End Header -->
+          </nav>        </div><!-- End Header -->
+
     </header>
