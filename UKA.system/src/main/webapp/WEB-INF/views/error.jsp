@@ -6,7 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	hello
-	${iuy}
+<h2>ERROR!!!</h2>
 </body>
 </html>

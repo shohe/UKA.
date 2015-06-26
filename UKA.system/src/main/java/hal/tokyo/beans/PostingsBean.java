@@ -15,8 +15,39 @@ public class PostingsBean {
 	private int posting_Type_Id;
 	private int status;
 	private String title;
-	private int posting_Content_Id;
-	
+	private String posting_Content;
+	private String department_name;
+	private String name;
+	private int achievement_percentage;
+	private int achievement_vote;
+	private String image;
+	private String profilecomment;
+	private int timelimit;
+
+	public int getTimelimit() {
+		return timelimit;
+	}
+	public void setTimelimit(int timelimit) {
+		this.timelimit = timelimit;
+	}
+	public int getAchievement_vote() {
+		return achievement_vote;
+	}
+	public void setAchievement_vote(int achievement_vote) {
+		this.achievement_vote = achievement_vote;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getProfilecomment() {
+		return profilecomment;
+	}
+	public void setProfilecomment(String profilecomment) {
+		this.profilecomment = profilecomment;
+	}
 	public int getPosting_Id() {
 		return posting_Id;
 	}
@@ -59,12 +90,31 @@ public class PostingsBean {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getPosting_Content_Id() {
-		return posting_Content_Id;
+	public String getPosting_Content() {
+		return posting_Content;
 	}
-	public void setPosting_Content_Id(int posting_Content_Id) {
-		this.posting_Content_Id = posting_Content_Id;
+	public void setPosting_Content(String posting_Content) {
+		this.posting_Content = posting_Content;
 	}
-	
+	public String getDepartment_name() {
+		return department_name;
+	}
+	public void setDepartment_name(String department_name) {
+		this.department_name = department_name;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAchievement_percentage() {
+		return achievement_percentage;
+	}
+	public void setAchievement_percentage(int achievement_percentage) {
+		this.achievement_percentage = achievement_percentage;
+	}
+
+
 
 }

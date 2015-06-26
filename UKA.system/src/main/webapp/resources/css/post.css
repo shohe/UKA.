@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.well h4 {font-weight: bold;margin-left: 5px;color: #777;}
+.count {width: 100%; height: 10px; text-align: right;}
+.well span {font-weight: bold;margin-right: 5px;color: #bbb;}
+.well input {margin-right: 5px;}
+.input-group table{width: 325px; font-size: 13px; color: #555;}
+.komoku {margin: 15px 0px; width: 100%;}
+.komoku3 {padding-left: 0px;}
+.button-w-max {width: 310px; height: 40px; font-size: 11px;}
+#preview {margin-top: 25px;margin-bottom: 15px;}
+#plus {width: 80px; height: 34px; font-size: 11px; line-height: 1.9em;}
+#boxA-background {display: block;}
+#boxA-parpus {display: block;}
+#boxA-target {display: block;}
+#boxA-search {display: block;}
+#boxA-discription {display: block;}
+#boxA-plan {display: block;}
