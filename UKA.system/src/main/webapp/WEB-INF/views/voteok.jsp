@@ -6,7 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	hello
-	${iuy}
+(≧Д≦)
 </body>
 </html>

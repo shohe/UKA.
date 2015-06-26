@@ -1,6 +1,6 @@
 package hal.tokyo.controller;
 
-import hal.tokyo.dao.MailDao;
+import hal.tokyo.dao.VotesDao;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EnquiryCreateServlet
+ * Servlet implementation class TestVote
  */
-@WebServlet("/EnquiryCreateServlet")
-public class EnquiryCreateServlet extends HttpServlet {
+@WebServlet("/TestVote")
+public class TestVote extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnquiryCreateServlet() {
+    public TestVote() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,58 +41,31 @@ public class EnquiryCreateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
-		request.setCharacterEncoding("utf-8");
-		//HTTPレスポンスの文字コード設定
-		response.setContentType("text/html");
-		response.setCharacterEncoding("utf-8");
-		
-		System.out.println("Enquiry Servletとうたつ");
-		String jspName = "";
-		MailDao dao = null;
+		System.out.println("投票servletとうたつ");
+		String jspName = "/WEB-INF/viws/testvote.jsp";
+		VotesDao dao = null;
 
 		try {			
-			String enq_id = request.getParameter("enq_id");
-			String kenmei = request.getParameter("kenmei");
-			String naiyou = request.getParameter("naiyou");
+			String post_id = request.getParameter("post_id");
 			
-			System.out.println(enq_id);
-			System.out.println(kenmei);
-			System.out.println(naiyou);
+			System.out.println(post_id);
 			System.out.println("daoに行く手前");
-			dao = new MailDao();		
+			dao = new VotesDao();		
 
-			dao.Enqinsert(enq_id,kenmei,naiyou);
+			dao.Voteupdate(post_id);
 			dao.commit();
-			jspName = "messageComplete";
-		} catch (SQLException e) {
+			jspName = "/WEB-INF/views/voteok.jsp";
+		} catch (NamingException | SQLException e) {
+			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
-			try{
-				if(dao != null){
-					dao.rollback();
-				}
-			}catch(SQLException e1){
-				e1.printStackTrace();
-				jspName = "/WEB-INF/views/error.jsp";
-			}
-		}	catch(NamingException e){
-				e.printStackTrace();
-		}	finally	{
-				try{
-					if(dao != null){
-						dao.close();
-					}
-				}catch(SQLException e){
-					e.printStackTrace();
-					jspName = "/WEB-INF/views/error.jsp";
-				}
+			jspName = "/WEB-INF/views/testvote.jsp";
 		}
-		System.out.println("おっぱい"+jspName);
 		RequestDispatcher dispatcher =
 				request.getRequestDispatcher(jspName);
 
 			dispatcher.forward(request, response);
 		
+	
 	}
 
 }

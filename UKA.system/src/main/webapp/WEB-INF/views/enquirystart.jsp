@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form action="EnquiryCreateServlet" method="get">
+<form action="EnquiryCreateServlet" method="post">
 ゆーざID:<br />
 <input type="text" name="user_id"/><br />
 お問い合わせ種別:<br />
