@@ -53,7 +53,7 @@ public class IdeaDetailViewDao {
 	public IdeaDetailViewBean read(int postId) throws SQLException {
 		IdeaDetailViewBean ideaDetailViewBean = new IdeaDetailViewBean();
 		this.preparedStatement = this.connection
-				.prepareStatement("SELECT p.title, p.date, c.posting_content, u.image, u.name, d.department_name, u.profilecomment, p.possession_vote / t.achievement_vote * 100 AS achievement_percentage, DATEDIFF( DATE_ADD( (p.date), INTERVAL( SELECT t.terms_period FROM postings p, terms t WHERE t.terms_id = p.terms_id AND p.posting_id = ? ) DAY), CURRENT_DATE() ) AS timelimit FROM postings p, posting_content c, users u, departments d, terms t WHERE p.posting_content_id = c.posting_content_id AND p.user_id = u.mailaddress AND u.department_id = d.department_id AND p.terms_id = t.terms_id AND p.posting_id = ?");
+				.prepareStatement("SELECT p.title, p.date, c.posting_content, u.image, u.name, d.department_name, u.profilecomment, p.possession_vote / t.achievement_vote * 100 AS achievement_percentage, p.possession_vote, DATEDIFF( DATE_ADD( (p.date), INTERVAL( SELECT t.terms_period FROM postings p, terms t WHERE t.terms_id = p.terms_id AND p.posting_id = ? ) DAY), CURRENT_DATE() ) AS timelimit FROM postings p, posting_content c, users u, departments d, terms t WHERE p.posting_content_id = c.posting_content_id AND p.user_id = u.mailaddress AND u.department_id = d.department_id AND p.terms_id = t.terms_id AND p.posting_id = ?");
 		this.preparedStatement.setInt(1, postId);
 		this.preparedStatement.setInt(2, postId);
 		ResultSet resultSet = this.preparedStatement.executeQuery();
@@ -68,6 +68,8 @@ public class IdeaDetailViewDao {
 				.getString("department_name"));
 		ideaDetailViewBean.setProfilecomment(resultSet
 				.getString("profilecomment"));
+		ideaDetailViewBean.setPossession_vote(resultSet
+				.getInt("possession_vote"));
 		ideaDetailViewBean.setAchievement_percentage(resultSet
 				.getInt("achievement_percentage"));
 		ideaDetailViewBean.setTimelimit(resultSet.getInt("timelimit"));

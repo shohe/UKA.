@@ -16,6 +16,7 @@ public class IdeaDetailViewBean {
 	private String name;
 	private String department_name;
 	private String profilecomment;
+	private int possession_vote;
 	private int achievement_percentage;
 	private int timelimit;
 
@@ -73,6 +74,14 @@ public class IdeaDetailViewBean {
 
 	public void setProfilecomment(String profilecomment) {
 		this.profilecomment = profilecomment;
+	}
+
+	public int getPossession_vote() {
+		return possession_vote;
+	}
+
+	public void setPossession_vote(int possession_vote) {
+		this.possession_vote = possession_vote;
 	}
 
 	public int getAchievement_percentage() {

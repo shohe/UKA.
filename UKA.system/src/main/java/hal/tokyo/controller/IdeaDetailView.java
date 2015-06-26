@@ -33,7 +33,7 @@ public class IdeaDetailView {
 			try {
 				ideaDetailViewBean = ideaDetailViewDao.read(postId);
 				ideaDetailViewDao.rollback();
-				ModelAndView modelAndView = new ModelAndView("detail");
+				ModelAndView modelAndView = new ModelAndView("info");
 				modelAndView.addObject("title", ideaDetailViewBean.getTitle());
 				modelAndView.addObject("date", ideaDetailViewBean.getDate());
 				modelAndView.addObject("posting_content",
@@ -44,6 +44,8 @@ public class IdeaDetailView {
 						ideaDetailViewBean.getDepartment_name());
 				modelAndView.addObject("profilecomment",
 						ideaDetailViewBean.getProfilecomment());
+				modelAndView.addObject("possession_vote",
+						ideaDetailViewBean.getPossession_vote());
 				modelAndView.addObject("achievement_percentage",
 						ideaDetailViewBean.getAchievement_percentage());
 				modelAndView.addObject("timelimit",
