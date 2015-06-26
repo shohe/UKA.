@@ -1,10 +1,10 @@
 package hal.tokyo.controller;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import hal.tokyo.beans.PostingsBean;
 import hal.tokyo.dao.PostingsDao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

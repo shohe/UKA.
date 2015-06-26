@@ -39,7 +39,7 @@ public class LoginModule extends HttpServlet{
 		try {
 			UsersBean record = new UsersBean();
 			record = usersdao.findById(MailAddress, Password);
-			if(record != null){
+			if(record.getMailAddress() != null){
 				if(record.getPassword().equals(Password)){
 					return record.getMailAddress();
 				}else{
