@@ -18,6 +18,8 @@ public class EnquiryReceiveController {
 		ModelAndView mv = new ModelAndView("jushin");
 
 		MailDao md = new MailDao();
+		
+		md.
 
 		return mv;
 	}
