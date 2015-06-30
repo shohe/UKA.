@@ -14,7 +14,7 @@
             <div class="col-lg-8" id="form-group">
             	<div class="well" id="boxA-title">
                     <h4>プロジェクトタイトル</h4>
-						<input type="text" name="title" class="form-control" placeholder="100文字まで...">
+						<input type="text" name="maintitle" class="form-control" placeholder="100文字まで...">
                 </div>
                 
                 <div class="well" id="boxA-background">

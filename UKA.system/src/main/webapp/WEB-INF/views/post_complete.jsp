@@ -13,10 +13,15 @@
     <div class="row headline"><!-- Begin Headline -->
         <div class="top_project_search">
             <div class="top">おめでとうございます。<br/>プロジェクトの投稿が完了しました。</div>
+            <!-- <p>${conCre}</p> -->
             <form class="form-inline" method="post" action="thankYou">
             <div class="bottom" style="margin-top:60px;">
                 <button class="btn btn-primary" type="submit" style="color:#fff;width:150px;height:50px;">トップページに戻る。</button>
             </div>
+            </form>
+            <form action="viewtest" method="post">
+            <input type="hidden" name="content" value="${id}">
+            <input type="submit">
             </form>
         </div>
     </div><!-- End Headline -->
