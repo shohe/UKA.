@@ -57,9 +57,11 @@
                 <div class="logo_title" id="uka_text">nipponham business experts Ltd.</div>
                 <div id="login-form">
                 <%
-
-
-                	out.println("<form class='' action='LoginServlet' method='post'>");
+                	if(session.getAttribute("Name") != null){
+                		out.println("<form class='' action='logout' method='post'>");
+                	}else{
+                		out.println("<form class='' action='login' method='post'>");
+                	}
                     out.println("<div class='left'>");
                             //out
 

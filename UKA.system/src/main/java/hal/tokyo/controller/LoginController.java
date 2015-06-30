@@ -1,6 +1,9 @@
 package hal.tokyo.controller;
 
-import hal.tokyo.login.LoginModule;
+import hal.tokyo.beans.UsersBean;
+import hal.tokyo.dao.UsersDao;
+
+import java.sql.SQLException;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * +---------------------------------------+
- *   !このコントローラーはテスト用に作ったモノです!
- * +---------------------------------------+
- * @author shohe
+ *
+ * @author kosaka
  *
  */
 @Controller
@@ -28,16 +29,20 @@ public class LoginController extends HttpServlet {
 
 		String Login = "login";
 
+		UsersDao dao = new UsersDao();
+		UsersBean record = new UsersBean();
 
-		LoginModule loginm = new LoginModule();
-
-
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 			if(request.getParameter("login").equals(Login)){
-				String name = loginm.Login(MailAddress, Password);
-				if(name.equals(MailAddress)){
+				try {
+					record = dao.findById(MailAddress, Password);
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+				if(record.getMailAddress().equals(MailAddress)){
 					//認証成功
-					session.setAttribute("Name", name);
+					session.setAttribute("Name", record.getName());
 					session.setAttribute("Status", "true");
 				}else{
 					session.setAttribute("Status", "false");
@@ -49,9 +54,6 @@ public class LoginController extends HttpServlet {
 
 		ModelAndView mv = new ModelAndView("index");
 		mv.addObject("message", message);
-		mv.addObject("Email",MailAddress );
-		mv.addObject("Password",Password );
-		mv.addObject("login",login );
 		return mv;
 	}
 }
