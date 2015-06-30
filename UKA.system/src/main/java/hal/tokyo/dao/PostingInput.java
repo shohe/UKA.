@@ -6,26 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class PostingInput {
 
 	// MySQLに接続
     Connection con;
 	public PostingInput() {
-		
-		// ドライバロード
-        try {
-        	
-			Class.forName("org.gjt.mm.mysql.Driver");
-
-	        con = DriverManager.getConnection("jdbc:mysql://localhost/ukasystem?useUnicode=true&characterEncoding=utf8", "root", "");
-
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		try {            InitialContext context;
+        context = new InitialContext();
+        DataSource ds;
+        ds = (DataSource) context
+                .lookup("java:comp/env/jdbc/ukasystem");
+        con = ds.getConnection();
+        } catch (NamingException e) {
+        	e.printStackTrace();        
+        	} catch (SQLException e) {
+        		e.printStackTrace();        
+        		} 
 	}
 
 	public String selectCotent(int id) {
@@ -64,15 +64,16 @@ public class PostingInput {
 	        // ステートメント生成
         	Statement stmt = con.createStatement();
         	
-        	//INSERT INTO product_content(POSTING_CONTENT) VALUES ('"+htmlText+"')
+        	
 
             String postConIns = "INSERT INTO posting_content(POSTING_CONTENT) VALUES ('"+htmlText+"')";
+            System.out.println(postConIns);
         	stmt.executeUpdate(postConIns);
-        	
+        	con.commit();
             // SQLを実行
             String sqlStr = "SELECT MAX(POSTING_CONTENT_ID) FROM posting_content";
             ResultSet rs = stmt.executeQuery(sqlStr);
-
+            
             // 結果行をループ
             while(rs.next()){
                 // レコードの値
@@ -82,10 +83,9 @@ public class PostingInput {
                 System.out.println("ID："+id);
             }
             
-	        //INSERT INTO postings(USER_ID, POSSESSION_VOTE, POSTING_TYPE_ID, TERMS_ID, STATUS, TITLE, POSTING_CONTENT_ID) VALUES ('"+userId+"',0,"+postingTypeId+","+termId+",1,'"+title+"',"+postingContentId+")
-        
             String insPostings = "INSERT INTO postings(USER_ID, POSSESSION_VOTE, POSTING_TYPE_ID, TERMS_ID, STATUS, TITLE, POSTING_CONTENT_ID) VALUES ('"+userId+"',0,"+postingTypeId+","+termId+",1,'"+title+"',"+id+")";
             System.out.println(insPostings);
+            con.commit();
             try {
                 stmt.executeUpdate(insPostings);
 			} catch (Exception e) {
@@ -117,7 +117,7 @@ public class PostingInput {
             String postConIns = "INSERT INTO posting_content(POSTING_CONTENT) VALUES ('"+htmlText+"')";
             System.out.println(postConIns);
         	stmt.executeUpdate(postConIns);
-        	
+        	con.commit();
             // SQLを実行
             String sqlStr = "SELECT MAX(POSTING_CONTENT_ID) FROM posting_content";
             ResultSet rs = stmt.executeQuery(sqlStr);
@@ -135,7 +135,7 @@ public class PostingInput {
         
             String insPostings = "INSERT INTO postings(USER_ID, POSSESSION_VOTE, POSTING_TYPE_ID, TERMS_ID, STATUS, TITLE, POSTING_CONTENT_ID) VALUES ('"+userId+"',0,"+postingTypeId+","+termId+",1,'"+title+"',"+id+")";
             stmt.executeUpdate(insPostings);
-            
+            con.commit();
             // 接続を閉じる
             rs.close();
             stmt.close();

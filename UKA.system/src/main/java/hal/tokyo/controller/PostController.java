@@ -193,7 +193,7 @@ public class PostController {
 	private String createUploadPath() {
 		
 		String path = context.getRealPath("\\");
-		//System.out.println(path);
+		System.out.println("path::"+path);
 		String[] paths = path.split("\\\\", 0);
 		path = "";
 		//int loop = 0;
