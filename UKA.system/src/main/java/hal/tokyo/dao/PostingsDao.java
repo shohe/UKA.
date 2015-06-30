@@ -97,14 +97,14 @@ public class PostingsDao {
 	public ArrayList<PostingsBean> searchChar(String SearchChar) throws SQLException{
 
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, departments.department_name, users.name, "
+				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
 				+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
 				+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 				+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
 				+ "JOIN users ON users.mailaddress = postings.user_id "
 				+ "JOIN departments ON departments.department_id = users.department_id "
-				+ "JOIN product_content ON postings.posting_content_id = product_content.posting_content_id "
-				+ "WHERE postings.title LIKE  '%' || ? || '%' OR product_content.posting_content LIKE  '%' || ? || '%' "
+				+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
+				+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
 				+ "AND postings.status =1 HAVING timelimit >0");
 		pstm.setString(1, SearchChar);
 		pstm.setString(2, SearchChar);
@@ -122,6 +122,7 @@ public class PostingsDao {
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
 			table.add(Bean);
 		}
 
@@ -131,10 +132,10 @@ public class PostingsDao {
 	//新着順
 	public PostingsBean sortNew() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-					"SELECT users.name, departments.department_name, postings.title, product_content.posting_content ,terms.achievement_percentage , users.image"
+					"SELECT users.name, departments.department_name, postings.title, posting_content.posting_content ,terms.achievement_percentage , users.image"
 						+ "FROM postings JOIN terms ON postings.POSTING_TYPE_ID = terms.POSTING_TYPE_ID JOIN users ON postings.user_id = users.mailaddress "
-						+ "JOIN departments ON departments.department_id = users.department_id JOIN product_content "
-						+ "ON product_content.posting_content_id = postings.posting_content_id WHERE postings.status = 1 ORDER BY date DESC"
+						+ "JOIN departments ON departments.department_id = users.department_id JOIN posting_content "
+						+ "ON posting_content.posting_content_id = postings.posting_content_id WHERE postings.status = 1 ORDER BY date DESC"
 				);
 
 		ResultSet rs = pstm.executeQuery();
@@ -155,10 +156,10 @@ public class PostingsDao {
 	//人気順(投票数が多い順)
 	public PostingsBean sortFavor() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT users.name, departments.department_name, postings.title, product_content.posting_content ,terms.achievement_percentage "
+				"SELECT users.name, departments.department_name, postings.title, posting_content.posting_content ,terms.achievement_percentage "
 				+ "FROM postings JOIN terms ON postings.POSTING_TYPE_ID = terms.POSTING_TYPE_ID JOIN users ON postings.user_id = users.mailaddress "
-				+ "JOIN departments ON departments.department_id = users.department_id JOIN product_content "
-				+ "ON product_content.posting_content_id = postings.posting_content_id WHERE postings.status = 1 ORDER BY achievement_percentage DESC");
+				+ "JOIN departments ON departments.department_id = users.department_id JOIN posting_content "
+				+ "ON posting_content.posting_content_id = postings.posting_content_id WHERE postings.status = 1 ORDER BY achievement_percentage DESC");
 
 		ResultSet rs = pstm.executeQuery();
 
