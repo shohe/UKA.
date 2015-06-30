@@ -80,7 +80,7 @@ public class UsersDao {
 			table.add(record);
 		}
 
-		findAll.close();
+		con.close();
 
 		return table;
 
@@ -120,7 +120,8 @@ public class UsersDao {
 
 
 		}
-		//findById.close();
+
+		con.close();
 
 
 

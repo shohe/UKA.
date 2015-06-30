@@ -39,14 +39,13 @@ public class LoginServlet extends HttpServlet {
 		String MailAddress = request.getParameter("Email");
 		String Password = request.getParameter("Password");
 		String Login = "login";
-		System.out.println(request.getParameter("login"));
 
 		String index = "/WEB-INF/views/index.jsp";
 
 		LoginModule login = new LoginModule();
 
 
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		RequestDispatcher dis = request.getRequestDispatcher(index);
 			if(request.getParameter("login").equals(Login)){
 				String name = login.Login(MailAddress, Password);
@@ -62,6 +61,7 @@ public class LoginServlet extends HttpServlet {
 			}else{
 				session.removeAttribute("Name");
 				session.removeAttribute("Status");
+				System.out.println("ログアウト処理完了");
 				dis.forward(request, response);
 			}
 

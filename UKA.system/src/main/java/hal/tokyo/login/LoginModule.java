@@ -41,15 +41,24 @@ public class LoginModule extends HttpServlet{
 			record = usersdao.findById(MailAddress, Password);
 			if(record.getMailAddress() != null){
 				if(record.getPassword().equals(Password)){
+					usersdao.close();
 					return record.getMailAddress();
 				}else{
+					usersdao.close();
 					return ErrorMessage;
 				}
 			}else{
+				usersdao.close();
 				return ErrorMessage;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				usersdao.close();
+			} catch (SQLException e1) {
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
+			}
 			return ErrorMessage;
 		}
 

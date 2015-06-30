@@ -64,10 +64,7 @@
                             //out
 
                             if(session.getAttribute("Status") == "true"){
-                            	String mailaddress =  (String)session.getAttribute("Name");
-                            	out.println("<p>");
-                            	out.println(mailaddress + "さん");
-                            	out.println("</p>");
+
                             }else{
                             	out.println("<input type='text' class='form-control' id='Email-Form'  name='Email' placeholder='メールアドレス'>");
                             	out.println("<input type='password' class='form-control' id='Password-Form' name='Password' placeholder='パスワード'>");
@@ -99,17 +96,16 @@
                 <a href="<c:url value="/search" />"><li class="navi">プロジェクトを探す</li></a>
                 <a href="#"><li class="navi">UKA.とは？</li></a>
                 <a href="<c:url value="/message" />"><li class="navi">管理人にメッセージ</li></a>
-                <a href="<c:url value="/regist" />"><li class="navi">新規登録</li></a>
+
                 <%
-                /*
+
                 if(session.getAttribute("Status") == "true"){
                 	String Name = (String)session.getAttribute("Name");
-                	out.println(Name);
-                	//<a href="<c:url value="/regist" />"><li class="navi">新規登録</li></a>
+                	out.println("<li class='navi'>" + Name + "</li>");
                 }else{
                 	out.println("<a href='<c:url value='/regist' />'><li class='navi'>新規登録</li></a>");
                 }
-                */
+
                 %>
               </ul>
           </nav>        </div><!-- End Header -->
