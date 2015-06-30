@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.transform.impl.AddDelegateTransformer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,10 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PostController {
-	
+
 	@Autowired
 	ServletContext context;
-	
+
 	@RequestMapping(value="/viewtest", method=RequestMethod.POST)
 	public ModelAndView getContent(@RequestParam("content") int contentId) {
 		PostingInput dao = new PostingInput();
@@ -36,13 +35,13 @@ public class PostController {
 		mv.addObject("content",content);
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/postDetail", method=RequestMethod.GET)
 	public ModelAndView getDetail() {
 		ModelAndView mv = new ModelAndView("post");
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/post", method=RequestMethod.GET)
 	public ModelAndView getPost() {
 		ModelAndView mv = new ModelAndView("posting_summary");
@@ -58,8 +57,8 @@ public class PostController {
 	 * @return
 	 * @throws IOException
 	 */
-	
-	
+
+
 	@RequestMapping(value="/post", method=RequestMethod.POST)
 	public ModelAndView postPost(
 			@RequestParam("maintitle") String muintitle,
@@ -67,7 +66,7 @@ public class PostController {
 			@RequestParam("title[]") String[] titles,
 			@RequestParam("file[]") MultipartFile[] files) throws IOException {
 		System.out.println("メインタイトル："+muintitle);
-		ArrayList<MultipleData> malBean = new ArrayList<MultipleData>(); 
+		ArrayList<MultipleData> malBean = new ArrayList<MultipleData>();
 		for (int i=0; i<texts.length; i++) {
 			String regex = "\r\n";
 			Pattern p = Pattern.compile(regex);
@@ -88,26 +87,26 @@ public class PostController {
 				System.out.println("<c:url value='/resources/var/"+getFileExtention(files[i].getOriginalFilename())+"' />");
 				fileBean.upload();
 			}
-			
+
 			malBean.add(fileBean);
 		}
-		
+
 		//DBに登録するものの編集
 		String conCre = contentCreate(muintitle,malBean);
-		
+
 		//db登録詳細
 		PostingInput Dao = new PostingInput();
 		Dao.insertDetail("bbbb@bbbb.com", conCre, muintitle, 0, 1,0);
-		
+
 		//ModelAndView mv = new ModelAndView("post_complete");
 		ModelAndView mv = new ModelAndView("post_complete");
 		//確認用
 		//mv.addObject("conCre", "<img src=\"../../resorces/var/1435219826718the_screamy_wallpaperl.jpg\">"+conCre);mv.addObject("conCre", "<img src=\"../../resorces/var/1435219826718the_screamy_wallpaperl.jpg\">"+conCre);
 		mv.addObject("conCre", conCre);
-		
+
 		return mv;
 	}
-	
+
 	/**
 	 * 概要を投稿する際の場所
 	 * @author kumagai
@@ -125,7 +124,7 @@ public class PostController {
 			@RequestParam("title[]") String[] titles,
 			@RequestParam("file[]") MultipartFile[] files) throws IOException {
 		System.out.println("メインタイトル："+muintitle);
-		ArrayList<MultipleData> malBean = new ArrayList<MultipleData>(); 
+		ArrayList<MultipleData> malBean = new ArrayList<MultipleData>();
 		for (int i=0; i<texts.length; i++) {
 			String regex = "\r\n";
 			Pattern p = Pattern.compile(regex);
@@ -148,23 +147,23 @@ public class PostController {
 			}
 			malBean.add(fileBean);
 		}
-		
+
 		//DBに登録するものの編集
 		String conCre = contentCreate(muintitle,malBean);
-		
+
 		//db登録詳細
 		PostingInput Dao = new PostingInput();
-		int id = Dao.insertSummary("aaaa@aaaa.com", conCre, muintitle, 0, 0,0);
-		
+		int id = Dao.insertSummary("aaa@sample.com", conCre, muintitle, 1, 1,1);
+
 		//ModelAndView mv = new ModelAndView("post_complete");
 		ModelAndView mv = new ModelAndView("post_complete");
 		//確認用
 		//mv.addObject("conCre", "<img src=\"../../resorces/var/1435219826718the_screamy_wallpaperl.jpg\">"+conCre);mv.addObject("conCre", "<img src=\"../../resorces/var/1435219826718the_screamy_wallpaperl.jpg\">"+conCre);
 		mv.addObject("id", id);
-		
+
 		return mv;
 	}
-	
+
 	/**
 	 * DB保存用の内容変換メソッド
 	 * @author kumagai
@@ -183,15 +182,15 @@ public class PostController {
 		System.out.println(conCon);
 		return conCon;
 	}
-	
+
 	@RequestMapping(value="/thankYou", method=RequestMethod.POST)
 	public ModelAndView getPostComp() {
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
-	
+
 	private String createUploadPath() {
-		
+
 		String path = context.getRealPath("\\");
 		System.out.println("path::"+path);
 		String[] paths = path.split("\\\\", 0);
@@ -206,7 +205,7 @@ public class PostController {
 				break;
 			}
 		}
-		
+
 
 //		String path = context.getRealPath("/");
 //		String[] paths = path.split("/", 0);
@@ -220,7 +219,7 @@ public class PostController {
 //		}
 		return path;
 	}
-	
+
 	private String getFileExtention(String file) {
 		String result = String.valueOf(Calendar.getInstance().getTimeInMillis());
 		return result+file;
