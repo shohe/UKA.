@@ -29,6 +29,12 @@ public class LoginController extends HttpServlet {
 
 		String Login = "login";
 
+		if(MailAddress.isEmpty()){
+			ModelAndView mv = new ModelAndView("index");
+			mv.addObject("message", message);
+			return mv;
+		}
+
 		UsersDao dao = new UsersDao();
 		UsersBean record = new UsersBean();
 
@@ -36,16 +42,24 @@ public class LoginController extends HttpServlet {
 			if(request.getParameter("login").equals(Login)){
 				try {
 					record = dao.findById(MailAddress, Password);
+					System.out.println(record.getMailAddress());
 				} catch (SQLException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
-				if(record.getMailAddress().equals(MailAddress)){
-					//認証成功
-					session.setAttribute("Name", record.getName());
-					session.setAttribute("Status", "true");
+				if(record.getMailAddress() != null){
+					if(record.getMailAddress().equals(MailAddress)){
+						//認証成功
+						session.setAttribute("Name", record.getName());
+						session.setAttribute("Status", "true");
+					}else{
+
+						session.setAttribute("Status", "false");
+					}
 				}else{
-					session.setAttribute("Status", "false");
+					ModelAndView mv = new ModelAndView("index");
+					mv.addObject("message", message);
+					return mv;
 				}
 			}else{
 				session.removeAttribute("Name");
