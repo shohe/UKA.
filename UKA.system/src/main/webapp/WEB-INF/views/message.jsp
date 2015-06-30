@@ -18,9 +18,9 @@
 						<tr>
 							<td><select id="shubetsu" name="enq_id" class="form-control">
 									<option>お選びください。</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
+									<option value="1">クレーム</option>
+									<option value="2">問題報告</option>
+									<option value="3">その他</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -28,7 +28,7 @@
 						</tr>
 						<tr>
 							<td><input type="text" id="kenmei" name="kenmei" maxlength="100"
-								class="form-control" placeholder="件名を入力してください。"></td>
+								class="form-control" placeholder="件名を入力してください。" value="${kenmei}"></td>
 						</tr>
 						<tr>
 							<td>${err_kenmei}</td>
@@ -38,7 +38,7 @@
 						</tr>
 						<tr>
 							<td><textarea class="form-control" id="naiyou" name="naiyou"
-									rows="10" maxlength="1000" placeholder="1000文字まで。"
+									rows="10" maxlength="1000" placeholder="1000文字まで。" value="${kenmei}"
 									onKeyup="
   o=document.getElementById('slen');
   n=this.value.replace(/\s|　/gm,'').length;
@@ -47,7 +47,7 @@
   o.style.color=(n>100)?'blue':'blue';
   document.getElementById('mes1').innerHTML=(n>1000)?'文字　文字制限を越えています。1000文字以内で入力してください。':'文字';
   document.getElementById('mes2').innerHTML=(n>1000)?'':'　あと'+(1000-n)+'文字です。';
-"></textarea>
+">${naiyou}</textarea>
 <tr><td>
  <span id="slen"></span>
 <span id="mes1" style="font-size:12px">　</span>

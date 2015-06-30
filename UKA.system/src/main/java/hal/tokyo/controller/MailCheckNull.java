@@ -23,9 +23,9 @@ public class MailCheckNull {
 	
 	public String ContentNullCheck(String content){
 		if(!mc.StringNull(content)){
-			return "タイトル" + null_checker;
+			return null_checker;
 		}else if(!mc.StringBlank(content)){
-			return "タイトル" + blank_checker;
+			return blank_checker;
 		}else{
 			return "";
 		}
