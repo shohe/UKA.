@@ -5,9 +5,11 @@ import hal.tokyo.dao.PostingsDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,38 +17,35 @@ import org.springframework.web.servlet.ModelAndView;
 public class SearchController {
 
 
-		@RequestMapping("/search")
+		@RequestMapping(method = RequestMethod.POST , value = "/search")
 		public ModelAndView showSearch(@RequestParam(value = "search" , required = false) String search) {
 			ModelAndView mv = new ModelAndView("search");
+			PostingsDao postingsDao = new PostingsDao();
+			ArrayList<PostingsBean> result = null;
 
+			//searchに何も入れないで押下された場合
 			if(search == null || search.equals("")){
+				try {
+					result = postingsDao.getPostings();
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+				Collections.shuffle(result);
+				mv.addObject("result", result);
 				return mv;
 			}
 
-			ArrayList<PostingsBean> result = null;
-			//test
-			System.out.println("searchの内容:" + search);
-			PostingsDao postingsDao = new PostingsDao();
 
 			try {
 				result = postingsDao.searchChar(search);
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
-				System.out.println("SQLがエラーでとるで");
+				System.out.println("SQL Error");
 				e.printStackTrace();
 			}
-
-			for ( PostingsBean postingsBean  :  result ) {
-				System.out.println("名前:"+ postingsBean.getName());
-				System.out.println("タイトル:"+ postingsBean.getTitle());
-				System.out.println("部署名:"+ postingsBean.getDepartment_name());
-				System.out.println("パーセント:"+ postingsBean.getAchievement_percentage());
-				System.out.println("イメージ:"+ postingsBean.getImage());
-				System.out.println("プロフィールコメント:"+ postingsBean.getProfilecomment());
-				System.out.println("投票数:"+ postingsBean.getAchievement_vote());
-				System.out.println("期限:"+postingsBean.getTimelimit());
-			}
-
+			//list型を送る
+			Collections.shuffle(result);
 			mv.addObject("result", result);
 
 			return mv;
