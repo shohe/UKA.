@@ -1,3 +1,5 @@
+<%@page import="hal.tokyo.beans.PostingsBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/header.jsp" %>
@@ -56,11 +58,12 @@
             <ul class="gallery-post-grid holder">
 
                     <!-- Gallery Item 1 -->
+                    <c:forEach items="${result}" var="item">
                     <a href="#"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    人事の仕事が一括管理できる、人事システムを作ろう！
+                                    <c:out value="${item.title}" />
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -70,122 +73,24 @@
                                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg" alt="user image." />
                                       </div>
                                       <div class="col-xs-4 col-sm-9 user_comment">
-                                          <span>人事部 : 新田寮</span><br/>
-                                          仕事大好きです!よろしくお願いします:)
+                                          <span><c:out value="${item.department_name}" /> : <c:out value="${item.name}" /></span><br/>
+                                          <c:out value="${item.profilecomment}" />
                                       </div>
                                   </div>
                                 </div>
                                 <div class="text-center">
-                                    <input type="text" class="knob" value="60" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+                                    <input type="text" class="knob" value="<c:out value="${item.achievement_percentage}" />" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
                                     <div class="knob-label">
-                                        <i class="fa fa-calendar"></i><span>残り期間:15日</span>
+                                        <i class="fa fa-calendar"></i><span>残り期間:<c:out value="${item.timelimit}" />日</span>
                                     </div>
                                     <div class="knob-label">
-                                        <i class="fa fa-male"></i><span>58人が評価しています。</span>
+                                        <i class="fa fa-male"></i><span><c:out value="${item.achievement_vote}" />人が評価しています。</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li></a>
-
-                    <!-- Gallery Item 2 -->
-                    <a href="#"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    人事の仕事が一括管理できる、人事システムを作ろう！
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row user_info">
-                                  <div class="col-sm-12">
-                                      <div class="col-xs-4 col-sm-3">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/pixeliris/128.jpg" alt="user image." />
-                                      </div>
-                                      <div class="col-xs-4 col-sm-9 user_comment">
-                                          <span>マーケティング部 : 小坂めぐる</span><br/>
-                                          仕事大好きです!よろしくお願いします:)
-                                      </div>
-                                  </div>
-                                </div>
-                                <div class="text-center">
-                                    <input type="text" class="knob" value="38" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
-                                    <div class="knob-label">
-                                        <i class="fa fa-calendar"></i><span>残り期間:15日</span>
-                                    </div>
-                                    <div class="knob-label">
-                                        <i class="fa fa-male"></i><span>58人が評価しています。</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li></a>
-
-                    <!-- Gallery Item 3 -->
-                    <a href="#"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    人事の仕事が一括管理できる、人事システムを作ろう！
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row user_info">
-                                  <div class="col-sm-12">
-                                      <div class="col-xs-4 col-sm-3">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/tonypeterson/128.jpg" alt="user image." />
-                                      </div>
-                                      <div class="col-xs-4 col-sm-9 user_comment top_usr_com">
-                                          <span>経理部 : 熊谷冬馬</span><br/>
-                                          仕事大好きです!よろしくお願いします:)
-                                      </div>
-                                  </div>
-                                </div>
-                                <div class="text-center">
-                                    <input type="text" class="knob" value="76" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
-                                    <div class="knob-label">
-                                        <i class="fa fa-calendar"></i><span>残り期間:15日</span>
-                                    </div>
-                                    <div class="knob-label">
-                                        <i class="fa fa-male"></i><span>58人が評価しています。</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li></a>
-
-                    <!-- Gallery Item 4 -->
-                    <a href="#"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    人事の仕事が一括管理できる、人事システムを作ろう！
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row user_info">
-                                  <div class="col-sm-12">
-                                      <div class="col-xs-4 col-sm-3">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="user image." />
-                                      </div>
-                                      <div class="col-xs-4 col-sm-9 user_comment">
-                                          <span>総務部 : 遠藤史哉</span><br/>
-                                          仕事大好きです!よろしくお願いします:)
-                                      </div>
-                                  </div>
-                                </div>
-                                <div class="text-center">
-                                    <input type="text" class="knob" value="92" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
-                                    <div class="knob-label">
-                                        <i class="fa fa-calendar"></i><span>残り期間:15日</span>
-                                    </div>
-                                    <div class="knob-label">
-                                        <i class="fa fa-male"></i><span>58人が評価しています。</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li></a>
+                    </c:forEach>
 
 
                 </ul>

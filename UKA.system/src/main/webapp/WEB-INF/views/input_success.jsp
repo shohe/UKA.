@@ -4,18 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>UKA. | プロジェクト一覧</title>
+<title>投稿完了</title>
 </head>
 <body>
-	<h1>プロジェクト一覧.</h1>
-
-	<form action = "SearchTest" method ="post">
-		<input type="text" name="search">
-		<input type="button">
-		<input type="button">
-		<input type="button">
-		<input type="button">
-		<input type="submit">
-	</form>
+<h1>投稿が完了しました。</h1>
+<br />
+<h3>確認</h3>
+${text}
 </body>
 </html>

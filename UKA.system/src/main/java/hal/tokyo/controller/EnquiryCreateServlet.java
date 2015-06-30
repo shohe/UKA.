@@ -48,28 +48,46 @@ public class EnquiryCreateServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		
 		System.out.println("Enquiry Servletとうたつ");
-		String jspName = "/WEB-INF/views/enquirystart.jsp";
+		String jspName = "";
 		MailDao dao = null;
 
 		try {			
-			String id = request.getParameter("user_id");
-			String enq = request.getParameter("enq");
-			String content = request.getParameter("content");
+			String enq_id = request.getParameter("enq_id");
+			String kenmei = request.getParameter("kenmei");
+			String naiyou = request.getParameter("naiyou");
 			
-			System.out.println(id);
-			System.out.println(enq);
-			System.out.println(content);
+			System.out.println(enq_id);
+			System.out.println(kenmei);
+			System.out.println(naiyou);
 			System.out.println("daoに行く手前");
 			dao = new MailDao();		
 
-			dao.Enqinsert(id,enq,content);
+			dao.Enqinsert(enq_id,kenmei,naiyou);
 			dao.commit();
-			jspName = "mailok";
-		} catch (NamingException | SQLException e) {
-			// TODO 自動生成された catch ブロック
+			jspName = "messageComplete";
+		} catch (SQLException e) {
 			e.printStackTrace();
-			jspName = "/WEB-INF/views/mailok.jsp";
+			try{
+				if(dao != null){
+					dao.rollback();
+				}
+			}catch(SQLException e1){
+				e1.printStackTrace();
+				jspName = "/WEB-INF/views/error.jsp";
+			}
+		}	catch(NamingException e){
+				e.printStackTrace();
+		}	finally	{
+				try{
+					if(dao != null){
+						dao.close();
+					}
+				}catch(SQLException e){
+					e.printStackTrace();
+					jspName = "/WEB-INF/views/error.jsp";
+				}
 		}
+		System.out.println("おっぱい"+jspName);
 		RequestDispatcher dispatcher =
 				request.getRequestDispatcher(jspName);
 

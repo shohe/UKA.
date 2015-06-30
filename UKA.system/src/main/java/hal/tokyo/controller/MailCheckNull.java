@@ -7,8 +7,8 @@ public class MailCheckNull {
 	String blank_checker;
 	
 	public MailCheckNull(){
-		null_checker = "入力されてないからムリ";
-		blank_checker = "空白しかないからムリ";
+		null_checker = "入力値がありません。";
+		blank_checker = "空白のみの送信は出来ません。";
 	}
 	
 	public String TitleNullCheck(String title){

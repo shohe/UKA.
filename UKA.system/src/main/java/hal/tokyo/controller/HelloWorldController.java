@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * +---------------------------------------+
- *   !このコントローラーはテスト用に作ったモノです! 
+ *   !このコントローラーはテスト用に作ったモノです!
  * +---------------------------------------+
  * @author shohe
  *
@@ -15,12 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HelloWorldController {
 	String message="Welcome to Spring MVC!";
-	
-	@RequestMapping("/")
+
+	@RequestMapping("/hello")
 	public ModelAndView showMessage(/*@RequestParam("test") String test*/) {
-		ModelAndView mv = new ModelAndView("index");
-		System.out.println("-");
-//		mv.addObject("message", message);
+		ModelAndView mv = new ModelAndView("helloworld");
+		mv.addObject("message", message);
 //		mv.addObject("test", test);
 		return mv;
 	}
