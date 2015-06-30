@@ -9,6 +9,7 @@ import java.util.Collections;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class SearchController {
 
 
-		@RequestMapping("/search")
+		@RequestMapping(value = "/search")
 		public ModelAndView showSearch(@RequestParam(value = "search" , required = false) String search) {
 			ModelAndView mv = new ModelAndView("search");
 			PostingsDao postingsDao = new PostingsDao();
