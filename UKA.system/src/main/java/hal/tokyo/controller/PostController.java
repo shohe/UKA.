@@ -57,7 +57,7 @@ public class PostController {
 		return mv;
 	}
 
-	private String createUploadPath() {
+	public String createUploadPath() {
 		String path = context.getRealPath("/");
 		String[] paths = path.split("/", 0);
 		path = "";
@@ -71,7 +71,7 @@ public class PostController {
 		return path;
 	}
 
-	private String getFileExtention(String file) {
+	public String getFileExtention(String file) {
 		String result = String.valueOf(Calendar.getInstance().getTimeInMillis());
 		return result+file;
 	}

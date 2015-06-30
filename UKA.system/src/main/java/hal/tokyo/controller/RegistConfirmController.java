@@ -1,6 +1,9 @@
 package hal.tokyo.controller;
 
+import hal.tokyo.model.MultipleData;
 import hal.tokyo.model.RegistCheck;
+
+import java.io.File;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,18 @@ public class RegistConfirmController {
 
 		/** 入力内容チェック **/
 		RegistCheck rc = new RegistCheck();
+
+		/** 画像ファイル関係 **/
+		MultipleData md = new MultipleData();
+
+		PostController pc = new PostController();
+
+		File file = new File(pc.createUploadPath(),pc.getFileExtention(thumbnail.getOriginalFilename()));
+
+		md.setFile(file);
+		md.setMultipartFile(thumbnail);
+		md.setUrl("<c:url value='/resources/var/"+pc.getFileExtention(thumbnail.getOriginalFilename())+"' />");
+		md.upload();
 
 		/** エラーメッセージ用 **/
 		String rc_name = "";
