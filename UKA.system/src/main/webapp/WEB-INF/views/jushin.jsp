@@ -11,7 +11,14 @@
 <div class="container">
     <div class="row headline"><!-- Begin Headline -->
 
-
+<c:forEach var="enq" items="${enquiry}" varStatus="status">
+	<c:out value="${enq.enquiry_id}"/>
+	<c:out value="${enq.date}"/>
+	<c:out value="${enq.user_id}"/>
+	<c:out value="${enq.enquiry_type_id}"/>
+	<c:out value="${enq.enquiry_content}"/>
+	<c:out value="${status.index}"/><br>
+</c:forEach>
 
     </div><!-- End Headline -->
 </div>

@@ -4,7 +4,9 @@ import hal.tokyo.beans.Enquiry_MAILBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -30,9 +32,29 @@ public class MailDao {
 
 	public List<Enquiry_MAILBean> AllMailselect() throws SQLException{
 
-		PreparedStatement select = con.prepareStatement("select * from administrator_mail");
+		ArrayList<Enquiry_MAILBean> table = new ArrayList<Enquiry_MAILBean>();
 
-		return null;
+		PreparedStatement select = con.prepareStatement("select * from enquiry_mail");
+
+		ResultSet result = select.executeQuery();
+
+		while(result.next()){
+
+			Enquiry_MAILBean emb = new Enquiry_MAILBean();
+
+			emb.setEnquiry_id(result.getInt("enquiry_id"));
+			emb.setDate(result.getString("date"));
+			emb.setUser_id(result.getString("user_id"));
+			emb.setEnquiry_type_id(result.getInt("enquiry_type_id"));
+			emb.setEnquiry_content(result.getString("enquiry_content"));
+
+			table.add(emb);
+
+		}
+
+		select.close();
+
+		return table;
 
 	}
 
