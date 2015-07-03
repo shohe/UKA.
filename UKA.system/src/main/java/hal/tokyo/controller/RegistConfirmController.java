@@ -3,8 +3,6 @@ package hal.tokyo.controller;
 import hal.tokyo.model.MultipleData;
 import hal.tokyo.model.RegistCheck;
 
-import java.io.File;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +39,7 @@ public class RegistConfirmController {
 
 		PostController pc = new PostController();
 
+		/*
 		File file = new File(pc.createUploadPath(),pc.getFileExtention(thumbnail.getOriginalFilename()));
 
 		md.setFile(file);
@@ -48,6 +47,8 @@ public class RegistConfirmController {
 		md.setUrl("<c:url value='/resources/var/"+pc.getFileExtention(thumbnail.getOriginalFilename())+"' />");
 		md.upload();
 		
+
+		*/
 
 		/** エラーメッセージ用 **/
 		String rc_name = "";

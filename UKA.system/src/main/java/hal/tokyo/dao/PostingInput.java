@@ -64,12 +64,11 @@ public class PostingInput {
 	        // ステートメント生成
         	Statement stmt = con.createStatement();
         	
-        	
-
             String postConIns = "INSERT INTO posting_content(POSTING_CONTENT) VALUES ('"+htmlText+"')";
             System.out.println(postConIns);
         	stmt.executeUpdate(postConIns);
         	con.commit();
+        	
             // SQLを実行
             String sqlStr = "SELECT MAX(POSTING_CONTENT_ID) FROM posting_content";
             ResultSet rs = stmt.executeQuery(sqlStr);
@@ -85,9 +84,10 @@ public class PostingInput {
             
             String insPostings = "INSERT INTO postings(USER_ID, POSSESSION_VOTE, POSTING_TYPE_ID, TERMS_ID, STATUS, TITLE, POSTING_CONTENT_ID) VALUES ('"+userId+"',0,"+postingTypeId+","+termId+",1,'"+title+"',"+id+")";
             System.out.println(insPostings);
-            con.commit();
+            
             try {
                 stmt.executeUpdate(insPostings);
+                con.commit();
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -104,7 +104,6 @@ public class PostingInput {
         }
 		return id;
 	}
-	
 	
 	public boolean insertDetail(String userId ,String htmlText ,String title ,int postingContentId ,int postingTypeId,int termId) {
 		String msg = "";
