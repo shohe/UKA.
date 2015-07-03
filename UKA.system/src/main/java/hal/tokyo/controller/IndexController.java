@@ -1,11 +1,10 @@
 package hal.tokyo.controller;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-
 import hal.tokyo.beans.PostingsBean;
 import hal.tokyo.dao.PostingsDao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,6 @@ public class IndexController {
 		PostingsDao postingsDao = new PostingsDao();
 		try {
 			result = postingsDao.getPostings();
-			Collections.shuffle(result);
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

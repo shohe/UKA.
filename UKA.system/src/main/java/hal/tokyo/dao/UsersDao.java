@@ -80,7 +80,7 @@ public class UsersDao {
 			table.add(record);
 		}
 
-		findAll.close();
+		con.close();
 
 		return table;
 
@@ -95,20 +95,18 @@ public class UsersDao {
 	 * @return table
 	 * @throws SQLException
 	 */
-	public List<UsersBean> findById(String mailaddress,String password) throws SQLException{
+	public UsersBean findById(String mailaddress,String password) throws SQLException{
 
-		PreparedStatement findById = con.prepareStatement("select * from users where mailaddress = ? and password = ?");
-
+		PreparedStatement findById = con.prepareStatement("select * from users where mailaddress = ? and password = ?;");
 		findById.setString(1, mailaddress);
 		findById.setString(2, password);
 
 		ResultSet result = findById.executeQuery();
 
-		ArrayList<UsersBean> table = new ArrayList<UsersBean>();
+		//ArrayList<UsersBean> table = new ArrayList<UsersBean>();
 
+		UsersBean record = new UsersBean();
 		while(result.next()){
-
-			UsersBean record = new UsersBean();
 
 			record.setMailAddress(result.getString("mailaddress"));
 			record.setPassword(result.getString("password"));
@@ -118,12 +116,16 @@ public class UsersDao {
 			record.setImage(result.getString("image"));
 			record.setStatus(result.getInt("status"));
 
-			table.add(record);
+			//table.add(record);
+
+
 		}
 
-		findById.close();
+		con.close();
 
-		return table;
+
+
+		return record;
 
 	}
 

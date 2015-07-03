@@ -46,6 +46,7 @@ public class RegistConfirmController {
 		md.setMultipartFile(thumbnail);
 		md.setUrl("<c:url value='/resources/var/"+pc.getFileExtention(thumbnail.getOriginalFilename())+"' />");
 		md.upload();
+		
 
 		*/
 
