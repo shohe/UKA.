@@ -6,7 +6,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:if test="${!empty name}">
+ありますあります
+${name}
+</c:if>
 ないです
-${alert}
 </body>
 </html>
