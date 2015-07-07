@@ -52,6 +52,7 @@ public class LoginController extends HttpServlet {
 						//認証成功
 						session.setAttribute("Name", record.getName());
 						session.setAttribute("Status", "true");
+						session.setAttribute("Judge", record.getStatus());
 					}else{
 
 						session.setAttribute("Status", "false");
@@ -64,6 +65,7 @@ public class LoginController extends HttpServlet {
 			}else{
 				session.removeAttribute("Name");
 				session.removeAttribute("Status");
+				session.removeAttribute("Judge");
 			}
 
 		ModelAndView mv = new ModelAndView("index");
