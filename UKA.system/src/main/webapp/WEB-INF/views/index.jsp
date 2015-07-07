@@ -59,7 +59,7 @@
 
                     <!-- Gallery Item 1 -->
                     <c:forEach items="${result}" var="item">
-                    <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${result.post_id}" />"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
+                    <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${item.post_id}" />"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">

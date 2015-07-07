@@ -12,8 +12,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.springframework.context.annotation.Bean;
-
 public class PostingsDao {
 
 	/** Connection **/
@@ -27,13 +25,13 @@ public class PostingsDao {
 
 		try {
 
-			InitialContext context;
-				context = new InitialContext();
-			DataSource ds;
-				ds = (DataSource) context
-						.lookup("java:comp/env/jdbc/ukasystem");
+		InitialContext context;
+			context = new InitialContext();
+		DataSource ds;
+			ds = (DataSource) context
+					.lookup("java:comp/env/jdbc/ukasystem");
 
-			con = ds.getConnection();
+		con = ds.getConnection();
 
 		} catch (NamingException e) {
 
@@ -90,7 +88,7 @@ public class PostingsDao {
 			Bean.setPost_id(rs.getInt("posting_id"));
 			table.add(Bean);
 		}
-
+		//クローズ処理
 		rs.close();
 		pstm.close();
 		return table;
@@ -102,14 +100,14 @@ public class PostingsDao {
 
 		PreparedStatement pstm = con.prepareStatement(
 				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
-				+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
-				+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
-				+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
-				+ "JOIN users ON users.mailaddress = postings.user_id "
-				+ "JOIN departments ON departments.department_id = users.department_id "
-				+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
-				+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
-				+ "AND postings.status =1 HAVING timelimit >0");
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
+						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
+						+ "AND postings.status =1 HAVING timelimit >0");
 		pstm.setString(1, SearchChar);
 		pstm.setString(2, SearchChar);
 		ResultSet rs = pstm.executeQuery();
@@ -129,22 +127,62 @@ public class PostingsDao {
 			Bean.setPost_id(rs.getInt("posting_id"));
 			table.add(Bean);
 		}
-
+		//クローズ処理
 		rs.close();
 		pstm.close();
+		return table;
+	}
+	/** ------------------------- 新着順 --------------------------------- **/
+	//新着順
+	public ArrayList<PostingsBean> sortNew() throws SQLException{
+		PreparedStatement pstm = con.prepareStatement(
+				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings "
+						+ "JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "WHERE postings.status = 1 HAVING timelimit > 0 ORDER BY date DESC"
+				);
 
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
+		ResultSet rs = pstm.executeQuery();
+		while(rs.next()){
+			PostingsBean Bean = new PostingsBean();
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
+		}
+		//クローズ処理
+		rs.close();
+		pstm.close();
 		return table;
 	}
 
-	//新着順
-	public PostingsBean sortNew() throws SQLException{
+	//文字がある時
+	public ArrayList<PostingsBean> sortNew(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-					"SELECT users.name, departments.department_name, postings.title, posting_content.posting_content ,terms.achievement_percentage , users.image"
-						+ "FROM postings JOIN terms ON postings.POSTING_TYPE_ID = terms.POSTING_TYPE_ID JOIN users ON postings.user_id = users.mailaddress "
-						+ "JOIN departments ON departments.department_id = users.department_id JOIN posting_content "
-						+ "ON posting_content.posting_content_id = postings.posting_content_id WHERE postings.status = 1 ORDER BY date DESC"
+				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
+						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
+						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY date DESC;"
 				);
-
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
+		pstm.setString(1, SearchChar);
+		pstm.setString(2, SearchChar);
 		ResultSet rs = pstm.executeQuery();
 		while(rs.next()){
 			PostingsBean Bean = new PostingsBean();
@@ -155,53 +193,31 @@ public class PostingsDao {
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
 		}
-		return null
-				;
+		//クローズ処理
+		rs.close();
+		pstm.close();
+		return table;
 	}
 
+
+	/** ------------------------- 人気順 --------------------------------- **/
 	//人気順(投票数が多い順)
-	public PostingsBean sortFavor() throws SQLException{
+	public ArrayList<PostingsBean> sortFavor() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT users.name, departments.department_name, postings.title, posting_content.posting_content ,terms.achievement_percentage "
-				+ "FROM postings JOIN terms ON postings.POSTING_TYPE_ID = terms.POSTING_TYPE_ID JOIN users ON postings.user_id = users.mailaddress "
-				+ "JOIN departments ON departments.department_id = users.department_id JOIN posting_content "
-				+ "ON posting_content.posting_content_id = postings.posting_content_id WHERE postings.status = 1 ORDER BY achievement_percentage DESC");
+				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings "
+						+ "JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "WHERE postings.status = 1 HAVING timelimit > 0 ORDER BY achievement_percentage DESC");
 
-		ResultSet rs = pstm.executeQuery();
-
-		while(rs.next()){
-			PostingsBean Bean = new PostingsBean();
-			Bean.setName(rs.getString("name"));
-			Bean.setDepartment_name(rs.getString("department_name"));
-			Bean.setTitle(rs.getString("title"));
-			Bean.setPosting_Content(rs.getString("posting_content"));
-			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
-		}
-
-
-		return null;
-	}
-
-	//締切はどうするか
-	/*
-	 * メモ
-	 * 現在の日付を取得
-	 * 投稿日と締切期限を取得
-	 * 現在の日付-(投稿日+締切期限)で残り時間を取得
-	 * */
-	public PostingsBean sortNearDeadline() throws SQLException{
-		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, departments.department_name, "
-				+ "users.name, users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote , "
-				+ "DATEDIFF( DATE_ADD( (postings.date), INTERVAL( "
-				+ "SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id )  DAY ), "
-				+ "CURRENT_DATE( ) ) AS timelimit "
-				+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
-				+ "JOIN users ON users.mailaddress = postings.user_id "
-				+ "JOIN departments ON departments.department_id = users.department_id "
-				+ "having timelimit > 0  ORDER BY timelimit ;");
-
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
 		ResultSet rs = pstm.executeQuery();
 
 		while(rs.next()){
@@ -213,20 +229,136 @@ public class PostingsDao {
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
 		}
-		return null;
+		//クローズ処理
+		rs.close();
+		pstm.close();
+		return table;
 	}
 
+	//文字があった場合
+	public ArrayList<PostingsBean> sortFavor(String SearchChar) throws SQLException{
+		PreparedStatement pstm = con.prepareStatement(
+				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
+						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
+						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY achievement_percentage DESC"
+						);
+
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
+		ResultSet rs = pstm.executeQuery();
+
+		while(rs.next()){
+			PostingsBean Bean = new PostingsBean();
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
+		}
+		//クローズ処理
+		rs.close();
+		pstm.close();
+		return table;
+	}
+
+	/** ------------------------- 締切 --------------------------------- **/
+	//締切
+	public ArrayList<PostingsBean> sortNearDeadline() throws SQLException{
+		PreparedStatement pstm = con.prepareStatement(
+				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings "
+						+ "JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "WHERE postings.status = 1 HAVING timelimit > 0  ORDER BY timelimit ;");
+
+		ResultSet rs = pstm.executeQuery();
+
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
+
+		while(rs.next()){
+			PostingsBean Bean = new PostingsBean();
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
+		}
+		//クローズ処理
+		rs.close();
+		pstm.close();
+		return table;
+	}
+
+	public ArrayList<PostingsBean> sortNearDeadline(String SearchChar) throws SQLException{
+		PreparedStatement pstm = con.prepareStatement(
+				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
+						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
+						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY timelimit ;");
+
+		ResultSet rs = pstm.executeQuery();
+
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
+
+		while(rs.next()){
+			PostingsBean Bean = new PostingsBean();
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
+		}
+		//クローズ処理
+		rs.close();
+		pstm.close();
+		return table;
+	}
+
+	/** ------------------------- 評価数が高い --------------------------------- **/
 	//評価数が高い
-	public PostingsBean sortHigh() throws SQLException{
+	public ArrayList<PostingsBean> sortHigh() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote "
+				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
 						+ "JOIN terms ON terms.terms_id = postings.terms_id "
 						+ "JOIN users ON users.mailaddress = postings.user_id "
-						+ "JOIN departments ON departments.department_id = users.department_id  ORDER BY possesion_Vote");
-
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "WHERE postings.status = 1 HAVING timelimit > 0 ORDER BY possesion_Vote");
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
 		ResultSet rs = pstm.executeQuery();
 
 		while(rs.next()){
@@ -238,20 +370,28 @@ public class PostingsDao {
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
 		}
-		return null;
+		//クローズ処理
+		rs.close();
+		pstm.close();
+		return table;
 	}
 
-	//評価数が低い
-	public PostingsBean sortLow() throws SQLException{
+	public ArrayList<PostingsBean> sortHigh(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote "
-						+ "FROM postings "
-						+ "JOIN terms ON terms.terms_id = postings.terms_id "
+				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
 						+ "JOIN users ON users.mailaddress = postings.user_id "
-						+ "JOIN departments ON departments.department_id = users.department_id  ORDER BY possesion_Vote DESC");
-
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
+						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
+						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY possesion_Vote");
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
 		ResultSet rs = pstm.executeQuery();
 
 		while(rs.next()){
@@ -263,7 +403,82 @@ public class PostingsDao {
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
 		}
-		return null;
+		//クローズ処理
+		rs.close();
+		pstm.close();
+		return table;
+	}
+
+	/** ------------------------- 評価数が低い --------------------------------- **/
+	//評価数が低い
+	public ArrayList<PostingsBean> sortLow() throws SQLException{
+		PreparedStatement pstm = con.prepareStatement(
+				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings "
+						+ "JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "WHERE postings.status = 1 HAVING timelimit > 0 ORDER BY possesion_Vote DESC");
+
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
+		ResultSet rs = pstm.executeQuery();
+
+		while(rs.next()){
+			PostingsBean Bean = new PostingsBean();
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
+		}
+		//クローズ処理
+		rs.close();
+		pstm.close();
+		return table;
+	}
+
+	public ArrayList<PostingsBean> sortLow(String searcString) throws SQLException{
+		PreparedStatement pstm = con.prepareStatement(
+				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
+						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN departments ON departments.department_id = users.department_id "
+						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
+						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
+						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY possesion_Vote DESC");
+
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
+		ResultSet rs = pstm.executeQuery();
+
+		while(rs.next()){
+			PostingsBean Bean = new PostingsBean();
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			table.add(Bean);
+		}
+		//クローズ処理
+		rs.close();
+		pstm.close();
+		return table;
 	}
 }
