@@ -1,8 +1,14 @@
 package hal.tokyo.controller;
 
+import hal.tokyo.model.ImageUpload;
 import hal.tokyo.model.MultipleData;
 import hal.tokyo.model.RegistCheck;
 
+import java.io.File;
+
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RegistConfirmController {
 
+	@Autowired
+	ServletContext context;
+
 	@RequestMapping("/regist_confirm_con")
 	public ModelAndView showMessage(@RequestParam("department_Id") int department_Id,
 									@RequestParam("mailaddress") String mailaddress,
@@ -28,8 +37,6 @@ public class RegistConfirmController {
 									@RequestParam("thumbnail") MultipartFile thumbnail,
 									@RequestParam("profileComment") String profileComment) {
 
-		/** 今は使わない **/
-		//RegistValueCheck rvc = new RegistValueCheck();
 
 		/** 入力内容チェック **/
 		RegistCheck rc = new RegistCheck();
@@ -39,16 +46,16 @@ public class RegistConfirmController {
 
 		PostController pc = new PostController();
 
-		/*
-		File file = new File(pc.createUploadPath(),pc.getFileExtention(thumbnail.getOriginalFilename()));
+		ImageUpload iu = new ImageUpload(context);
+
+
+		File file = new File(iu.createUploadPath(),iu.getFileExtention(thumbnail.getOriginalFilename()));
 
 		md.setFile(file);
 		md.setMultipartFile(thumbnail);
-		md.setUrl("<c:url value='/resources/var/"+pc.getFileExtention(thumbnail.getOriginalFilename())+"' />");
+		md.setUrl("/resources/var/"+iu.getFileExtention(thumbnail.getOriginalFilename()));
 		md.upload();
-		
 
-		*/
 
 		/** エラーメッセージ用 **/
 		String rc_name = "";
@@ -112,6 +119,7 @@ public class RegistConfirmController {
 			mv.addObject("name", name);
 			mv.addObject("password", password);
 			mv.addObject("password_a", rc.HidePassword(password));
+			mv.addObject("image", md.getUrl());
 			mv.addObject("profileComment", profileComment);
 			return mv;
 
