@@ -153,7 +153,7 @@ public class PostController {
 
 		//db登録詳細
 		PostingInput Dao = new PostingInput();
-		int id = Dao.insertSummary("aaa@sample.com", conCre, muintitle, 1, 1,1);
+		int id = Dao.insertSummary("useraddress1@example.com", conCre, muintitle, 1, 1,1);
 
 		//ModelAndView mv = new ModelAndView("post_complete");
 		ModelAndView mv = new ModelAndView("post_complete");

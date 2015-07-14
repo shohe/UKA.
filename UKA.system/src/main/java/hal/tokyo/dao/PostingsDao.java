@@ -58,14 +58,16 @@ public class PostingsDao {
 	 * @return
 	 * @throws SQLException
 	 */
+
+	/** ------------------------- 全件取得 --------------------------------- **/
 	public ArrayList<PostingsBean> getPostings() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
-				+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+				+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 				+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 				+ "FROM postings "
 				+ "JOIN terms ON terms.terms_id = postings.terms_id "
-				+ "JOIN users ON users.mailaddress = postings.user_id "
+				+ "JOIN users ON users.mailaddress = postings.mailaddress "
 				+ "JOIN departments ON departments.department_id = users.department_id "
 				+ "WHERE postings.status = 1 HAVING timelimit > 0");
 
@@ -94,16 +96,17 @@ public class PostingsDao {
 		return table;
 	}
 
-	//文字で検索
+
+	/** ------------------------- 文字検索 --------------------------------- **/
 	//statusは１が生存 ０が死亡
 	public ArrayList<PostingsBean> searchChar(String SearchChar) throws SQLException{
 
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
 						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
@@ -132,16 +135,21 @@ public class PostingsDao {
 		pstm.close();
 		return table;
 	}
+
+
+
+
+
 	/** ------------------------- 新着順 --------------------------------- **/
 	//新着順
 	public ArrayList<PostingsBean> sortNew() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
 						+ "JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "WHERE postings.status = 1 HAVING timelimit > 0 ORDER BY date DESC"
 				);
@@ -170,11 +178,11 @@ public class PostingsDao {
 	//文字がある時
 	public ArrayList<PostingsBean> sortNew(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
 						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
@@ -208,12 +216,12 @@ public class PostingsDao {
 	//人気順(投票数が多い順)
 	public ArrayList<PostingsBean> sortFavor() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
 						+ "JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "WHERE postings.status = 1 HAVING timelimit > 0 ORDER BY achievement_percentage DESC");
 
@@ -242,16 +250,20 @@ public class PostingsDao {
 	//文字があった場合
 	public ArrayList<PostingsBean> sortFavor(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
 						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
-						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY achievement_percentage DESC"
+						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY achievement_percentage DESC ;"
 						);
+
+
+		pstm.setString(1, SearchChar);
+		pstm.setString(2, SearchChar);
 
 		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
 		ResultSet rs = pstm.executeQuery();
@@ -279,12 +291,12 @@ public class PostingsDao {
 	//締切
 	public ArrayList<PostingsBean> sortNearDeadline() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
 						+ "JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "WHERE postings.status = 1 HAVING timelimit > 0  ORDER BY timelimit ;");
 
@@ -313,15 +325,18 @@ public class PostingsDao {
 
 	public ArrayList<PostingsBean> sortNearDeadline(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
 						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
 						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY timelimit ;");
+
+		pstm.setString(1, SearchChar);
+		pstm.setString(2, SearchChar);
 
 		ResultSet rs = pstm.executeQuery();
 
@@ -350,12 +365,12 @@ public class PostingsDao {
 	//評価数が高い
 	public ArrayList<PostingsBean> sortHigh() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
 						+ "JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "WHERE postings.status = 1 HAVING timelimit > 0 ORDER BY possesion_Vote");
 		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
@@ -382,15 +397,19 @@ public class PostingsDao {
 
 	public ArrayList<PostingsBean> sortHigh(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
 						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
 						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY possesion_Vote");
+
+		pstm.setString(1, SearchChar);
+		pstm.setString(2, SearchChar);
+
 		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
 		ResultSet rs = pstm.executeQuery();
 
@@ -417,12 +436,12 @@ public class PostingsDao {
 	//評価数が低い
 	public ArrayList<PostingsBean> sortLow() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.posting_id , postings.title, departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
 						+ "JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "WHERE postings.status = 1 HAVING timelimit > 0 ORDER BY possesion_Vote DESC");
 
@@ -448,17 +467,21 @@ public class PostingsDao {
 		return table;
 	}
 
-	public ArrayList<PostingsBean> sortLow(String searcString) throws SQLException{
+	public ArrayList<PostingsBean> sortLow(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.title, postings.posting_id ,departments.department_name, users.name, "
-						+ "users.image, users.profilecomment, terms.achievement_percentage, terms.achievement_vote, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
-						+ "JOIN users ON users.mailaddress = postings.user_id "
+						+ "JOIN users ON users.mailaddress = postings.mailaddress "
 						+ "JOIN departments ON departments.department_id = users.department_id "
 						+ "JOIN posting_content ON postings.posting_content_id = posting_content.posting_content_id "
 						+ "WHERE postings.title LIKE  '%' || ? || '%' OR posting_content.posting_content LIKE  '%' || ? || '%' "
 						+ "AND postings.status =1 HAVING timelimit >0 ORDER BY possesion_Vote DESC");
+
+
+		pstm.setString(1, SearchChar);
+		pstm.setString(2, SearchChar);
 
 		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
 		ResultSet rs = pstm.executeQuery();
