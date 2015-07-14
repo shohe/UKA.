@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,16 +27,18 @@
 		</tr>
 
 		<!-- ↓jspでがんばるとこ -->
+		<c:forEach var="mailbox" items="${mailbox}" varStatus="status">
 		<tr>
-			<td bgcolor="#FFF" align="left" nowrap>なんか眠い気がするんですけど</td>
-			<td bgcolor="#FFF" align="center" width="150">安威 卯江雄</td>
-			<td bgcolor="#FFF" align="right" width="200">1919/07/21-07:21:48</td>
+			<td bgcolor="#FFF" align="left" nowrap><c:out value="${mailbox.title}"/></td>
+			<td bgcolor="#FFF" align="center" width="150"><c:out value="${mailbox.user_id}"/></td>
+			<td bgcolor="#FFF" align="right" width="200"><c:out value="${mailbox.date}"/></td>
 			<td bgcolor="#FFF" align="center" nowrap>
 				<form action="adminTransition" method="post">
 					<input type="submit" name="adtransubmit" value="詳細表示・メール作成">
 				</form>
 			</td>
 		</tr>
+		</c:forEach>
 		<!-- ↑jspでがんばるとこ -->
 	</table>
 </body>

@@ -1,6 +1,12 @@
 package hal.tokyo.controller;
 
 
+import hal.tokyo.dao.MailDao;
+
+import java.sql.SQLException;
+
+import javax.naming.NamingException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,4 +53,5 @@ public class Mails {
 		}
 
 	}
+	
 }

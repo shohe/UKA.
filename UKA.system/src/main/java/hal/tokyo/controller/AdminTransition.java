@@ -1,6 +1,12 @@
 package hal.tokyo.controller;
 
+import hal.tokyo.dao.AlertDao;
+import hal.tokyo.dao.MailDao;
+
+import java.sql.SQLException;
 import java.util.HashMap;
+
+import javax.naming.NamingException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +27,7 @@ public class AdminTransition {
 
 	@RequestMapping("/adminTransition")
 	public ModelAndView showMessage(
-			@RequestParam("adtransubmit") String adtransubmit) {
+			@RequestParam("adtransubmit") String adtransubmit) throws NamingException, SQLException {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("管理者用トップページ", "admin_top");
 		map.put("トップへ戻る", "admin_top");
@@ -33,6 +39,9 @@ public class AdminTransition {
 		//System.out.println(map.get(adtransubmit));
 		ModelAndView mv = new ModelAndView(map.get(adtransubmit));
 		// mv.addObject("test", test);
+		MailDao ad = new MailDao();
+		mv.addObject("mailbox", ad.AllAdminMailselect());
+
 
 		return mv;
 	}
