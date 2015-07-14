@@ -48,7 +48,7 @@
 	<h1>管理者用トップページ</h1>
 
 	<!--
-	ログインしている人の名前を入れる 
+	ログインしている人の名前を入れる
 		↓logout処理 -->
 	<p class="bg-primary text-left">おっぱいぱん</p>
 	<form action="#" method="post">
@@ -58,7 +58,7 @@
 	<br />
 	<br />
 
-	<form action="adminTransition" method="post">
+	<form action="adminlist" method="post">
 		<input type="submit" name="adtransubmit" value="プロジェクト一覧">
 	</form>
 	<form action="adminTransition" method="post">
