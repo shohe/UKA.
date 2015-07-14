@@ -44,7 +44,7 @@ nav ul {width:100%; float:left; padding:0;}
 }
 
 #login-form input { height: 35px; width: 230px; margin-top: 10px; }
-#login-form button { background: #ba3636; color: #fff; width: 120px; }
+#login-form button { background: #ba3636; color: #fff; width: 120px; margin-bottom:10px;}
 #login-form button:hover { background: #792121; }
 
 #login-form .left {
@@ -59,8 +59,12 @@ nav ul {width:100%; float:left; padding:0;}
 	width: 150px;
 	height: 60px;
 	float: left;
-	padding-top: 55px;
+	padding-top: 10px;
 	text-align: right;
+}
+
+#manage{
+	padding-top:10px;
 }
 
 #dropdownMenu {position: relative;top: 55px;}
