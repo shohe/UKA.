@@ -42,7 +42,6 @@ public class LoginController extends HttpServlet {
 			if(request.getParameter("login").equals(Login)){
 				try {
 					record = dao.findById(MailAddress, Password);
-					System.out.println(record.getMailAddress());
 				} catch (SQLException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();

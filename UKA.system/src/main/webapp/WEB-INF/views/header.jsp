@@ -82,12 +82,21 @@
                         out.println("</div>");
                         out.println("<div class='right'>");
                         if(session.getAttribute("Status") == "true"){
-                            out.println("<button type='submit' class='btn btn-default' name='login' value='logout'>ログアウト</button>");
+                        	out.println("<button type='submit' class='btn btn-default' name='login' value='logout'>ログアウト</button>");
                         }else{
                         	out.println("<button type='submit' class='btn btn-default' name='login' value='login'>ログイン</button>");
                         }
-                        out.println("</div>");
+
                     out.println("</form>");
+                    if(session.getAttribute("Status") == "true"){
+                    	if(session.getAttribute("Judge").equals(2)){
+                    		out.println("<form action='adminTransition' method='post'>");
+                    		out.println("<button type='submit' class='btn btn-default' name='adtransubmit' value='管理者用トップページ'>管理者画面へ</button>");
+                    		out.println("</form>");
+                    	}
+                    }
+
+                    out.println("</div>");
                     %>
                 </div>
           </div>
