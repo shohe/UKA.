@@ -50,7 +50,7 @@ public class AlertDao {
 			table.add(emb);
 
 		}
-
+		result.close();
 		select.close();
 
 		return table;
@@ -73,7 +73,7 @@ public class AlertDao {
 
 			emb.setPosting_Id(result.getInt("posting_id"));
 			emb.setUser_Id(result.getString("user_id"));
-			emb.setData(result.getString("date"));
+			emb.setDate(result.getString("date"));
 			emb.setPossesion_Vote(result.getInt("possession_vote"));
 			emb.setTitle(result.getString("title"));
 

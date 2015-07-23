@@ -8,5 +8,9 @@
 </head>
 <body>
 <h1>メール送信完了しました。</h1>
+<br>
+    <form action="adminTransition" method="post">
+		<input type="submit" name="adtransubmit" value="管理者用トップページ">
+	</form>
 </body>
 </html>

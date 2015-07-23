@@ -29,12 +29,13 @@
 		<!-- ↓jspでがんばるとこ -->
 		<c:forEach var="mailbox" items="${mailbox}" varStatus="status">
 		<tr>
-			<td bgcolor="#FFF" align="left" nowrap><c:out value="${mailbox.title}"/></td>
+			<td bgcolor="#FFF" align="left" nowrap><c:out value="${mailbox.enquiry_title}"/></td>
 			<td bgcolor="#FFF" align="center" width="150"><c:out value="${mailbox.user_id}"/></td>
 			<td bgcolor="#FFF" align="right" width="200"><c:out value="${mailbox.date}"/></td>
 			<td bgcolor="#FFF" align="center" nowrap>
-				<form action="adminTransition" method="post">
-					<input type="submit" name="adtransubmit" value="詳細表示・メール作成">
+				<form action="AdminMailReplysReturn" method="post">
+				<input type="hidden" name="enquiry_id" value="${mailbox.enquiry_id}">
+					<input type="submit" name="AdminMailReplyServlet" value="メールの詳細を確認">
 				</form>
 			</td>
 		</tr>
