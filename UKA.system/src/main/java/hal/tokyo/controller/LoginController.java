@@ -50,6 +50,7 @@ public class LoginController extends HttpServlet {
 				if(record.getMailAddress() != null){
 					if(record.getMailAddress().equals(MailAddress)){
 						//認証成功
+						session.setAttribute("MailAddress", record.getMailAddress());
 						session.setAttribute("Name", record.getName());
 						session.setAttribute("Status", "true");
 						session.setAttribute("Judge", record.getStatus());
