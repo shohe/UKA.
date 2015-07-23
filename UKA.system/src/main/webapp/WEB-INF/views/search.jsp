@@ -13,16 +13,17 @@
                 <div class="input-group">
                   <div class="input-group-addon"><i class="fa fa-search"></i></div>
                   <input type="text" name ="search" class="form-control" id="inputSerachWord" placeholder="検索する言葉を入力してください。">
+                  <input type="hidden" name="searchchar" value="${searchchar}">
                 </div>
               </div>
               <button type="submit" id="inputSerachBtn" class="btn btn-primary">検索</button>
         </div>
         <div class="bottom">
-            <button class="btn btn-default" type="submit">新着順</button>
-            <button class="btn btn-default" type="submit">人気順</button>
-            <button class="btn btn-default" type="submit">締切期限が近い順</button>
-            <button class="btn btn-default" type="submit">評価数が高い順</button>
-            <button class="btn btn-default" type="submit">評価数が低い順</button>
+            <button class="btn btn-default" type="submit" name="newbtn" value="newbtn">新着順</button>
+            <button class="btn btn-default" type="submit" name="popular" value="popular">人気順</button>
+            <button class="btn btn-default" type="submit" name="neardeadline" value="neardeadline">締切期限が近い順</button>
+            <button class="btn btn-default" type="submit" name="highvote" value="highvote">評価数が高い順</button>
+            <button class="btn btn-default" type="submit" name="lowvote" value="lowvote">評価数が低い順</button>
         </div>
         </form>
     </div>

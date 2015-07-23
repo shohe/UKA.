@@ -39,6 +39,9 @@
         ================================================== -->
         <div class="span3 margin-left20">
         	<h3>燃料電池自動車の本格普及に向けた新プロジェクト</h3>
+        	<form action="adminTransition" method="post">
+		<input type="submit" name="adtransubmit" value="トップへ戻る">
+		</form>
             <p class="lead">
                 燃料電池自動車（FCV）の本格的な普及に向け、燃料電池の飛躍的な高性能化・低コスト化、
                 生産性の抜本的な向上を実現するため新たな研究開発プロジェクトに着手します。
@@ -98,4 +101,7 @@
             </div>
 
     </div><!-- End Gallery Row -->
+    <form action="adminTransition" method="post">
+		<input type="submit" name="adtransubmit" value="管理者用トップページ">
+	</form>
 <%@ include file="/WEB-INF/views/footer.jsp" %>

@@ -1,5 +1,6 @@
 package hal.tokyo.dao;
 
+import hal.tokyo.beans.Administrator_MAILBean;
 import hal.tokyo.beans.Enquiry_MAILBean;
 
 import java.sql.Connection;
@@ -51,8 +52,37 @@ public class MailDao {
 			table.add(emb);
 
 		}
-
+		result.close();
 		select.close();
+
+		return table;
+
+	}
+	
+	public List<Administrator_MAILBean> AllAdminMailselect() throws SQLException{
+
+		ArrayList<Administrator_MAILBean> table = new ArrayList<Administrator_MAILBean>();
+
+		PreparedStatement select = con.prepareStatement("select * from administrator_mail");
+
+		ResultSet result = select.executeQuery();
+
+		while(result.next()){
+
+			Administrator_MAILBean emb = new Administrator_MAILBean();
+
+			emb.setAdministrator_mail_id(result.getInt("administrator_mail_id"));
+			emb.setDate(result.getString("date"));
+			emb.setTitle(result.getString("title"));
+			emb.setContent(result.getString("content"));
+			emb.setUser_id(result.getString("user_id"));
+
+			table.add(emb);
+
+		}
+		result.close();
+		select.close();
+		
 
 		return table;
 
@@ -73,7 +103,7 @@ public class MailDao {
 	public int Enqinsert(String enq_id, String kenmei, String naiyou) throws SQLException {
 		System.out.println("Enqのインサートdao到達");
 		PreparedStatement update = con
-				.prepareStatement("insert into enquiry_mail (user_id,enquiry_type_id,enquiry_title,enquiry_content) values ('testman',?,?,?);");
+				.prepareStatement("insert into enquiry_mail (user_id,enquiry_type_id,enquiry_title,enquiry_content) values ('useraddress1@example.com',?,?,?);");
 		update.setString(1, enq_id);
 		update.setString(2, kenmei);
 		update.setString(3, naiyou);

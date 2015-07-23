@@ -13,8 +13,9 @@ public class Administrator_MAILBean {
 	private String date;
 	private String title;
 	private String content;
-	private int posting_id;
-
+	//private int posting_id;
+	private String user_id;
+	
 	public int getAdministrator_mail_id() {
 		return administrator_mail_id;
 	}
@@ -39,11 +40,12 @@ public class Administrator_MAILBean {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getPosting_id() {
-		return posting_id;
+
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setPosting_id(int posting_id) {
-		this.posting_id = posting_id;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
 
