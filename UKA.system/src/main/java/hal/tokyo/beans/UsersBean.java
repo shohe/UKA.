@@ -14,6 +14,16 @@ public class UsersBean{
 	private int department_Id;
 	private String image;
 	private int status;
+	private String department_Name;
+
+
+
+	public String getDepartment_Name() {
+		return department_Name;
+	}
+	public void setDepartment_Name(String department_Name) {
+		this.department_Name = department_Name;
+	}
 	public String getMailAddress() {
 		return mailAddress;
 	}
