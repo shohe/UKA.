@@ -37,7 +37,8 @@
                     </tr>
                     <tr><td class="table_left">サムネイル画像:</td></tr>
                     <tr><td style="padding-left:25px;">
-                        <img style="width:100px;height:100px;overflow:hidden;border:3px rgb(205, 205, 205) solid;" class="img-circle" src="${image }" alt="user image." />
+                        <img style="width:100px;height:100px;overflow:hidden;border:3px rgb(205, 205, 205) solid;" class="img-circle" src="/UKA.system/${image }" alt="user image." />
+                        <input type="hidden" name="image" value="${image }" >
                     </td></tr>
                     <tr><td class="table_left">プロフィールコメント（一言）:&nbsp;&nbsp;<input type="hidden" name="profileComment" value="${profileComment }" >${profileComment }</td></tr>
                     <tr><td style="height:110px;"><button type="submit" class="btn btn-primary">登録する。</button></td></tr>
