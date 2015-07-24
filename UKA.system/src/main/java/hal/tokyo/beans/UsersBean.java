@@ -16,14 +16,6 @@ public class UsersBean{
 	private int status;
 	private String department_Name;
 
-
-
-	public String getDepartment_Name() {
-		return department_Name;
-	}
-	public void setDepartment_Name(String department_Name) {
-		this.department_Name = department_Name;
-	}
 	public String getMailAddress() {
 		return mailAddress;
 	}
@@ -66,6 +58,14 @@ public class UsersBean{
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public String getDepartment_Name() {
+		return department_Name;
+	}
+	public void setDepartment_Name(String department_Name) {
+		this.department_Name = department_Name;
+	}
+
+
 
 
 }

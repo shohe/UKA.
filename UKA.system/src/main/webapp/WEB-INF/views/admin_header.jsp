@@ -96,7 +96,7 @@
 					</form>
 				</li>
 				<li class="admin_li">
-					<form action="adminTransition" method="post">
+					<form action="adminauthority" method="post">
 						<input type="submit" class="btn btn-danger" name="adtransubmit"
 							value="権限管理">
 					</form>
