@@ -42,6 +42,7 @@ public class LoginController extends HttpServlet {
 			if(request.getParameter("login").equals(Login)){
 				try {
 					record = dao.findById(MailAddress, Password);
+					System.out.println(record.getMailAddress());
 				} catch (SQLException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
@@ -50,8 +51,8 @@ public class LoginController extends HttpServlet {
 					if(record.getMailAddress().equals(MailAddress)){
 						//認証成功
 						session.setAttribute("Name", record.getName());
+						session.setAttribute("MailAddress", record.getMailAddress());
 						session.setAttribute("Status", "true");
-						session.setAttribute("Judge", record.getStatus());
 					}else{
 
 						session.setAttribute("Status", "false");
@@ -63,8 +64,8 @@ public class LoginController extends HttpServlet {
 				}
 			}else{
 				session.removeAttribute("Name");
+				session.removeAttribute("MailAddress");
 				session.removeAttribute("Status");
-				session.removeAttribute("Judge");
 			}
 
 		ModelAndView mv = new ModelAndView("index");

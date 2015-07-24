@@ -1,6 +1,5 @@
 package hal.tokyo.controller;
 
-import hal.tokyo.dao.AlertDao;
 import hal.tokyo.dao.MailDao;
 
 import java.sql.SQLException;
@@ -33,7 +32,7 @@ public class AdminTransition {
 		map.put("トップへ戻る", "admin_top");
 		map.put("プロジェクト一覧", "admin_projectinspection");
 		map.put("メール一覧", "admin_mailbox");
-		map.put("詳細表示・メール作成", "admin_mailreply");
+		map.put("詳細表示・メール作成", "AdminMailReplyServlet");
 		map.put("権限管理", "admin_authorization");
 		map.put("メール送信", "admin_mailsuctrans");
 		//System.out.println(map.get(adtransubmit));
@@ -41,6 +40,7 @@ public class AdminTransition {
 		// mv.addObject("test", test);
 		MailDao ad = new MailDao();
 		mv.addObject("mailbox", ad.AllAdminMailselect());
+		//mv.addObject("selectmail", ad.AdminMailselect(adtransubmit));
 
 
 		return mv;

@@ -7,9 +7,19 @@
 <div class="container">
 	<div class="row headline">
 		<!-- Begin Headline -->
+			<%
+			String user_id = (String) session.getAttribute("Name");
+			String mail = (String) session.getAttribute("MailAddress");
+			System.out.println(user_id);
+			System.out.println(mail);
+			if(user_id == null){
+				out.println("ログインしてから記入して、どうぞ");
+			}
+		%>
 		<div class="top_project_search">
 			<div class="top">管理者にメッセージを送る。</div>
 			<form class="form-inline" method="post" action="messageConfirm">
+			<input type="hidden" name="user_id" value=user_id>
 				<div class="messageTable">
 					<table>
 						<tr>

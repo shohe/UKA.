@@ -49,7 +49,7 @@ public class AlertDao {
 			table.add(emb);
 
 		}
-
+		result.close();
 		select.close();
 
 		return table;
