@@ -54,27 +54,28 @@ public class MailDao {
 		}
 		result.close();
 		select.close();
+		con.close();
 
 		return table;
 
 	}
 	
-	public List<Administrator_MAILBean> AllAdminMailselect() throws SQLException{
+	public List<Enquiry_MAILBean> AllAdminMailselect() throws SQLException{
 
-		ArrayList<Administrator_MAILBean> table = new ArrayList<Administrator_MAILBean>();
+		ArrayList<Enquiry_MAILBean> table = new ArrayList<Enquiry_MAILBean>();
 
-		PreparedStatement select = con.prepareStatement("select * from administrator_mail");
+		PreparedStatement select = con.prepareStatement("select * from enquiry_mail;");
 
 		ResultSet result = select.executeQuery();
 
 		while(result.next()){
 
-			Administrator_MAILBean emb = new Administrator_MAILBean();
+			Enquiry_MAILBean emb = new Enquiry_MAILBean ();
 
-			emb.setAdministrator_mail_id(result.getInt("administrator_mail_id"));
+			emb.setEnquiry_id(result.getInt("enquiry_id"));
 			emb.setDate(result.getString("date"));
-			emb.setTitle(result.getString("title"));
-			emb.setContent(result.getString("content"));
+			emb.setEnquiry_title(result.getString("enquiry_title"));
+			emb.setEnquiry_content(result.getString("enquiry_content"));
 			emb.setUser_id(result.getString("user_id"));
 
 			table.add(emb);
@@ -82,8 +83,36 @@ public class MailDao {
 		}
 		result.close();
 		select.close();
-		
+		con.close();
 
+		return table;
+
+	}
+	
+	public List<Enquiry_MAILBean> AdminMailselect(String enquiry_id) throws SQLException{
+
+		ArrayList<Enquiry_MAILBean> table = new ArrayList<Enquiry_MAILBean>();
+
+		PreparedStatement select = con.prepareStatement("select * from enquiry_mail where enquiry_id = ?");
+		select.setString(1, enquiry_id);
+
+		ResultSet result = select.executeQuery();
+
+		while(result.next()){
+
+			Enquiry_MAILBean emb = new Enquiry_MAILBean();
+
+			emb.setDate(result.getString("date"));
+			emb.setEnquiry_title(result.getString("enquiry_title"));
+			emb.setEnquiry_content(result.getString("enquiry_content"));
+			emb.setUser_id(result.getString("user_id"));
+
+			table.add(emb);
+
+		}
+		result.close();
+		select.close();
+		con.close();
 		return table;
 
 	}
@@ -97,18 +126,43 @@ public class MailDao {
 		update.setString(3, content);
 		update.setString(4, post_id);
 		System.out.println("insert完了");
+		update.close();
+		con.close();
+		return update.executeUpdate();
+	}
+	
+	public int AdminMailinsert(String user_id, String title, String content) throws SQLException {
+		System.out.println("管理者メールインサートdao到達!!!!!");
+		PreparedStatement update = con
+				.prepareStatement("insert into administrator_mail (user_id,title,content,status) values (?,?,?,1);");
+		update.setString(1, user_id);
+		update.setString(2, title);
+		update.setString(3, content);
+		System.out.println("MailDao側の"+user_id);
+		System.out.println("MailDao側の"+title);
+		System.out.println("MailDao側の"+content);
 		return update.executeUpdate();
 	}
 
-	public int Enqinsert(String enq_id, String kenmei, String naiyou) throws SQLException {
+
+	
+	public int Enqinsert(String MailAddress, String enq_id, String kenmei, String naiyou) throws SQLException {
 		System.out.println("Enqのインサートdao到達");
+		System.out.println(MailAddress);
+		System.out.println(enq_id);
+		System.out.println(kenmei);
+		System.out.println(naiyou);
+
 		PreparedStatement update = con
-				.prepareStatement("insert into enquiry_mail (user_id,enquiry_type_id,enquiry_title,enquiry_content) values ('useraddress1@example.com',?,?,?);");
-		update.setString(1, enq_id);
-		update.setString(2, kenmei);
-		update.setString(3, naiyou);
+				.prepareStatement("insert into enquiry_mail (user_id,enquiry_type_id,enquiry_title,enquiry_content) values (?,?,?,?);");
+		update.setString(1, MailAddress);
+		update.setString(2, enq_id);
+		update.setString(3, kenmei);
+		update.setString(4, naiyou);
+
 		System.out.println("insert完了");
 		return update.executeUpdate();
+		
 	}
 
 
@@ -133,9 +187,9 @@ public class MailDao {
 	}
 
 	public void rollback() throws SQLException {
-		System.out.println("commit到達...");
+		System.out.println("rollback到達...");
 		con.rollback();
-		System.out.println("commit完了");
+		System.out.println("rollback完了");
 	}
 
 }

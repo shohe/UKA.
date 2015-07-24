@@ -58,7 +58,7 @@
 	<br />
 	<br />
 
-	<form action="adminlist" method="post">
+	<form action="adminTransition" method="post">
 		<input type="submit" name="adtransubmit" value="プロジェクト一覧">
 	</form>
 	<form action="adminTransition" method="post">
