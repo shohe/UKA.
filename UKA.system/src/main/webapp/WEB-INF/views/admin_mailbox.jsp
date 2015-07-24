@@ -28,6 +28,7 @@
 
 		<!-- ↓jspでがんばるとこ -->
 		<c:forEach var="mailbox" items="${mailbox}" varStatus="status">
+		
 		<tr>
 			<td bgcolor="#FFF" align="left" nowrap><c:out value="${mailbox.enquiry_title}"/></td>
 			<td bgcolor="#FFF" align="center" width="150"><c:out value="${mailbox.user_id}"/></td>

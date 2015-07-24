@@ -77,6 +77,7 @@ public class MailDao {
 			emb.setEnquiry_title(result.getString("enquiry_title"));
 			emb.setEnquiry_content(result.getString("enquiry_content"));
 			emb.setUser_id(result.getString("user_id"));
+			//emb.setStatus(result.getString("status"));
 
 			table.add(emb);
 
