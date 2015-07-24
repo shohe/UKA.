@@ -42,10 +42,6 @@ public class RegistConfirmController {
 
 		/** 画像ファイル関係 **/
 		MultipleData md = new MultipleData();
-
-		/** いらない？ **/
-		//PostController pc = new PostController();
-
 		/** 画像アップロード用 **/
 		ImageUpload iu = new ImageUpload(context);
 

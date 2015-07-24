@@ -3,8 +3,6 @@ package hal.tokyo.controller;
 import hal.tokyo.beans.UsersBean;
 import hal.tokyo.dao.UsersDao;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,26 +39,28 @@ public class LoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 			if(request.getParameter("login").equals(Login)){
 				try {
-					record = dao.findById(MailAddress, Password);
-					System.out.println(record.getMailAddress());
-				} catch (SQLException e) {
+						record = dao.findById(MailAddress, Password);
+
+						if(record.getMailAddress() != null){
+							if(record.getMailAddress().equals(MailAddress)){
+								//認証成功
+								session.setAttribute("Name", record.getName());
+								session.setAttribute("MailAddress", record.getMailAddress());
+								session.setAttribute("Status", "true");
+								System.out.println(record.getMailAddress());
+								System.out.println(record.getName());
+							}else{
+
+								session.setAttribute("Status", "false");
+							}
+						}else{
+							ModelAndView mv = new ModelAndView("index");
+							mv.addObject("message", message);
+							return mv;
+						}
+				} catch (Exception e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
-				}
-				if(record.getMailAddress() != null){
-					if(record.getMailAddress().equals(MailAddress)){
-						//認証成功
-						session.setAttribute("Name", record.getName());
-						session.setAttribute("MailAddress", record.getMailAddress());
-						session.setAttribute("Status", "true");
-					}else{
-
-						session.setAttribute("Status", "false");
-					}
-				}else{
-					ModelAndView mv = new ModelAndView("index");
-					mv.addObject("message", message);
-					return mv;
 				}
 			}else{
 				session.removeAttribute("Name");

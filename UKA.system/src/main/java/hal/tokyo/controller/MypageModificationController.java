@@ -33,7 +33,7 @@ public class MypageModificationController {
 	@RequestMapping("/mypage_mod")
 	public ModelAndView showMessage(@RequestParam(value = "department_Id",required = false) int department_Id,
 									@RequestParam(value = "mailaddress" , required = false) String mailaddress,
-									@RequestParam(value = "mailaddress_old" , required = false) String mailaddress_old,
+									@RequestParam(value = "mailaddress_old") String mailaddress_old,
 									@RequestParam(value = "name" , required = false) String name,
 									@RequestParam(value = "password" , required = false) String password,
 									@RequestParam(value = "password_new" , required = false) String password_new,
