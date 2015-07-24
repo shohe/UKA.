@@ -27,8 +27,8 @@ public class LoginModule {
 			UsersBean record = new UsersBean();
 			usersdao.findById(MailAddress, Password);
 			/*ログイン判定*/
-			if(record.getMailAddress() == MailAddress && record.getPassword() == Password){
-				return record.getMailAddress();
+			if(record.getMailaddress() == MailAddress && record.getPassword() == Password){
+				return record.getMailaddress();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
