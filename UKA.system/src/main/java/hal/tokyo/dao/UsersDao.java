@@ -1,7 +1,5 @@
 package hal.tokyo.dao;
 
-import hal.tokyo.beans.UsersBean;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +11,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import hal.tokyo.beans.UsersBean;
+
 public class UsersDao {
 
 	/** Connection **/
@@ -21,15 +21,14 @@ public class UsersDao {
 	/**
 	 * コンストラクタ
 	 */
-	public UsersDao(){
+	public UsersDao() {
 
 		try {
 
 			InitialContext context;
-				context = new InitialContext();
+			context = new InitialContext();
 			DataSource ds;
-				ds = (DataSource) context
-						.lookup("java:comp/env/jdbc/ukasystem");
+			ds = (DataSource) context.lookup("java:comp/env/jdbc/ukasystem");
 
 			con = ds.getConnection();
 
@@ -45,7 +44,7 @@ public class UsersDao {
 
 	}
 
-	public UsersDao(Connection con) throws NamingException, SQLException{
+	public UsersDao(Connection con) throws NamingException, SQLException {
 		this.con = con;
 	}
 
@@ -57,7 +56,7 @@ public class UsersDao {
 	 * @return table
 	 * @throws SQLException
 	 */
-	public List<UsersBean> findAll() throws SQLException{
+	public List<UsersBean> findAll() throws SQLException {
 
 		PreparedStatement findAll = con.prepareStatement("select * from users");
 
@@ -65,11 +64,11 @@ public class UsersDao {
 
 		ArrayList<UsersBean> table = new ArrayList<UsersBean>();
 
-		while(result.next()){
+		while (result.next()) {
 
 			UsersBean record = new UsersBean();
 
-			record.setMailaddress(result.getString("mailaddress"));
+			record.setMailAddress(result.getString("mailaddress"));
 			record.setPassword(result.getString("password"));
 			record.setName(result.getString("name"));
 			record.setProfileComment(result.getString("profileComment"));
@@ -80,12 +79,11 @@ public class UsersDao {
 			table.add(record);
 		}
 
-		findAll.close();
+		con.close();
 
 		return table;
 
 	}
-
 
 	/**
 	 * ユーザーテーブル特定IDのデータ取得
@@ -95,22 +93,21 @@ public class UsersDao {
 	 * @return table
 	 * @throws SQLException
 	 */
-	public List<UsersBean> findById(String mailaddress,String password) throws SQLException{
+	public UsersBean findById(String mailaddress, String password) throws SQLException {
 
-		PreparedStatement findById = con.prepareStatement("select * from users where mailaddress = ? and password = ?");
-
+		PreparedStatement findById = con
+				.prepareStatement("select * from users where mailaddress = ? and password = ?;");
 		findById.setString(1, mailaddress);
 		findById.setString(2, password);
 
 		ResultSet result = findById.executeQuery();
 
-		ArrayList<UsersBean> table = new ArrayList<UsersBean>();
+		// ArrayList<UsersBean> table = new ArrayList<UsersBean>();
 
-		while(result.next()){
+		UsersBean record = new UsersBean();
+		while (result.next()) {
 
-			UsersBean record = new UsersBean();
-
-			record.setMailaddress(result.getString("mailaddress"));
+			record.setMailAddress(result.getString("mailaddress"));
 			record.setPassword(result.getString("password"));
 			record.setName(result.getString("name"));
 			record.setProfileComment(result.getString("profileComment"));
@@ -118,15 +115,15 @@ public class UsersDao {
 			record.setImage(result.getString("image"));
 			record.setStatus(result.getInt("status"));
 
-			table.add(record);
+			// table.add(record);
+
 		}
 
-		findById.close();
+		con.close();
 
-		return table;
+		return record;
 
 	}
-
 
 	/**
 	 * データの登録
@@ -143,10 +140,10 @@ public class UsersDao {
 	 * @return result
 	 * @throws SQLException
 	 */
-	public int insert(String mailaddress,String password,String name,String profileComment,int department_Id,String image,int status) throws SQLException{
+	public int insert(String mailaddress, String password, String name, String profileComment, int department_Id,
+			String image, int status) throws SQLException {
 
-		PreparedStatement insert =
-				con.prepareStatement("insert into users values(?,?,?,?,?,?,?);");
+		PreparedStatement insert = con.prepareStatement("insert into users values(?,?,?,?,?,?,?);");
 
 		insert.setString(1, mailaddress);
 		insert.setString(2, password);
@@ -159,29 +156,17 @@ public class UsersDao {
 		int result = insert.executeUpdate();
 
 		/*
-
-		ArrayList<UsersBean> table = new ArrayList<UsersBean>();
-
-		while(result.next()){
-
-			UsersBean record = new UsersBean();
-
-			record.setMailAddress(result.getString("mailaddress"));
-			record.setPassword(result.getString("password"));
-			record.setName(result.getString("name"));
-			record.setProfileComment(result.getString("profileComment"));
-			record.setDepartment_Id(result.getString("department_Id"));
-			record.setImage(result.getString("image"));
-			record.setStatus(result.getInt("status"));
-
-			table.add(record);
-		}
-
-
-
-		return table;
-
-		*/
+		 * ArrayList<UsersBean> table = new ArrayList<UsersBean>();
+		 * while(result.next()){ UsersBean record = new UsersBean();
+		 * record.setMailAddress(result.getString("mailaddress"));
+		 * record.setPassword(result.getString("password"));
+		 * record.setName(result.getString("name"));
+		 * record.setProfileComment(result.getString("profileComment"));
+		 * record.setDepartment_Id(result.getString("department_Id"));
+		 * record.setImage(result.getString("image"));
+		 * record.setStatus(result.getInt("status")); table.add(record); }
+		 * return table;
+		 */
 
 		insert.close();
 
@@ -189,10 +174,11 @@ public class UsersDao {
 
 	}
 
+	public int update(String mailaddress, String password, String name, String profileComment, int department_Id,
+			String image, int status) throws SQLException {
 
-	public int update(String mailaddress,String password,String name,String profileComment,int department_Id,String image,int status) throws SQLException{
-
-		PreparedStatement update = con.prepareStatement("update users set mailaddress = ?, password = ?, name = ?, profileComment = ?, department_Id = ?, image = ?, status = ?");
+		PreparedStatement update = con.prepareStatement(
+				"update users set mailaddress = ?, password = ?, name = ?, profileComment = ?, department_Id = ?, image = ?, status = ?");
 
 		update.setString(1, mailaddress);
 		update.setString(2, password);
@@ -220,7 +206,7 @@ public class UsersDao {
 	 * @return result
 	 * @throws SQLException
 	 */
-	public int delete(String mailaddress) throws SQLException{
+	public int delete(String mailaddress) throws SQLException {
 
 		PreparedStatement delete = con.prepareStatement("delete from users where mailaddress = ?");
 
@@ -239,7 +225,7 @@ public class UsersDao {
 	 *
 	 * @throws SQLException
 	 */
-	public void commit() throws SQLException{
+	public void commit() throws SQLException {
 
 		con.commit();
 
@@ -250,7 +236,7 @@ public class UsersDao {
 	 *
 	 * @throws SQLException
 	 */
-	public void close() throws SQLException{
+	public void close() throws SQLException {
 
 		con.close();
 
@@ -261,7 +247,7 @@ public class UsersDao {
 	 *
 	 * @throws SQLException
 	 */
-	public void rollback() throws SQLException{
+	public void rollback() throws SQLException {
 
 		con.rollback();
 
