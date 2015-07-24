@@ -21,22 +21,24 @@
 	</tr>
 
 	<!-- ↓jspでがんばるとこ -->
-	<tr>
-		<td>安威 卯江雄</td>
-		<td>窓際部署</td>
-		<td>fbzoo@nhbe.jp</td>
-		<td>
-			<form action="#" method="post">
-				<input type="submit" class="btn btn-danger" name="" value="ブロックボタン">
-			</form>
-		</td>
-		<td bgcolor="#FFF" align="center" nowrap>
-			<form action="#" method="post">
-				<input type="submit" class="btn btn-danger" name=""
-					value="権限付与・破棄ボタン">
-			</form>
-		</td>
-	</tr>
+	<c:forEach items="${result}" var="rs">
+		<tr>
+			<td><c:out value="${rs.name}" /></td>
+			<td><c:out value="${rs.department_name}" /></td>
+			<td><c:out value="${rs.mailaddress}" /></td>
+			<td>
+				<form action="#" method="post">
+					<input type="submit" class="btn btn-danger" name="" value="ブロックボタン">
+				</form>
+			</td>
+			<td bgcolor="#FFF" align="center" nowrap>
+				<form action="#" method="post">
+					<input type="submit" class="btn btn-danger" name=""
+						value="権限付与・破棄ボタン">
+				</form>
+			</td>
+		</tr>
+	</c:forEach>
 	<!-- ↑jspでがんばるとこ -->
 </table>
 <%@ include file="/WEB-INF/views/admin_footer.jsp"%>
