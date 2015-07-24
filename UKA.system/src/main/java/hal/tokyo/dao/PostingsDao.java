@@ -59,6 +59,45 @@ public class PostingsDao {
 	 * @throws SQLException
 	 */
 
+	/** ------------------------- 1件だけランダム取得 --------------------------------- **/
+
+	public ArrayList<PostingsBean> getOneRandom() throws SQLException{
+		PreparedStatement pstm = con.prepareStatement(
+		"SELECT postings.mailaddress , postings.posting_id , postings.title, departments.department_name, users.name, posting_content.posting_content, "
+				+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage , terms.achievement_vote, postings.date , "
+				+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+				+ "FROM postings "
+				+ "JOIN terms ON terms.terms_id = postings.terms_id "
+				+ "JOIN users ON users.mailaddress = postings.mailaddress "
+				+ "JOIN posting_content ON posting_content.posting_content_id = postings.posting_content_id "
+				+ "JOIN departments ON departments.department_id = users.department_id "
+				+ " WHERE postings.status = 1 ORDER BY RAND() LIMIT 1;");
+
+		ResultSet rs = pstm.executeQuery();
+
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
+
+		rs.beforeFirst();
+
+		while(rs.next()){
+			PostingsBean Bean = new PostingsBean();
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setDate(rs.getString("date"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			Bean.setPosting_content(rs.getString("posting_content"));
+			table.add(Bean);
+		}
+
+		return table;
+	}
+
 	/** ------------------------- 全件取得 --------------------------------- **/
 	public ArrayList<PostingsBean> getPostings() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
