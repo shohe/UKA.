@@ -93,6 +93,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -133,6 +134,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -172,6 +174,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -208,6 +211,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -244,6 +248,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -284,11 +289,11 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
 	/** ------------------------- 締切 --------------------------------- **/
-	//締切
 	public ArrayList<PostingsBean> sortNearDeadline() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
 				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
@@ -320,6 +325,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -358,6 +364,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -392,6 +399,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -429,6 +437,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -464,6 +473,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -502,6 +512,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 }
