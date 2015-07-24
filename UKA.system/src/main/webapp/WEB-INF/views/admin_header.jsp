@@ -84,7 +84,7 @@
 		<nav>
 			<ul>
 				<li class="admin_li">
-					<form action="adminTransition" method="post" class="admin_navi">
+					<form action="adminlist" method="post" class="admin_navi">
 						<input type="submit" class="btn btn-danger" name="adtransubmit"
 							value="プロジェクト一覧">
 					</form>

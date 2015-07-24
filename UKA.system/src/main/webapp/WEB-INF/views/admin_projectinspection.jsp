@@ -23,27 +23,29 @@
 	</tr>
 
 	<!-- ↓jspでがんばるとこ -->
-	<tr class="hov_css">
-		<td>玉子とベーコンとクリームソースのパスタをみんなで作り続けるaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-		<td>安威 卯江雄</td>
-		<td>1919/07/21-07:21:48</td>
-		<td>
-			<form action="#" method="post">
-				<input type="submit" class="btn btn-danger" name="" value="詳細ボタン">
-			</form>
-		</td>
-		<td bgcolor="#FFF" align="center" width="150">
-			<form action="#" method="post">
-				<input type="submit" class="btn btn-danger" name="" value="採用">
-				<input type="submit" class="btn btn-danger" name="" value="保留">
-			</form>
-		</td>
-		<td bgcolor="#FFF" align="center" width="200">
-			<form action="#" method="post">
-				<input type="submit" class="btn btn-danger" name="" value="メール作成">
-			</form>
-		</td>
-	</tr>
+	<c:forEach items="${result}" var="result">
+		<tr class="hov_css">
+			<td><c:out value="${result.title}" /></td>
+			<td><c:out value="${result.name}" /></td>
+			<td><c:out value="${result.date}" /></td>
+			<td>
+				<form action="#" method="post">
+					<input type="submit" class="btn btn-danger" name="" value="詳細ボタン">
+				</form>
+			</td>
+			<td bgcolor="#FFF" align="center" width="150">
+				<form action="#" method="post">
+					<input type="submit" class="btn btn-danger" name="" value="採用">
+					<input type="submit" class="btn btn-danger" name="" value="保留">
+				</form>
+			</td>
+			<td bgcolor="#FFF" align="center" width="200">
+				<form action="#" method="post">
+					<input type="submit" class="btn btn-danger" name="" value="メール作成">
+				</form>
+			</td>
+		</tr>
+	</c:forEach>
 	<!-- ↑jspでがんばるとこ -->
 
 	<tr class="hov_css">

@@ -1,7 +1,6 @@
 package hal.tokyo.controller;
 
 import java.util.HashMap;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * +---------------------------------------+ !このコントローラーはテスト用に作ったモノです!
  * +---------------------------------------+
- * 
+ *
  * @author shohe
  *
  */
