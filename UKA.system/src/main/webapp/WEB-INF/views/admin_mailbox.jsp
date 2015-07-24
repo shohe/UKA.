@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/admin_header.jsp"%>
 <h1>メール一覧</h1>
 <br />
@@ -21,17 +22,19 @@
 		</tr>
 
 		<!-- ↓jspでがんばるとこ -->
+		<c:forEach var="mailbox" items="${mailbox}" varStatus="status">
 		<tr>
-			<td>なんか眠い気がするんですけど</td>
-			<td>安威 卯江雄</td>
-			<td>1919/07/21-07:21:48</td>
+			<td><c:out value="${mailbox.enquiry_title}"/></td>
+			<td><c:out value="${mailbox.user_id}"/></td>
+			<td><c:out value="${mailbox.date}"/></td>
 			<td>
-				<form action="adminTransition" method="post">
-					<input type="submit" class="btn btn-danger" name="adtransubmit"
-						value="詳細表示・メール作成">
+				<form action="AdminMailReplysReturn" method="post">
+				<input type="hidden" name="enquiry_id" value="${mailbox.enquiry_id}">
+					<input type="submit" name="AdminMailReplyServlet" value="メールの詳細を確認">
 				</form>
 			</td>
 		</tr>
+		</c:forEach>
 		<!-- ↑jspでがんばるとこ -->
 	</table>
 </div>

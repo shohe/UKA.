@@ -406,7 +406,28 @@ public class PostingsDao {
 		con.close();
 		return table;
 	}
+	
+	/** ------------------------- プロジェクト許可 --------------------------------- **/
+	public int ProjectOk(String title) throws SQLException {
+		System.out.println("ジャッジするdao到達!!!!!");
+		PreparedStatement update = con
+				.prepareStatement("update postings set status = 3 where title = ?;");
+		update.setString(1, title);
+		System.out.println("ジャッジ側の"+title);
+		return update.executeUpdate();
+	}
+	
+	/** ------------------------- プロジェクト保留 --------------------------------- **/
+	public int ProjectNo(String title) throws SQLException {
+		System.out.println("ジャッジするdao(保留)到達!!!!!");
+		PreparedStatement update = con
+				.prepareStatement("update postings set status = 2 where title = ?;");
+		update.setString(1, title);
+		System.out.println("ジャッジ側の"+title);
+		return update.executeUpdate();
+	}
 
+	
 	/** ------------------------- 評価数が高い --------------------------------- **/
 	//評価数が高い
 	public ArrayList<PostingsBean> sortHigh() throws SQLException{
@@ -554,4 +575,25 @@ public class PostingsDao {
 		con.close();
 		return table;
 	}
+	
+	/**
+	 * 接続を閉じる
+	 *
+	 * @throws SQLException
+	 */
+	public void close() throws SQLException {
+		con.close();
+	}
+
+	/**
+	 * コミット
+	 *
+	 * @throws SQLException
+	 */
+	public void commit() throws SQLException {
+		System.out.println("commit到達...");
+		con.commit();
+		System.out.println("commit完了");
+	}
+
 }

@@ -34,9 +34,13 @@
 				</form>
 			</td>
 			<td bgcolor="#FFF" align="center" width="150">
-				<form action="#" method="post">
-					<input type="submit" class="btn btn-danger" name="" value="採用">
-					<input type="submit" class="btn btn-danger" name="" value="保留">
+				<form action="project_ok" method="post">
+					<input type="submit" class="btn btn-danger" name="project_ok" value="採用">
+					<input type="hidden" name="title" value="${result.title}">
+				</form>
+				<form action="project_no" method="post">
+					<input type="submit" class="btn btn-danger" name="project_no" value="保留">
+					<input type="hidden" name="title" value="${result.title}">
 				</form>
 			</td>
 			<td bgcolor="#FFF" align="center" width="200">
