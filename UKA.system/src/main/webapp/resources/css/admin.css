@@ -1,0 +1,93 @@
+@CHARSET "UTF-8";
+
+body {
+    background: #fff;
+}
+
+.hed {
+	width: 1120px;
+	background-color: #fff;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wep {
+	width: 1120px;
+	background-color: #fff;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+}
+
+.logoutbtn {
+	width: 400px;
+	height: 50px;
+	background-color: #fff;
+	float: right;
+}
+
+#footer {
+	height: 60px;
+	background-color: #fff;
+	width: 1120px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+ul {
+	width: 1120px;
+	height: 50px;
+	margin-left: 0;
+	padding-left: 0;
+	list-style-type: none;
+	border: 1px solid #fff;
+	position: relative;
+	top: -200px;
+}
+
+li {
+	float: left;
+}
+
+nav {
+	position: relative;
+	top: 200px;
+}
+
+.admin_logout {
+	width: 80px;
+	height: 40px;
+	float: left;
+}
+
+.admin_li {
+	margin-top: 7px;
+	margin-left: 7px;
+	margin-right: 7px;
+}
+
+.admin_navi {
+	height: 50px;
+}
+
+.retop {
+	width: 80px;
+	height: 40px;
+	margin-left: 30px;
+	float: left;
+}
+
+.readmintop {
+	width: 80px;
+	height: 40px;
+	margin-left: 70px;
+	float: left;
+}
+
+.admin_mail {
+	margin-left: 30px;
+}
+
+.repmail {
+	margin-left: 50px;
+}
