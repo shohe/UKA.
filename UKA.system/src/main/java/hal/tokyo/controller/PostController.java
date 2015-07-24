@@ -190,6 +190,7 @@ public class PostController {
 		return mv;
 	}
 	
+	
 	private String createUploadPath() {
 		
 		String path = context.getRealPath("\\");

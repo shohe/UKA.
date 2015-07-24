@@ -22,6 +22,7 @@
                             <div class="col-xs-4 col-sm-9 user_comment">
                                 <span>開発部 : 大谷昇平</span><br/>
                                 仕事大好きです!よろしくお願いします:)
+                                <a href="./admin_top.jsp">admin_top.jsp</a>
                             </div>
                         </div>
                     </div><!-- /top user -->
