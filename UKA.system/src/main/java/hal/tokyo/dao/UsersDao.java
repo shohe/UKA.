@@ -69,7 +69,7 @@ public class UsersDao {
 
 			UsersBean record = new UsersBean();
 
-			record.setMailAddress(result.getString("mailaddress"));
+			record.setMailaddress(result.getString("mailaddress"));
 			record.setPassword(result.getString("password"));
 			record.setName(result.getString("name"));
 			record.setProfileComment(result.getString("profileComment"));
@@ -110,7 +110,7 @@ public class UsersDao {
 
 			UsersBean record = new UsersBean();
 
-			record.setMailAddress(result.getString("mailaddress"));
+			record.setMailaddress(result.getString("mailaddress"));
 			record.setPassword(result.getString("password"));
 			record.setName(result.getString("name"));
 			record.setProfileComment(result.getString("profileComment"));
