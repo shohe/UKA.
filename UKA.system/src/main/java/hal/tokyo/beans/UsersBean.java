@@ -15,6 +15,7 @@ public class UsersBean{
 	private String image;
 	private int status;
 	private String department_name;
+
 	public String getMailaddress() {
 		return mailaddress;
 	}

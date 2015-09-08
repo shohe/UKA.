@@ -58,9 +58,9 @@
                 <div id="login-form">
                 <%
                 	if(session.getAttribute("Name") != null){
-                		out.println("<form class='' action='logout' method='post'>");
+                		out.println("<form action='logout' method='post'>");
                 	}else{
-                		out.println("<form class='' action='login' method='post'>");
+                		out.println("<form action='login' method='post'>");
                 	}
                     out.println("<div class='left'>");
                             //out
@@ -82,12 +82,21 @@
                         out.println("</div>");
                         out.println("<div class='right'>");
                         if(session.getAttribute("Status") == "true"){
-                            out.println("<button type='submit' class='btn btn-default' name='login' value='logout'>ログアウト</button>");
+                        	out.println("<button type='submit' class='btn btn-default' name='login' value='logout'>ログアウト</button>");
                         }else{
                         	out.println("<button type='submit' class='btn btn-default' name='login' value='login'>ログイン</button>");
                         }
-                        out.println("</div>");
+
                     out.println("</form>");
+                    if(session.getAttribute("Status") == "true"){
+                    	if(session.getAttribute("Judge").equals(3)){
+                    		out.println("<form action='adminTransition' method='post'>");
+                    		out.println("<button type='submit' class='btn btn-default' name='adtransubmit' value='管理者用トップページ'>管理者画面へ</button>");
+                    		out.println("</form>");
+                    	}
+                    }
+
+                    out.println("</div>");
                     %>
                 </div>
           </div>
@@ -105,7 +114,7 @@
                 	String Name = (String)session.getAttribute("Name");
                 	out.println("<li class='navi'>" + Name + "</li>");
                 }else{
-                	out.println("<a href='<c:url value='/regist' />'><li class='navi'>新規登録</li></a>");
+                	out.println("<a href= 'http://localhost:8080/UKA.system/regist'><li class='navi'>新規登録</li></a>");
                 }
 
                 %>

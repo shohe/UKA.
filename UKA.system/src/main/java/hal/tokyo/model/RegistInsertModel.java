@@ -14,11 +14,11 @@ public class RegistInsertModel {
 
 	}
 
-	public boolean RegistInsert(String mailaddress,String password,String name,String profileComment,int department_Id){
+	public boolean RegistInsert(String mailaddress,String password,String name,String profileComment,int department_Id,String image){
 
 		try {
 
-			int count = ud.insert(mailaddress, password, name, profileComment, department_Id, "", 0);
+			int count = ud.insert(mailaddress, password, name, department_Id, profileComment, image, 1);
 
 			if(count > 0){
 

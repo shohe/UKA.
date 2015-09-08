@@ -39,6 +39,7 @@
                 <tr><td>${password_c_msg}</td></tr>
                 <tr><td class="table_left">サムネイル画像</td></tr>
                 <tr><td><input id="file-0a" class="file" type="file" multiple data-min-file-count="0" name="thumbnail"></td></tr>
+                <tr><td>${image_msg}</td></tr>
                 <tr><td class="table_left">プロフィールコメント（一言）</td></tr>
                 <tr><td>
                     <textarea class="form-control"  id="naiyou" name="profileComment" rows="10" maxlength="20" placeholder="20文字まで。">${profileComment }</textarea>

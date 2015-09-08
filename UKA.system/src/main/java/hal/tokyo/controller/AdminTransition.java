@@ -35,6 +35,7 @@ public class AdminTransition {
 		map.put("詳細表示・メール作成", "admin_mailreply");
 		map.put("権限管理", "admin_authorization");
 		map.put("メール送信", "admin_mailsuctrans");
+		map.put("一般TOPページヘ", "index");
 		//System.out.println(map.get(adtransubmit));
 		MailDao ad = new MailDao();
 		ModelAndView mv = new ModelAndView(map.get(adtransubmit));

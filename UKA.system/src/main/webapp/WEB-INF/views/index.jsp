@@ -103,7 +103,5 @@
             </div>
 
     </div><!-- End Gallery Row -->
-    <form action="adminTransition" method="post">
-		<input type="submit" name="adtransubmit" value="管理者用トップページ">
-	</form>
+
 <%@ include file="/WEB-INF/views/footer.jsp" %>

@@ -69,9 +69,9 @@
 				</form>
 			</div>
 			<div class="retop">
-				<form action="./index.jsp" method="post">
-					<input type="submit" class="btn btn-danger" name="logout"
-						value="一般TOPページ">
+				<form action="adminTransition" method="post">
+					<input type="submit" class="btn btn-danger" name="adtransubmit"
+						value="一般TOPページヘ">
 				</form>
 			</div>
 			<div class="readmintop">

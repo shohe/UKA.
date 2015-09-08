@@ -3,14 +3,7 @@ package hal.tokyo.model;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- *
- * パラメータ内容をチェックするクラス
- *
- * @author UKA.System
- *
- */
-public class RegistValueCheck {
+public class MypageValueCheck {
 
 	/**
 	 *数字チェック
@@ -164,7 +157,21 @@ public class RegistValueCheck {
 
 	}
 
+	public boolean BeforePasswordCheck(String mailaddress_old,String password){
 
+
+
+		return false;
+	}
+
+
+	/**
+	 *
+	 * ファイル拡張子のチェック
+	 *
+	 * @param filename
+	 * @return
+	 */
 	public boolean FileExtensionCheck(String filename){
 
 		int index = filename.indexOf(".");

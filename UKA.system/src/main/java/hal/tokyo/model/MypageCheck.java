@@ -1,15 +1,12 @@
 package hal.tokyo.model;
 
+import hal.tokyo.dao.UsersDao;
 
-/**
- *登録画面の入力内容をチェックするクラス
- *
- * @author UKA.System
- *
- */
-public class RegistCheck {
+import java.sql.SQLException;
 
-	RegistValueCheck rvc = new RegistValueCheck();
+public class MypageCheck {
+
+	MypageValueCheck mvc = new MypageValueCheck();
 
 	String cannot_number;
 	String cannot_symbol;
@@ -18,13 +15,14 @@ public class RegistCheck {
 	String not_mailaddress_form;
 	int password_count;
 	String input_pass;
+	String wrong_pass;
 
 	/**
 	 * エラーメッセージ設定
 	 *
 	 *
 	 */
-	public RegistCheck() {
+	public MypageCheck() {
 		cannot_number = "数字は入力できません";
 		cannot_symbol = "記号は入力できません";
 		cannot_blank = "空白は入力できません";
@@ -32,29 +30,29 @@ public class RegistCheck {
 		not_mailaddress_form = "メールアドレスの形式が正しくありません";
 		password_count = 8;
 		input_pass = "文字以上のパスワードを入力して下さい";
+		wrong_pass = "現在のパスワードと一致しません";
 	}
-
 	/**
 	 * 名前をチェック
 	 *
 	 * @param name
 	 * @return
 	 */
-	public String RegistNameCheck(String name){
+	public String MypageNameCheck(String name){
 
-		if(!rvc.StringNull(name)){
+		if(!mvc.StringNull(name)){
 
 			return "名前" + cannot_null;
 
-		}else if(!rvc.StringBlank(name)){
+		}else if(!mvc.StringBlank(name)){
 
 			return cannot_blank;
 
-		}else if(!rvc.StringMatchSymbol(name)){
+		}else if(!mvc.StringMatchSymbol(name)){
 
 			return cannot_symbol;
 
-		}else if(!rvc.StringMatchNumber(name)){
+		}else if(!mvc.StringMatchNumber(name)){
 
 			return cannot_number;
 
@@ -71,17 +69,17 @@ public class RegistCheck {
 	 * @param mailaddress
 	 * @return
 	 */
-	public String RegistMailaddressCheck(String mailaddress){
+	public String MypageMailaddressCheck(String mailaddress){
 
-		if(!rvc.StringNull(mailaddress)){
+		if(!mvc.StringNull(mailaddress)){
 
 			return "メールアドレス" + cannot_null;
 
-		}else if(!rvc.StringBlank(mailaddress)){
+		}else if(!mvc.StringBlank(mailaddress)){
 
 			return cannot_blank;
 
-		}else if(!rvc.MailaddressFormCheck(mailaddress)){
+		}else if(!mvc.MailaddressFormCheck(mailaddress)){
 
 			return not_mailaddress_form;
 
@@ -98,21 +96,21 @@ public class RegistCheck {
 	 * @param password
 	 * @return
 	 */
-	public String RegistPasswordCheck(String password){
+	public String MypagePasswordCheck(String password){
 
-		if(!rvc.StringNull(password)){
+		if(!mvc.StringNull(password)){
 
 			return "パスワード" + cannot_null;
 
-		}else if(!rvc.StringBlank(password)){
+		}else if(!mvc.StringBlank(password)){
 
 			return cannot_blank;
 
-		}else if(!rvc.StringMatchSymbol(password)){
+		}else if(!mvc.StringMatchSymbol(password)){
 
 			return cannot_symbol;
 
-		}else if(!rvc.StringCount(password,password_count)){
+		}else if(!mvc.StringCount(password,password_count)){
 
 			return password_count + input_pass;
 
@@ -130,25 +128,25 @@ public class RegistCheck {
 	 * @param password_c
 	 * @return
 	 */
-	public String RegistPasswordConCheck(String password,String password_c){
+	public String MypagePasswordConCheck(String password,String password_c){
 
-		if(!rvc.StringNull(password_c)){
+		if(!mvc.StringNull(password_c)){
 
 			return "パスワード" + cannot_null;
 
-		}else if(!rvc.StringBlank(password_c)){
+		}else if(!mvc.StringBlank(password_c)){
 
 			return cannot_blank;
 
-		}else if(!rvc.StringMatchSymbol(password_c)){
+		}else if(!mvc.StringMatchSymbol(password_c)){
 
 			return cannot_symbol;
 
-		}else if(!rvc.StringCount(password_c,password_count)){
+		}else if(!mvc.StringCount(password_c,password_count)){
 
 			return password_count + input_pass;
 
-		}else if(!rvc.PasswordSameCheck(password, password_c)){
+		}else if(!mvc.PasswordSameCheck(password, password_c)){
 
 			return "パスがまちがってるよ";
 
@@ -166,9 +164,9 @@ public class RegistCheck {
 	 * @param profileComment
 	 * @return
 	 */
-	public String RegistProfileComment(String profileComment){
+	public String MypageProfileComment(String profileComment){
 
-		if(!rvc.StringBlank(profileComment)){
+		if(!mvc.StringBlank(profileComment)){
 
 			return cannot_blank;
 
@@ -181,23 +179,28 @@ public class RegistCheck {
 	}
 
 	/**
-	 * パスワードをアスタリスクにする
-	 * 完全におまけ
+	 * 以前のパスワードと一致しているかチェック
 	 *
+	 *
+	 * @param mailaddress_old
 	 * @param password
 	 * @return
+	 * @throws SQLException
 	 */
-	public String HidePassword(String password){
+	public String MypageOldPasswordCheck(String mailaddress_old,String password) throws SQLException{
 
-		String return_password = "";
+		UsersDao ud = new UsersDao();
 
-		for(int i = 0;i < password.length();i++){
+		if(!password.equals(ud.findPassword(mailaddress_old))){
 
-			return_password = return_password + "*";
+			ud.close();
+			return wrong_pass;
+
+		}else{
+			ud.close();
+			return "";
 
 		}
-
-		return return_password;
 
 	}
 
@@ -208,9 +211,9 @@ public class RegistCheck {
 	 * @param filename
 	 * @return
 	 */
-	public String RegistFileExtensionCheck(String filename){
+	public String MypageFileExtensionCheck(String filename){
 
-		if(!rvc.FileExtensionCheck(filename)){
+		if(!mvc.FileExtensionCheck(filename)){
 
 			return "有効なファイル形式は.jpg.pngです";
 
@@ -221,5 +224,4 @@ public class RegistCheck {
 		}
 
 	}
-
 }
