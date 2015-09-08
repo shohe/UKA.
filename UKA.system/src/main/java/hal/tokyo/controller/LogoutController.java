@@ -30,7 +30,6 @@ public class LogoutController extends HttpServlet {
 				session.removeAttribute("Name");
 				session.removeAttribute("MailAddress");
 				session.removeAttribute("Status");
-				session.removeAttribute("Judge");
 			}else{
 
 			}
