@@ -166,6 +166,7 @@ public class PostController extends HttpServlet{
 		PostingInput Dao = new PostingInput();
 		HttpSession session = request.getSession();
 		String MailAddress = (String) session.getAttribute("MailAddress");
+		System.out.println(MailAddress);
 		int id = Dao.insertSummary(MailAddress, conCre, muintitle, 1, 1,1);
 
 		//ModelAndView mv = new ModelAndView("post_complete");
