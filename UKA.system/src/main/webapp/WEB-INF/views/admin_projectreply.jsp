@@ -7,7 +7,8 @@
 <br />
 <br />
 <br />
-<br />
+<h3>送信相手</h3>
+ ・送信相手のMail
 <form action="adtransubmit" method="post">
 	<h3>件名</h3>
 	<input type="text">
