@@ -9,6 +9,9 @@ import java.io.File;
 import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +34,8 @@ public class MypageModificationController {
 	ServletContext context;
 
 	@RequestMapping("/mypage_mod")
-	public ModelAndView showMessage(@RequestParam(value = "department_Id",required = false) int department_Id,
+	public ModelAndView showMessage(HttpServletRequest request, HttpServletResponse response,
+									@RequestParam(value = "department_Id",defaultValue = "0") int department_Id,
 									@RequestParam(value = "mailaddress" , required = false) String mailaddress,
 									@RequestParam(value = "mailaddress_old") String mailaddress_old,
 									@RequestParam(value = "name" , required = false) String name,
@@ -39,7 +43,10 @@ public class MypageModificationController {
 									@RequestParam(value = "password_new" , required = false) String password_new,
 									@RequestParam(value = "thumbnail" , required = false) MultipartFile thumbnail,
 									@RequestParam(value = "image_old" , required = false) String image,
-									@RequestParam(value = "profileComment" , required = false) String profileComment) throws SQLException{
+									@RequestParam(value = "profileComment" , required = false) String profileComment) throws SQLException,Exception{
+
+		/** セッション更新用 **/
+		HttpSession session = request.getSession();
 
 		/** 入力内容チェック **/
 		MypageCheck mc = new MypageCheck();
@@ -70,9 +77,16 @@ public class MypageModificationController {
 		mc_password = mc.MypageOldPasswordCheck(mailaddress_old, password);
 		mc_password_new = mc.MypagePasswordCheck(password_new);
 		mc_profileComment = mc.MypageProfileComment(profileComment);
-		mc_image = mc.MypageFileExtensionCheck(thumbnail.getOriginalFilename());
+		//mc_image = mc.MypageFileExtensionCheck(thumbnail.getOriginalFilename());
 
-		/** 入力にエラーがないか？ **/
+		//画像が選択され送られてきたときのみ
+		if(!thumbnail.isEmpty() && thumbnail != null){
+			mc_image = mc.MypageFileExtensionCheck(thumbnail.getOriginalFilename());
+		}
+
+		/** 入力にエラーがないか？
+		 *  エラーがある場合
+		 *  **/
 		if(!mc_name.equals("") ||
 				!mc_mailaddress.equals("") ||
 				!mc_password.equals("") ||
@@ -117,27 +131,58 @@ public class MypageModificationController {
 			return mv;
 
 
-		}else{
+		}else{/** エラーなし **/
 
 			/** アップデートへ **/
 			ModelAndView mv = new ModelAndView("mypage");
 
-			/** ファイル操作 **/
-			File file = new File(iu.createUploadPath(),iu.getFileExtention(thumbnail.getOriginalFilename()));
+			//ファイルクラス
+			File file;
+			//画像のパスを入れる変数
+			String imageUrl;
 
-			md.setFile(file);
-			md.setMultipartFile(thumbnail);
-			md.setUrl("/resources/var/"+iu.getFileExtention(thumbnail.getOriginalFilename()));
-			md.upload();
+			//画像ファイルが選択されたとき実行
+			if(!thumbnail.isEmpty() && thumbnail != null){
 
-			if(mum.MypageUpdate(mailaddress, password_new, name, profileComment, department_Id, md.getUrl(), mailaddress_old)){
+				/** ファイル操作 **/
+				file = new File(iu.createUploadPath(),iu.getFileExtention(thumbnail.getOriginalFilename()));
 
+				md.setFile(file);
+				md.setMultipartFile(thumbnail);
+				md.setUrl("/resources/var/"+iu.getFileExtention(thumbnail.getOriginalFilename()));
+				md.upload();
+				imageUrl = md.getUrl();
+
+			}else{
+
+				imageUrl = "/resources/var/user-blank.jpg";
+
+			}
+
+			/** アップデートに成功した場合 **/
+			if(mum.MypageUpdate(mailaddress, password_new, name, profileComment, department_Id, imageUrl, mailaddress_old)){
+
+
+				//画像ファイルが選択されたとき実行
+				if(!thumbnail.isEmpty() && thumbnail != null){
+
+					mv.addObject("image", md.getUrl());
+
+				}else{
+
+					mv.addObject("image", "/resources/var/user-blank.jpg");
+
+				}
 				/** 入力値 **/
 				mv.addObject("department_Id", department_Id);
 				mv.addObject("mail", mailaddress);
 				mv.addObject("user", name);
-				mv.addObject("image", md.getUrl());
 				mv.addObject("profile", profileComment);
+
+				//	セッションセット
+				session.removeAttribute("MailAddress");
+				session.setAttribute("MailAddress", mailaddress);
+
 
 				mc = null;
 				md = null;
@@ -147,23 +192,24 @@ public class MypageModificationController {
 
 				return mv;
 
+			}else{
+
+				/** 入力値 **/
+
+				mv.addObject("department_Id", department_Id);
+				mv.addObject("mail", mailaddress);
+				mv.addObject("user", name);
+				mv.addObject("image", image);
+				mv.addObject("profile", profileComment);
+
+				mc = null;
+				md = null;
+				iu = null;
+				mum = null;
+				file = null;
+
+				return mv;
 			}
-
-			/** 入力値 **/
-
-			mv.addObject("department_Id", department_Id);
-			mv.addObject("mail", mailaddress);
-			mv.addObject("user", name);
-			mv.addObject("image", image);
-			mv.addObject("profile", profileComment);
-
-			mc = null;
-			md = null;
-			iu = null;
-			mum = null;
-			file = null;
-
-			return mv;
 
 		}
 	}

@@ -62,7 +62,12 @@ public class RegistConfirmController {
 		rc_password = rc.RegistPasswordCheck(password);
 		rc_password_c = rc.RegistPasswordConCheck(password,password_c);
 		rc_profileComment = rc.RegistProfileComment(profileComment);
-		rc_image = rc.RegistFileExtensionCheck(thumbnail.getOriginalFilename());
+		//rc_image = rc.RegistFileExtensionCheck(thumbnail.getOriginalFilename());
+
+		//画像が選択され送られてきたときのみ
+		if(!thumbnail.isEmpty() && thumbnail != null){
+			rc_image = rc.RegistFileExtensionCheck(thumbnail.getOriginalFilename());
+		}
 
 		/** 入力にエラーがないか？ **/
 		if(!rc_name.equals("") ||
@@ -99,13 +104,24 @@ public class RegistConfirmController {
 			/** 確認画面へ **/
 			ModelAndView mv = new ModelAndView("regist_confirm");
 
-			/** ファイル操作 **/
-			File file = new File(iu.createUploadPath(),iu.getFileExtention(thumbnail.getOriginalFilename()));
+			//画像ファイルが選択されたとき実行
+			if(!thumbnail.isEmpty() && thumbnail != null){
 
-			md.setFile(file);
-			md.setMultipartFile(thumbnail);
-			md.setUrl("/resources/var/"+iu.getFileExtention(thumbnail.getOriginalFilename()));
-			md.upload();
+				/** ファイル操作 **/
+				File file = new File(iu.createUploadPath(),iu.getFileExtention(thumbnail.getOriginalFilename()));
+
+				md.setFile(file);
+				md.setMultipartFile(thumbnail);
+				md.setUrl("/resources/var/"+iu.getFileExtention(thumbnail.getOriginalFilename()));
+				md.upload();
+
+				mv.addObject("image", md.getUrl());
+
+			}else{
+
+				mv.addObject("image", "/resources/var/user-blank.jpg");
+
+			}
 
 			/** 入力値 **/
 			mv.addObject("department_Id", department_Id);
@@ -113,7 +129,6 @@ public class RegistConfirmController {
 			mv.addObject("name", name);
 			mv.addObject("password", password);
 			mv.addObject("password_a", rc.HidePassword(password));
-			mv.addObject("image", md.getUrl());
 			mv.addObject("profileComment", profileComment);
 
 			return mv;
