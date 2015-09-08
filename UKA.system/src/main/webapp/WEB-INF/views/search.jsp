@@ -42,7 +42,7 @@
 
                 <!-- Gallery Item 1 -->
                 <c:forEach items="${result}" var="result">
-                <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${result.post_id}" />"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
+                <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${result.post_id}" />&vote_flag=0"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -62,7 +62,13 @@
                               </div>
                             </div>
                             <div class="text-center">
-                                <input type="text" class="knob" value="${result.achievement_percentage}" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+			                            <c:if test="${result.achievement_percentage  >= 100}">
+														     		<input type="text" class="knob" value="100" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+														     </c:if>
+														     <c:if test="${result.achievement_percentage < 100}">
+														         <input type="text" class="knob" value="${result.achievement_percentage}" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+														     </c:if>
+                                
                                 <div class="knob-label">
                                     <i class="fa fa-calendar"></i><span>残り期間:<c:out value="${result.timelimit}" />日</span>
                                 </div>

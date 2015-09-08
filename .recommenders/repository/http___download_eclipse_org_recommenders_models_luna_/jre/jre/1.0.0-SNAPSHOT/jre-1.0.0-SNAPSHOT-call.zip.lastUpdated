@@ -1,0 +1,4 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Sep 08 10:15:25 JST 2015
+64d3ad7959ec87910e009165dcba3d9638e33692@proxy.tokyo.hal.ac.jp\:8080>@default-models-http\://download.eclipse.org/recommenders/models/luna/.lastUpdated=1441674925896
+http\://download.eclipse.org/recommenders/models/luna/.error=Could not transfer artifact jre\:jre\:zip\:call\:1.0.0-SNAPSHOT from/to models (http\://download.eclipse.org/recommenders/models/luna/)\: Proxy Authorization Required (407)

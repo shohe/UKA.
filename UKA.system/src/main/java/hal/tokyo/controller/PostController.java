@@ -11,6 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class PostController {
+public class PostController extends HttpServlet{
+
 
 	@Autowired
 	ServletContext context;
@@ -61,6 +66,8 @@ public class PostController {
 
 	@RequestMapping(value="/post", method=RequestMethod.POST)
 	public ModelAndView postPost(
+			HttpServletRequest request,
+			HttpServletResponse response,
 			@RequestParam("maintitle") String muintitle,
 			@RequestParam("text[]") String[] texts,
 			@RequestParam("title[]") String[] titles,
@@ -96,7 +103,9 @@ public class PostController {
 
 		//db登録詳細
 		PostingInput Dao = new PostingInput();
-		Dao.insertDetail("bbbb@bbbb.com", conCre, muintitle, 0, 1,0);
+		HttpSession session = request.getSession();
+		String MailAddress = (String) session.getAttribute("MailAddress");
+		Dao.insertDetail(MailAddress, conCre, muintitle, 0, 1,0);
 
 		//ModelAndView mv = new ModelAndView("post_complete");
 		ModelAndView mv = new ModelAndView("post_complete");
@@ -119,6 +128,8 @@ public class PostController {
 	 */
 	@RequestMapping(value="/postSummary", method=RequestMethod.POST)
 	public ModelAndView postSummary(
+			HttpServletRequest request,
+			HttpServletResponse response,
 			@RequestParam("maintitle") String muintitle,
 			@RequestParam("text[]") String[] texts,
 			@RequestParam("title[]") String[] titles,
@@ -153,7 +164,10 @@ public class PostController {
 
 		//db登録詳細
 		PostingInput Dao = new PostingInput();
-		int id = Dao.insertSummary("useraddress1@example.com", conCre, muintitle, 1, 1,1);
+		HttpSession session = request.getSession();
+		String MailAddress = (String) session.getAttribute("MailAddress");
+		System.out.println(MailAddress);
+		int id = Dao.insertSummary(MailAddress, conCre, muintitle, 1, 1,1);
 
 		//ModelAndView mv = new ModelAndView("post_complete");
 		ModelAndView mv = new ModelAndView("post_complete");

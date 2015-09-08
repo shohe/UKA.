@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -56,7 +55,7 @@ public class AlertDao {
 		return table;
 
 	}
-	
+
 
 	//掲載期間終了した投稿を取得
 	public ArrayList<PostingsBean> AllEndContents() throws SQLException{

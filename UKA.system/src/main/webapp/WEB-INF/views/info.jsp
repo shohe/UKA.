@@ -38,7 +38,14 @@
                           </div>
                         </div>
                         <div class="text-center">
-                            <input type="text" class="knob" value="${achievement_percentage}" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+          
+                        	 <c:if test="${achievement_percentage  >= 100}">
+											     		<input type="text" class="knob" value="100" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+											     </c:if>
+											     <c:if test="${achievement_percentage < 100}">
+											         <input type="text" class="knob" value="${achievement_percentage}" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
+											     </c:if>
+                            
                             <div class="knob-label">
                                 <i class="fa fa-male"></i><span>${possession_vote}人が評価しています。</span>
                             </div>

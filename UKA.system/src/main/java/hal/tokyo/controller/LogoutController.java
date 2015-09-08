@@ -21,18 +21,16 @@ public class LogoutController extends HttpServlet {
 	@RequestMapping("/logout")
 	public ModelAndView showMessage(HttpServletRequest request, HttpServletResponse response) {
 
-		String Logout = "logout";
+		String Logout = "ログアウト";
+		System.out.print("logoutcontroller");
 
 
 
 		HttpSession session = request.getSession();
-			if(request.getParameter("login").equals(Logout)){
 				session.removeAttribute("Name");
 				session.removeAttribute("MailAddress");
 				session.removeAttribute("Status");
-			}else{
-				
-			}
+				session.invalidate();
 
 		ModelAndView mv = new ModelAndView("index");
 		mv.addObject("message", message);

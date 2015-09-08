@@ -23,13 +23,14 @@ public class RegistInsertController {
 									@RequestParam("mailaddress") String mailaddress,
 									@RequestParam("name") String name,
 									@RequestParam("password") String password,
-									@RequestParam("profileComment") String profileComment) {
+									@RequestParam("profileComment") String profileComment,
+									@RequestParam("image") String image) {
 
 		RegistInsertModel rim = new RegistInsertModel();
 
 		boolean insert_check = false;
 
-		insert_check = rim.RegistInsert(mailaddress, password, name, profileComment, department_Id);
+		insert_check = rim.RegistInsert(mailaddress, password, name, profileComment, department_Id, image);
 
 		if(insert_check){
 

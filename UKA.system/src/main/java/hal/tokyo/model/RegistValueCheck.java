@@ -164,4 +164,23 @@ public class RegistValueCheck {
 
 	}
 
+
+	public boolean FileExtensionCheck(String filename){
+
+		int index = filename.indexOf(".");
+
+		String extension = filename.substring(index+1);
+
+		if(extension.equals("jpg") || extension.equals("png")){
+
+			return true;
+
+		}else{
+
+			return false;
+
+		}
+
+	}
+
 }

@@ -201,4 +201,25 @@ public class RegistCheck {
 
 	}
 
+
+	/**
+	 * ファイル拡張子のチェック
+	 *
+	 * @param filename
+	 * @return
+	 */
+	public String RegistFileExtensionCheck(String filename){
+
+		if(!rvc.FileExtensionCheck(filename)){
+
+			return "有効なファイル形式は.jpg.pngです";
+
+		}else{
+
+			return  "";
+
+		}
+
+	}
+
 }
