@@ -36,14 +36,36 @@
 				</form>
 			</td>
 			<td bgcolor="#FFF" align="center" width="150">
-				<form action="project_ok" method="post">
-					<input type="submit" class="btn btn-danger" name="project_ok" value="採用">
-					<input type="hidden" name="postId" value="${result.post_id}">
-				</form>
-				<form action="project_no" method="post">
-					<input type="submit" class="btn btn-danger" name="project_no" value="保留">
-					<input type="hidden" name="postId" value="${result.post_id}">
-				</form>
+				<c:choose>
+					<c:when test="${result.is_permit==0}">
+						<form action="project_ok" method="post">
+							<input type="submit" class="btn btn-danger" name="project_ok" value="採用">
+							<input type="hidden" name="postId" value="${result.post_id}">
+						</form>
+						<form action="project_no" method="post">
+							<input type="submit" class="btn btn-success" name="project_no" value="保留">
+							<input type="hidden" name="postId" value="${result.post_id}">
+						</form>
+					</c:when>
+					<c:when test="${result.is_permit=='2'}">
+						<form action="project_ok" method="post">
+							<input type="submit" class="btn btn-danger" name="project_ok" value="採用">
+							<input type="hidden" name="postId" value="${result.post_id}">
+						</form>
+					</c:when>
+					<c:when test="${result.is_permit=='3'}">
+						<form action="project_end" method="post">
+							<input type="submit" class="btn btn-primary" name="project_ok" value="実施完了">
+							<input type="hidden" name="postId" value="${result.post_id}">
+						</form>
+					</c:when>
+					<c:when test="${result.is_permit=='1'}">
+						<p>実施終了</p>
+					</c:when>
+					<c:otherwise>
+						どのwhenの判定式もtrueでなかった場合に実行される処理
+					</c:otherwise>
+			</c:choose>
 			</td>
 			<td bgcolor="#FFF" align="center" width="200">
 				<form action="AdminProjectMail" method="post">

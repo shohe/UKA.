@@ -55,7 +55,7 @@ public class AdminSearchDao {
 	/** ------------------------- 全件取得 --------------------------------- **/
 	public ArrayList<PostingsBean> getAllPostings() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress , postings.posting_id , postings.title, departments.department_name, users.name, "
+				"SELECT postings.mailaddress , postings.posting_id , postings.title, postings.is_permit, departments.department_name, users.name, "
 				+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage , terms.achievement_vote, postings.date , "
 				+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 				+ "FROM postings "
@@ -81,6 +81,7 @@ public class AdminSearchDao {
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
+			Bean.setIs_permit(rs.getInt("is_permit"));
 			table.add(Bean);
 		}
 		//クローズ処理

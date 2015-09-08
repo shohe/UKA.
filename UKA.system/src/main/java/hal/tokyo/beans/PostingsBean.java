@@ -24,6 +24,7 @@ public class PostingsBean {
 	private String image;
 	private String profilecomment;
 	private int timelimit;
+	private int is_permit;
 	public int getPosting_Id() {
 		return posting_Id;
 	}
@@ -119,6 +120,13 @@ public class PostingsBean {
 	}
 	public void setTimelimit(int timelimit) {
 		this.timelimit = timelimit;
+	}
+
+	public int getIs_permit() {
+		return is_permit;
+	}
+	public void setIs_permit(int is_permit) {
+		this.is_permit = is_permit;
 	}
 
 

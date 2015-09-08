@@ -82,7 +82,7 @@ public class PostingInput {
                 System.out.println("ID："+id);
             }
 
-            String insPostings = "INSERT INTO postings(MAILADDRESS, POSSESSION_VOTE, POSTING_TYPE_ID, TERMS_ID, STATUS, TITLE, POSTING_CONTENT_ID) VALUES ('"+userId+"',0,"+postingTypeId+","+termId+",1,'"+title+"',"+id+")";
+            String insPostings = "INSERT INTO postings(MAILADDRESS, POSSESSION_VOTE, POSTING_TYPE_ID, TERMS_ID,IS_PERMIT, STATUS, TITLE, POSTING_CONTENT_ID) VALUES ('"+userId+"',0,"+postingTypeId+","+termId+",0,1,'"+title+"',"+id+")";
             System.out.println(insPostings);
 
             try {
