@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class EnquiryCreateServlet
@@ -51,7 +52,10 @@ public class EnquiryCreateServlet extends HttpServlet {
 		String jspName = "";
 		MailDao dao = null;
 
+
 		try {			
+			HttpSession session = request.getSession(true);
+			String MailAddress = (String)session.getAttribute("MailAddress");
 			String enq_id = request.getParameter("enq_id");
 			String kenmei = request.getParameter("kenmei");
 			String naiyou = request.getParameter("naiyou");
@@ -59,11 +63,13 @@ public class EnquiryCreateServlet extends HttpServlet {
 			System.out.println(enq_id);
 			System.out.println(kenmei);
 			System.out.println(naiyou);
+			System.out.println(MailAddress);
 			System.out.println("daoに行く手前");
 			dao = new MailDao();		
 
-			dao.Enqinsert(enq_id,kenmei,naiyou);
+			dao.Enqinsert(MailAddress,enq_id,kenmei,naiyou);
 			dao.commit();
+			dao.close();
 			jspName = "messageComplete";
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,7 +93,7 @@ public class EnquiryCreateServlet extends HttpServlet {
 					jspName = "/WEB-INF/views/error.jsp";
 				}
 		}
-		System.out.println("おっぱい"+jspName);
+		//System.out.println("おっぱい"+jspName);
 		RequestDispatcher dispatcher =
 				request.getRequestDispatcher(jspName);
 

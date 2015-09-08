@@ -9,15 +9,15 @@ public class EnquiryNullChecker {
 	String blank_checker;
 	
 	public EnquiryNullChecker(){
-		null_checker = "入力されてないからムリ";
-		blank_checker = "空白しかないからムリ";
+		null_checker = "入力値がありません。";
+		blank_checker = "空白のみの送信は出来ません。";
 	}
 	
 	public String TitleNullCheck(String kenmei){
 		if(!ec.StringNull(kenmei)){
-			return "タイトル" + null_checker;
+			return null_checker;
 		}else if(!ec.StringBlank(kenmei)){
-			return "タイトル" + blank_checker;
+			return blank_checker;
 		}else{
 			return "";
 		}
@@ -25,9 +25,9 @@ public class EnquiryNullChecker {
 	
 	public String ContentNullCheck(String naiyou){
 		if(!ec.StringNull(naiyou)){
-			return "タイトル" + null_checker;
+			return null_checker;
 		}else if(!ec.StringBlank(naiyou)){
-			return "タイトル" + blank_checker;
+			return blank_checker;
 		}else{
 			return "";
 		}

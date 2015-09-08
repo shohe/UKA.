@@ -56,25 +56,48 @@
                 <div class="logo_title" id="uka">UKA.</div>
                 <div class="logo_title" id="uka_text">nipponham business experts Ltd.</div>
                 <div id="login-form">
-                    <form class="" action="" method="post">
-                        <div class="left">
-                            <!-- out -->
-                            <input type="text" class="form-control" id="Email-Form" placeholder="メールアドレス">
-                            <input type="password" class="form-control" id="Password-Form" placeholder="パスワード">
+                <%
+                	if(session.getAttribute("Name") != null){
+                		out.println("<form action='logout' method='post'>");
+                	}else{
+                		out.println("<form action='login' method='post'>");
+                	}
+                    out.println("<div class='left'>");
+                            //out
 
-                            <!-- in -->
-                            <!-- <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                一般社員
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">管理者</a></li>
-                            </ul> -->
-                        </div>
-                        <div class="right">
-                            <button type="submit" class="btn btn-default">ログイン</button>
-                        </div>
-                    </form>
+                            if(session.getAttribute("Status") == "true"){
+
+                            }else{
+                            	out.println("<input type='text' class='form-control' id='Email-Form'  name='Email' placeholder='メールアドレス'>");
+                            	out.println("<input type='password' class='form-control' id='Password-Form' name='Password' placeholder='パスワード'>");
+                            }
+                            //in
+                            // <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            //    一般社員
+                            //    <span class="caret"></span>
+                            //</button>
+                            //<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            //    <li><a href="#">管理者</a></li>
+                            //</ul>
+                        out.println("</div>");
+                        out.println("<div class='right'>");
+                        if(session.getAttribute("Status") == "true"){
+                        	out.println("<button type='submit' class='btn btn-default' name='login' value='logout'>ログアウト</button>");
+                        }else{
+                        	out.println("<button type='submit' class='btn btn-default' name='login' value='login'>ログイン</button>");
+                        }
+
+                    out.println("</form>");
+                    if(session.getAttribute("Status") == "true"){
+                    	if(session.getAttribute("Judge").equals(3)){
+                    		out.println("<form action='adminTransition' method='post'>");
+                    		out.println("<button type='submit' class='btn btn-default' name='adtransubmit' value='管理者用トップページ'>管理者画面へ</button>");
+                    		out.println("</form>");
+                    	}
+                    }
+
+                    out.println("</div>");
+                    %>
                 </div>
           </div>
           <nav>
@@ -84,8 +107,18 @@
                 <a href="<c:url value="/search" />"><li class="navi">プロジェクトを探す</li></a>
                 <a href="#"><li class="navi">UKA.とは？</li></a>
                 <a href="<c:url value="/message" />"><li class="navi">管理人にメッセージ</li></a>
-                <a href="<c:url value="/regist" />"><li class="navi">新規登録</li></a>
+
+                <%
+
+                if(session.getAttribute("Status") == "true"){
+                	String Name = (String)session.getAttribute("Name");
+                	out.println("<li class='navi'>" + Name + "</li>");
+                }else{
+                	out.println("<a href= 'http://localhost:8080/UKA.system/regist'><li class='navi'>新規登録</li></a>");
+                }
+
+                %>
               </ul>
-          </nav>
-        </div><!-- End Header -->
+          </nav>        </div><!-- End Header -->
+
     </header>

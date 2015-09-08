@@ -11,12 +11,12 @@ public class PostingsBean {
 	private int posting_Id;
 	private String user_Id;
 	private int post_id;
-	private String data;
+	private String date;
 	private int possesion_Vote;
 	private int posting_Type_Id;
 	private int status;
 	private String title;
-	private String posting_Content;
+	private String posting_content;
 	private String department_name;
 	private String name;
 	private int achievement_percentage;
@@ -24,38 +24,6 @@ public class PostingsBean {
 	private String image;
 	private String profilecomment;
 	private int timelimit;
-
-
-	public int getPost_id() {
-		return post_id;
-	}
-	public void setPost_id(int post_id) {
-		this.post_id = post_id;
-	}
-	public int getTimelimit() {
-		return timelimit;
-	}
-	public void setTimelimit(int timelimit) {
-		this.timelimit = timelimit;
-	}
-	public int getAchievement_vote() {
-		return achievement_vote;
-	}
-	public void setAchievement_vote(int achievement_vote) {
-		this.achievement_vote = achievement_vote;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public String getProfilecomment() {
-		return profilecomment;
-	}
-	public void setProfilecomment(String profilecomment) {
-		this.profilecomment = profilecomment;
-	}
 	public int getPosting_Id() {
 		return posting_Id;
 	}
@@ -68,11 +36,17 @@ public class PostingsBean {
 	public void setUser_Id(String user_Id) {
 		this.user_Id = user_Id;
 	}
-	public String getData() {
-		return data;
+	public int getPost_id() {
+		return post_id;
 	}
-	public void setData(String data) {
-		this.data = data;
+	public void setPost_id(int post_id) {
+		this.post_id = post_id;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 	public int getPossesion_Vote() {
 		return possesion_Vote;
@@ -98,11 +72,11 @@ public class PostingsBean {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getPosting_Content() {
-		return posting_Content;
+	public String getPosting_content() {
+		return posting_content;
 	}
-	public void setPosting_Content(String posting_Content) {
-		this.posting_Content = posting_Content;
+	public void setPosting_content(String posting_content) {
+		this.posting_content = posting_content;
 	}
 	public String getDepartment_name() {
 		return department_name;
@@ -121,6 +95,30 @@ public class PostingsBean {
 	}
 	public void setAchievement_percentage(int achievement_percentage) {
 		this.achievement_percentage = achievement_percentage;
+	}
+	public int getAchievement_vote() {
+		return achievement_vote;
+	}
+	public void setAchievement_vote(int achievement_vote) {
+		this.achievement_vote = achievement_vote;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getProfilecomment() {
+		return profilecomment;
+	}
+	public void setProfilecomment(String profilecomment) {
+		this.profilecomment = profilecomment;
+	}
+	public int getTimelimit() {
+		return timelimit;
+	}
+	public void setTimelimit(int timelimit) {
+		this.timelimit = timelimit;
 	}
 
 

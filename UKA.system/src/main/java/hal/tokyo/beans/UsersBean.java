@@ -7,18 +7,20 @@ package hal.tokyo.beans;
  */
 public class UsersBean{
 
-	private String mailAddress;
+	private String mailaddress;
 	private String password;
 	private String name;
 	private String profileComment;
 	private int department_Id;
 	private String image;
 	private int status;
-	public String getMailAddress() {
-		return mailAddress;
+	private String department_name;
+
+	public String getMailaddress() {
+		return mailaddress;
 	}
-	public void setMailAddress(String mailAddress) {
-		this.mailAddress = mailAddress;
+	public void setMailaddress(String mailaddress) {
+		this.mailaddress = mailaddress;
 	}
 	public String getPassword() {
 		return password;
@@ -55,6 +57,12 @@ public class UsersBean{
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getDepartment_name() {
+		return department_name;
+	}
+	public void setDepartment_name(String department_name) {
+		this.department_name = department_name;
 	}
 
 
