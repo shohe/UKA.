@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MessageTest {
 	@RequestMapping("/messagssse")
 	public ModelAndView showMessage(
+			@RequestParam("user_id") String user_id,
 			@RequestParam("enq_id") String enq_id,
 			@RequestParam("kenmei") String kenmei,
 			@RequestParam("naiyou") String naiyou) {
@@ -35,6 +36,7 @@ public class MessageTest {
 
 			/** 確認画面へ **/
 			ModelAndView mv = new ModelAndView("message_confirm");
+			mv.addObject("user_id",user_id);
 			mv.addObject("enq_id",enq_id);
 			mv.addObject("kenmei",kenmei);
 			mv.addObject("naiyou",naiyou);

@@ -29,7 +29,7 @@
 			<td><c:out value="${result.name}" /></td>
 			<td><c:out value="${result.date}" /></td>
 			<td>
-				<form action="#" method="post">
+				<form action="Adimn" method="post">
 					<input type="submit" class="btn btn-danger" name="" value="詳細ボタン">
 				</form>
 			</td>
@@ -44,8 +44,8 @@
 				</form>
 			</td>
 			<td bgcolor="#FFF" align="center" width="200">
-				<form action="#" method="post">
-					<input type="submit" class="btn btn-danger" name="" value="メール作成">
+				<form action="adminTransition" method="post">
+					<input type="submit" class="btn btn-danger" name="adtransubmit" value="メール作成">
 				</form>
 			</td>
 		</tr>

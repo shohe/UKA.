@@ -93,7 +93,6 @@ public class EnquiryCreateServlet extends HttpServlet {
 					jspName = "/WEB-INF/views/error.jsp";
 				}
 		}
-		//System.out.println("おっぱい"+jspName);
 		RequestDispatcher dispatcher =
 				request.getRequestDispatcher(jspName);
 

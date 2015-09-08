@@ -34,7 +34,7 @@ public class AdminProjectJudge {
 		ModelAndView mv = new ModelAndView("/admin_judge");
 		PostingsDao pd = new PostingsDao();
 		System.out.println("spring側の"+title);
-		mv.addObject("selectmail", pd.ProjectOk(title));
+		mv.addObject("selectmail", pd.ProjectNo(title));
 		pd.commit();
 		pd.close();
 		return mv;

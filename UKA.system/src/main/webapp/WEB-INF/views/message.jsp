@@ -10,8 +10,8 @@
 			<%
 			String user_id = (String) session.getAttribute("Name");
 			String mail = (String) session.getAttribute("MailAddress");
-			System.out.println(user_id);
-			System.out.println(mail);
+			System.out.println("1" + user_id);
+			System.out.println("2" + mail);
 			if(user_id == null){
 				out.println("ログインしてから記入して、どうぞ");
 			}
@@ -22,6 +22,9 @@
 			<input type="hidden" name="user_id" value=user_id>
 				<div class="messageTable">
 					<table>
+						<tr>
+							<input type="hidden" name="user" value="user_id">
+						</tr>
 						<tr>
 							<td class="table_left">お問い合わせ種別<i class="fa fa-asterisk"></i></td>
 						</tr>

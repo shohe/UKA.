@@ -9,6 +9,7 @@
         <div class="top">メッセージ確認</div>
         <form class="form-inline" method="post" action="EnquiryCreateServlet">
         <div class="messageTable">
+        <% //System.out.println("2" + user_id); %>
             <table>
                 <tr><td>お問い合わせ種別名</td></tr>
                 <tr><td><input type="hidden" name=enq_id value="${enq_id}">${enq_id}</td></tr>
