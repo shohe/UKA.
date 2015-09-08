@@ -42,6 +42,7 @@ public class LoginController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 			if(request.getParameter("login").equals(Login)){
+				System.out.print("LoginController");
 				try {
 					record = dao.findById(MailAddress, Password);
 				} catch (SQLException e) {
