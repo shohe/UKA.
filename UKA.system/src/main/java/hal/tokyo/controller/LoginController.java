@@ -79,6 +79,7 @@ public class LoginController extends HttpServlet {
 				session.removeAttribute("Judge");
 
 				session.invalidate();
+				System.out.println("セッション破棄\n\r");
 			}
 
 		ModelAndView mv = new ModelAndView("index");
