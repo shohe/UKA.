@@ -408,22 +408,22 @@ public class PostingsDao {
 	}
 	
 	/** ------------------------- プロジェクト許可 --------------------------------- **/
-	public int ProjectOk(String title) throws SQLException {
+	public int ProjectOk(String postId) throws SQLException {
 		System.out.println("ジャッジするdao到達!!!!!");
 		PreparedStatement update = con
 				.prepareStatement("update postings set status = 3 where title = ?;");
-		update.setString(1, title);
-		System.out.println("ジャッジ側の"+title);
+		update.setString(1, postId);
+		System.out.println("ジャッジ側の"+postId);
 		return update.executeUpdate();
 	}
 	
 	/** ------------------------- プロジェクト保留 --------------------------------- **/
-	public int ProjectNo(String title) throws SQLException {
+	public int ProjectNo(String postId) throws SQLException {
 		System.out.println("ジャッジするdao(保留)到達!!!!!");
 		PreparedStatement update = con
 				.prepareStatement("update postings set status = 2 where title = ?;");
-		update.setString(1, title);
-		System.out.println("ジャッジ側の"+title);
+		update.setString(1, postId);
+		System.out.println("ジャッジ側の"+postId);
 		return update.executeUpdate();
 	}
 

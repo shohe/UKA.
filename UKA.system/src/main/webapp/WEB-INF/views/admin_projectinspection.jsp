@@ -14,6 +14,7 @@
 		<th>タイトル</th>
 		<th>投稿者名</th>
 		<th>投稿日</th>
+		<th>投稿ID</th>
 		<!-- ↓ボタン -->
 		<th>詳細</th>
 		<!-- ↓ボタン×２　※すでにジャッチが行われている場合はその結果と変更する際のボタンを設置 -->
@@ -28,6 +29,7 @@
 			<td><c:out value="${result.title}" /></td>
 			<td><c:out value="${result.name}" /></td>
 			<td><c:out value="${result.date}" /></td>
+			<td><c:out value="${result.post_id}" /></td>
 			<td>
 				<form action="Adimn" method="post">
 					<input type="submit" class="btn btn-danger" name="" value="詳細ボタン">
@@ -36,16 +38,17 @@
 			<td bgcolor="#FFF" align="center" width="150">
 				<form action="project_ok" method="post">
 					<input type="submit" class="btn btn-danger" name="project_ok" value="採用">
-					<input type="hidden" name="title" value="${result.title}">
+					<input type="hidden" name="postId" value="${result.post_id}">
 				</form>
 				<form action="project_no" method="post">
 					<input type="submit" class="btn btn-danger" name="project_no" value="保留">
-					<input type="hidden" name="title" value="${result.title}">
+					<input type="hidden" name="postId" value="${result.post_id}">
 				</form>
 			</td>
 			<td bgcolor="#FFF" align="center" width="200">
 				<form action="adminTransition" method="post">
-					<input type="submit" class="btn btn-danger" name="adtransubmit" value="メール作成">
+					<input type="submit" class="btn btn-danger" name="admin_mailcreate" value="メール作成">
+					<input type="hidden" name="user_id" value="${result.name}">
 				</form>
 			</td>
 		</tr>

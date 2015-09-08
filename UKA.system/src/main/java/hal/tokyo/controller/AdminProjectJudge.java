@@ -18,11 +18,11 @@ public class AdminProjectJudge {
 
 	@RequestMapping("/project_ok")
 	public ModelAndView showMessage(
-			@RequestParam("title") String title) throws NamingException, SQLException {
+			@RequestParam("postId") String postId) throws NamingException, SQLException {
 		ModelAndView mv = new ModelAndView("/admin_mailsuctrans");
 		PostingsDao pd = new PostingsDao();
-		System.out.println("spring側の"+title);
-		mv.addObject("selectmail", pd.ProjectOk(title));
+		System.out.println("spring側の"+postId);
+		mv.addObject("selectmail", pd.ProjectOk(postId));
 		pd.commit();
 		pd.close();
 		return mv;
@@ -30,11 +30,11 @@ public class AdminProjectJudge {
 	
 	@RequestMapping("/project_no")
 	public ModelAndView showMessage2(
-			@RequestParam("title") String title) throws NamingException, SQLException {
+			@RequestParam("postId") String postId) throws NamingException, SQLException {
 		ModelAndView mv = new ModelAndView("/admin_judge");
 		PostingsDao pd = new PostingsDao();
-		System.out.println("spring側の"+title);
-		mv.addObject("selectmail", pd.ProjectNo(title));
+		System.out.println("spring側の"+postId);
+		mv.addObject("selectmail", pd.ProjectNo(postId));
 		pd.commit();
 		pd.close();
 		return mv;

@@ -10,7 +10,6 @@
 <br />
 <br />
 <br />
-<h2>送信内容作成</h2>
 <div class="repmail">
 	<h2>送信内容作成</h2>
 	<form action="AdminMailSent" method="post">
