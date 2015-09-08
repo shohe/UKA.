@@ -87,9 +87,9 @@ public class UsersDao {
 			table.add(record);
 		}
 
-		findAll.cancel();
-		result.close();
+		findAll = null;
 		close();
+		result.close();
 
 		return table;
 
@@ -126,9 +126,10 @@ public class UsersDao {
 
 		}
 
-		findById.close();
-		result.close();
+		findById = null;
+
 		close();
+		result.close();
 
 		return record;
 
@@ -162,9 +163,10 @@ public class UsersDao {
 
 		}
 
-		findByMailaddress.close();
-		result.close();
+		findByMailaddress = null;
+
 		close();
+		result.close();
 
 		return record;
 
@@ -200,7 +202,8 @@ public class UsersDao {
 
 		int result = insert.executeUpdate();
 
-		insert.close();
+		insert = null;
+		close();
 
 		return result;
 
@@ -234,7 +237,8 @@ public class UsersDao {
 
 		int result = update.executeUpdate();
 
-		update.close();
+		update = null;
+		close();
 
 		return result;
 
@@ -258,7 +262,7 @@ public class UsersDao {
 
 		int result = delete.executeUpdate();
 
-		delete.close();
+		delete = null;
 		close();
 
 		return result;
@@ -287,8 +291,9 @@ public class UsersDao {
 			password = result.getString("password");
 
 		}
-		findPassword.close();
+		findPassword = null;
 		result.close();
+		close();
 
 		return password;
 
