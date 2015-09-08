@@ -13,6 +13,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+/**
+ *
+ * ユーザー関係Dao
+ *
+ * @author UKA.system
+ *
+ */
 public class UsersDao {
 
 	/** Connection **/
@@ -80,7 +87,9 @@ public class UsersDao {
 			table.add(record);
 		}
 
-		findAll.close();
+		findAll.cancel();
+		result.close();
+		close();
 
 		return table;
 
@@ -88,27 +97,24 @@ public class UsersDao {
 
 
 	/**
-	 * ユーザーテーブル特定IDのデータ取得
+	 * ユーザーテーブル
+	 * メールアドレス・パスワードでデータを取得
 	 *
 	 * @author UKA.System
 	 *
 	 * @return table
 	 * @throws SQLException
 	 */
-	public List<UsersBean> findById(String mailaddress,String password) throws SQLException{
+	public UsersBean findById(String mailaddress,String password) throws SQLException{
 
-		PreparedStatement findById = con.prepareStatement("select * from users where mailaddress = ? and password = ?");
-
+		PreparedStatement findById = con.prepareStatement("select * from users where mailaddress = ? and password = ?;");
 		findById.setString(1, mailaddress);
 		findById.setString(2, password);
 
 		ResultSet result = findById.executeQuery();
 
-		ArrayList<UsersBean> table = new ArrayList<UsersBean>();
-
+		UsersBean record = new UsersBean();
 		while(result.next()){
-
-			UsersBean record = new UsersBean();
 
 			record.setMailaddress(result.getString("mailaddress"));
 			record.setPassword(result.getString("password"));
@@ -118,20 +124,51 @@ public class UsersDao {
 			record.setImage(result.getString("image"));
 			record.setStatus(result.getInt("status"));
 
-			System.out.print(result.getString("mailaddress"));
-			System.out.print("test");
-
-			table.add(record);
 		}
 
-
-
 		findById.close();
+		result.close();
+		close();
 
-		return table;
+		return record;
 
 	}
 
+	/**
+	 * ユーザーテーブル
+	 * メールアドレスでデータ取得
+	 *
+	 * @param mailaddress
+	 * @return
+	 * @throws SQLException
+	 */
+	public UsersBean findByMailaddress(String mailaddress) throws SQLException{
+
+		PreparedStatement findByMailaddress = con.prepareStatement("select * from users where mailaddress = ?;");
+		findByMailaddress.setString(1, mailaddress);
+
+		ResultSet result = findByMailaddress.executeQuery();
+
+		UsersBean record = new UsersBean();
+		while(result.next()){
+
+			record.setMailaddress(result.getString("mailaddress"));
+			record.setPassword(result.getString("password"));
+			record.setName(result.getString("name"));
+			record.setProfileComment(result.getString("profileComment"));
+			record.setDepartment_Id(result.getInt("department_Id"));
+			record.setImage(result.getString("image"));
+			record.setStatus(result.getInt("status"));
+
+		}
+
+		findByMailaddress.close();
+		result.close();
+		close();
+
+		return record;
+
+	}
 
 	/**
 	 * データの登録
@@ -148,7 +185,7 @@ public class UsersDao {
 	 * @return result
 	 * @throws SQLException
 	 */
-	public int insert(String mailaddress,String password,String name,String profileComment,int department_Id,String image,int status) throws SQLException{
+	public int insert(String mailaddress,String password,String name,int department_Id,String profileComment,String image,int status) throws SQLException{
 
 		PreparedStatement insert =
 				con.prepareStatement("insert into users values(?,?,?,?,?,?,?);");
@@ -156,37 +193,12 @@ public class UsersDao {
 		insert.setString(1, mailaddress);
 		insert.setString(2, password);
 		insert.setString(3, name);
-		insert.setString(4, profileComment);
-		insert.setInt(5, department_Id);
+		insert.setInt(4, department_Id);
+		insert.setString(5, profileComment);
 		insert.setString(6, image);
 		insert.setInt(7, status);
 
 		int result = insert.executeUpdate();
-
-		/*
-
-		ArrayList<UsersBean> table = new ArrayList<UsersBean>();
-
-		while(result.next()){
-
-			UsersBean record = new UsersBean();
-
-			record.setMailAddress(result.getString("mailaddress"));
-			record.setPassword(result.getString("password"));
-			record.setName(result.getString("name"));
-			record.setProfileComment(result.getString("profileComment"));
-			record.setDepartment_Id(result.getString("department_Id"));
-			record.setImage(result.getString("image"));
-			record.setStatus(result.getInt("status"));
-
-			table.add(record);
-		}
-
-
-
-		return table;
-
-		*/
 
 		insert.close();
 
@@ -195,9 +207,22 @@ public class UsersDao {
 	}
 
 
-	public int update(String mailaddress,String password,String name,String profileComment,int department_Id,String image,int status) throws SQLException{
+	/**
+	 * データの変更
+	 *
+	 * @param mailaddress
+	 * @param password
+	 * @param name
+	 * @param profileComment
+	 * @param department_Id
+	 * @param image
+	 * @param status
+	 * @return
+	 * @throws SQLException
+	 */
+	public int update(String mailaddress,String password,String name,String profileComment,int department_Id,String image,String mailaddress_old) throws SQLException{
 
-		PreparedStatement update = con.prepareStatement("update users set mailaddress = ?, password = ?, name = ?, profileComment = ?, department_Id = ?, image = ?, status = ?");
+		PreparedStatement update = con.prepareStatement("update users set mailaddress = ?, password = ?, name = ?, profileComment = ?, department_Id = ?, image = ? where mailaddress = ?");
 
 		update.setString(1, mailaddress);
 		update.setString(2, password);
@@ -205,7 +230,7 @@ public class UsersDao {
 		update.setString(4, profileComment);
 		update.setInt(5, department_Id);
 		update.setString(6, image);
-		update.setInt(7, status);
+		update.setString(7, mailaddress_old);
 
 		int result = update.executeUpdate();
 
@@ -234,8 +259,38 @@ public class UsersDao {
 		int result = delete.executeUpdate();
 
 		delete.close();
+		close();
 
 		return result;
+
+	}
+
+	/**
+	 *
+	 * 特定IDのパスワードを1件取得
+	 *
+	 * @param mailaddress
+	 * @return
+	 * @throws SQLException
+	 */
+	public String findPassword(String mailaddress) throws SQLException{
+
+		String password = "";
+
+		PreparedStatement findPassword = con.prepareStatement("select password from users where mailaddress = ?;");
+		findPassword.setString(1, mailaddress);
+
+		ResultSet result = findPassword.executeQuery();
+
+		while(result.next()){
+
+			password = result.getString("password");
+
+		}
+		findPassword.close();
+		result.close();
+
+		return password;
 
 	}
 
