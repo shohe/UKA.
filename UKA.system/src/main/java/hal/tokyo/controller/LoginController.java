@@ -3,12 +3,9 @@ package hal.tokyo.controller;
 import hal.tokyo.beans.UsersBean;
 import hal.tokyo.dao.UsersDao;
 
-<<<<<<< HEAD
-=======
 import java.sql.SQLException;
 import java.util.List;
 
->>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,34 +42,9 @@ public class LoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 			if(request.getParameter("login").equals(Login)){
 				try {
-<<<<<<< HEAD
-						record = dao.findById(MailAddress, Password);
-
-						if(record.getMailAddress() != null){
-							if(record.getMailAddress().equals(MailAddress)){
-								//認証成功
-								session.setAttribute("Name", record.getName());
-								session.setAttribute("MailAddress", record.getMailAddress());
-								session.setAttribute("Status", "true");
-								System.out.println(record.getMailAddress());
-								System.out.println(record.getName());
-							}else{
-
-								session.setAttribute("Status", "false");
-							}
-						}else{
-							ModelAndView mv = new ModelAndView("index");
-							mv.addObject("message", message);
-							return mv;
-						}
-				} catch (Exception e) {
-					// TODO 自動生成された catch ブロック
-					e.printStackTrace();
-				}
-=======
 					List<UsersBean> bean = (List<UsersBean>) dao.findById(MailAddress, Password);
 					record = (UsersBean) bean.get(0);
-					
+
 				} catch (SQLException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
@@ -92,7 +64,6 @@ public class LoginController extends HttpServlet {
 					mv.addObject("message", message);
 					return mv;
 				}
->>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 			}else{
 				session.removeAttribute("Name");
 				session.removeAttribute("MailAddress");

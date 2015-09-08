@@ -1,28 +1,20 @@
 package hal.tokyo.dao;
 
 import hal.tokyo.beans.UsersBean;
-<<<<<<< HEAD
-=======
 
->>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 
->>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 
-=======
->>>>>>> de4495af566f5fac3665f1359d1da3be20851372
+
 public class AdminAuthorityDao {
 
 	/** Connection **/
@@ -63,11 +55,8 @@ public class AdminAuthorityDao {
 	/** ------------------------- 全件取得 --------------------------------- **/
 	public ArrayList<UsersBean> getAllUsers() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-<<<<<<< HEAD
-				"SELECT users.mailaddress , users.status , users.name , departments.department_name "
-=======
+				//"SELECT users.mailaddress , users.status , users.name , departments.department_name "
 				"SELECT users.mailaddress , users.name , departments.department_name "
->>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 				+ "FROM users JOIN departments on users.department_id = departments.department_id ");
 
 		ResultSet rs = pstm.executeQuery();
@@ -81,10 +70,7 @@ public class AdminAuthorityDao {
 			Bean.setMailaddress(rs.getString("mailaddress"));
 			Bean.setName(rs.getString("name"));
 			Bean.setDepartment_name(rs.getString("department_name"));
-<<<<<<< HEAD
 			Bean.setStatus(rs.getInt("status"));
-=======
->>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 			table.add(Bean);
 		}
 		//クローズ処理
@@ -95,7 +81,6 @@ public class AdminAuthorityDao {
 	}
 
 
-<<<<<<< HEAD
 	/** ------------------------- ブロック設定 --------------------------------- **/
 	public void  blockUser(int status , String name) throws SQLException{
 
@@ -141,7 +126,5 @@ public class AdminAuthorityDao {
 		update.close();
 		con.close();
 	}
-=======
->>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 
 }

@@ -36,7 +36,7 @@ public class MypageController {
 
 		mv.addObject("user", ub.getName());
 		mv.addObject("image", ub.getImage());
-		mv.addObject("mail", ub.getMailAddress());
+		mv.addObject("mail", ub.getMailaddress());
 		mv.addObject("profile", ub.getProfileComment());
 
 		ud.close();
