@@ -58,6 +58,7 @@ public class LoginController extends HttpServlet {
 						session.setAttribute("Name", record.getName());
 						session.setAttribute("Status", "true");
 						session.setAttribute("Judge", record.getStatus());
+						session.setAttribute("MailAddress",record.getMailaddress());
 
 						System.out.print(session.getAttribute("Name"));
 						System.out.print(session.getAttribute("Status"));
@@ -76,6 +77,8 @@ public class LoginController extends HttpServlet {
 				session.removeAttribute("Name");
 				session.removeAttribute("Status");
 				session.removeAttribute("Judge");
+
+				session.invalidate();
 			}
 
 		ModelAndView mv = new ModelAndView("index");
