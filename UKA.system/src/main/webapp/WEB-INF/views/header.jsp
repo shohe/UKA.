@@ -58,9 +58,9 @@
                 <div id="login-form">
                 <%
                 	if(session.getAttribute("Name") != null){
-                		out.println("<form class='' action='logout' method='post'>");
+                		out.println("<form action='logout' method='post'>");
                 	}else{
-                		out.println("<form class='' action='login' method='post'>");
+                		out.println("<form action='login' method='post'>");
                 	}
                     out.println("<div class='left'>");
                             //out

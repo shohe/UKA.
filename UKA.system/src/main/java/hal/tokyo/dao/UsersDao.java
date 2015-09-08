@@ -96,6 +96,7 @@ public class UsersDao {
 	 * @throws SQLException
 	 */
 	public List<UsersBean> findById(String mailaddress,String password) throws SQLException{
+		System.out.print("LoginDao呼び出し");
 
 		PreparedStatement findById = con.prepareStatement("select * from users where mailaddress = ? and password = ?");
 
@@ -118,8 +119,6 @@ public class UsersDao {
 			record.setImage(result.getString("image"));
 			record.setStatus(result.getInt("status"));
 
-			System.out.print(result.getString("mailaddress"));
-			System.out.print("test");
 
 			table.add(record);
 		}
