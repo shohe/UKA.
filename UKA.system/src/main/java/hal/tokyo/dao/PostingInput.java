@@ -47,6 +47,7 @@ public class PostingInput {
 
             //表示
             System.out.println("content："+content);
+            con.close();
         }
 
 		} catch (SQLException e) {
@@ -93,6 +94,7 @@ public class PostingInput {
 			}
 
             // 接続を閉じる
+            con.close();
             rs.close();
             stmt.close();
 
@@ -135,6 +137,7 @@ public class PostingInput {
             stmt.executeUpdate(insPostings);
             con.commit();
             // 接続を閉じる
+            con.close();
             rs.close();
             stmt.close();
 

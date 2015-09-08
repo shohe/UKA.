@@ -128,6 +128,8 @@ public class PostController extends HttpServlet{
 	 */
 	@RequestMapping(value="/postSummary", method=RequestMethod.POST)
 	public ModelAndView postSummary(
+			HttpServletRequest request,
+			HttpServletResponse response,
 			@RequestParam("maintitle") String muintitle,
 			@RequestParam("text[]") String[] texts,
 			@RequestParam("title[]") String[] titles,
@@ -162,7 +164,9 @@ public class PostController extends HttpServlet{
 
 		//db登録詳細
 		PostingInput Dao = new PostingInput();
-		int id = Dao.insertSummary("useraddress1@example.com", conCre, muintitle, 1, 1,1);
+		HttpSession session = request.getSession();
+		String MailAddress = (String) session.getAttribute("MailAddress");
+		int id = Dao.insertSummary(MailAddress, conCre, muintitle, 1, 1,1);
 
 		//ModelAndView mv = new ModelAndView("post_complete");
 		ModelAndView mv = new ModelAndView("post_complete");

@@ -114,7 +114,7 @@
                 	String Name = (String)session.getAttribute("Name");
                 	out.println("<li class='navi'>" + Name + "</li>");
                 }else{
-                	out.println("<a href='<c:url value='/regist' />'><li class='navi'>新規登録</li></a>");
+                	out.println("<a href= 'http://localhost:8080/UKA.system/regist'><li class='navi'>新規登録</li></a>");
                 }
 
                 %>
