@@ -4,7 +4,6 @@ import hal.tokyo.beans.UsersBean;
 import hal.tokyo.dao.UsersDao;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +32,6 @@ public class LoginController extends HttpServlet {
 		String Login = "login";
 
 		if(MailAddress.isEmpty()){
-			System.out.print("メールアドレス空");
 			ModelAndView mv = new ModelAndView("index");
 			mv.addObject("message", message);
 			return mv;
@@ -44,10 +42,8 @@ public class LoginController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 			if(request.getParameter("login").equals(Login)){
-				System.out.print("Login処理");
 				try {
-					List<UsersBean> bean = dao.findById(MailAddress, Password);
-					record = bean.get(0);
+					record = dao.findById(MailAddress, Password);
 				} catch (SQLException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
