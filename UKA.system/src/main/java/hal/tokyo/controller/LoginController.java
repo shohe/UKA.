@@ -4,7 +4,6 @@ import hal.tokyo.beans.UsersBean;
 import hal.tokyo.dao.UsersDao;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +27,8 @@ public class LoginController extends HttpServlet {
 	@RequestMapping("/login")
 	public ModelAndView showMessage(HttpServletRequest request, HttpServletResponse response,@RequestParam("Email") String MailAddress, @RequestParam("Password") String Password, @RequestParam("login") String login) {
 
+
+		System.out.print("LoginController");
 		String Login = "login";
 
 		if(MailAddress.isEmpty()){
@@ -41,20 +42,27 @@ public class LoginController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 			if(request.getParameter("login").equals(Login)){
+				System.out.print("LoginController");
 				try {
-					List<UsersBean> bean = (List<UsersBean>) dao.findById(MailAddress, Password);
-					record = (UsersBean) bean.get(0);
-
+					record = dao.findById(MailAddress, Password);
 				} catch (SQLException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
+
+				System.out.print(record.getMailaddress());
+
 				if(record.getMailaddress() != null){
 					if(record.getMailaddress().equals(MailAddress)){
 						//認証成功
 						session.setAttribute("Name", record.getName());
-						session.setAttribute("MailAddress", record.getMailaddress());
 						session.setAttribute("Status", "true");
+						session.setAttribute("Judge", record.getStatus());
+
+						System.out.print(session.getAttribute("Name"));
+						System.out.print(session.getAttribute("Status"));
+						System.out.print(session.getAttribute("Judge"));
+
 					}else{
 
 						session.setAttribute("Status", "false");
@@ -66,8 +74,8 @@ public class LoginController extends HttpServlet {
 				}
 			}else{
 				session.removeAttribute("Name");
-				session.removeAttribute("MailAddress");
 				session.removeAttribute("Status");
+				session.removeAttribute("Judge");
 			}
 
 		ModelAndView mv = new ModelAndView("index");
