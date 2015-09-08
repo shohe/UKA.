@@ -104,6 +104,7 @@ public class RegistConfirmController {
 			/** 確認画面へ **/
 			ModelAndView mv = new ModelAndView("regist_confirm");
 
+			//画像ファイルが選択されたとき実行
 			if(!thumbnail.isEmpty() && thumbnail != null){
 
 				/** ファイル操作 **/
@@ -117,7 +118,9 @@ public class RegistConfirmController {
 				mv.addObject("image", md.getUrl());
 
 			}else{
+
 				mv.addObject("image", "/resources/var/user-blank.jpg");
+
 			}
 
 			/** 入力値 **/
