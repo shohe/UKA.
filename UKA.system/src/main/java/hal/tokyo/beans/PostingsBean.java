@@ -16,7 +16,7 @@ public class PostingsBean {
 	private int posting_Type_Id;
 	private int status;
 	private String title;
-	private String posting_Content;
+	private String posting_content;
 	private String department_name;
 	private String name;
 	private int achievement_percentage;
@@ -72,11 +72,11 @@ public class PostingsBean {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getPosting_Content() {
-		return posting_Content;
+	public String getPosting_content() {
+		return posting_content;
 	}
-	public void setPosting_Content(String posting_Content) {
-		this.posting_Content = posting_Content;
+	public void setPosting_content(String posting_content) {
+		this.posting_content = posting_content;
 	}
 	public String getDepartment_name() {
 		return department_name;

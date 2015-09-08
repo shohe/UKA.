@@ -9,12 +9,14 @@ package hal.tokyo.beans;
  */
 public class Administrator_MAILBean {
 
+
 	private int administrator_mail_id;
 	private String date;
 	private String title;
 	private String content;
 	//private int posting_id;
 	private String user_id;
+	private String status;
 	
 	public int getAdministrator_mail_id() {
 		return administrator_mail_id;
@@ -46,6 +48,12 @@ public class Administrator_MAILBean {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 

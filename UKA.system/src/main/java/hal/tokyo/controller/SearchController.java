@@ -4,7 +4,6 @@ import hal.tokyo.beans.PostingsBean;
 import hal.tokyo.dao.PostingsDao;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class SearchController {
 
 
-		@SuppressWarnings({ "null", "unused" })
+		@SuppressWarnings({ })
 		@RequestMapping(value = "/search")
 		public ModelAndView showSearch(@RequestParam(value = "search" , required = false) String search ,
 									@RequestParam(value="searchchar" , required = false) String searchchar ,
@@ -24,14 +23,6 @@ public class SearchController {
 									@RequestParam(value="highvote" , required = false) String highvote ,
 									@RequestParam(value="lowvote" , required = false) String lowvote
 		) {
-			System.out.println(search);
-			System.out.println(searchchar);
-			System.out.println(newbtn);
-			System.out.println(popular);
-			System.out.println(neardeadline);
-			System.out.println(highvote);
-			System.out.println(lowvote);
-			System.out.println("");
 
 			ModelAndView mv = new ModelAndView("search");
 			//変数宣言

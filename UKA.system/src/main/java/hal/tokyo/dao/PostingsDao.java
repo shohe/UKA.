@@ -59,6 +59,45 @@ public class PostingsDao {
 	 * @throws SQLException
 	 */
 
+	/** ------------------------- 1件だけランダム取得 --------------------------------- **/
+
+	public ArrayList<PostingsBean> getOneRandom() throws SQLException{
+		PreparedStatement pstm = con.prepareStatement(
+		"SELECT postings.mailaddress , postings.posting_id , postings.title, departments.department_name, users.name, posting_content.posting_content, "
+				+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage , terms.achievement_vote, postings.date , "
+				+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
+				+ "FROM postings "
+				+ "JOIN terms ON terms.terms_id = postings.terms_id "
+				+ "JOIN users ON users.mailaddress = postings.mailaddress "
+				+ "JOIN posting_content ON posting_content.posting_content_id = postings.posting_content_id "
+				+ "JOIN departments ON departments.department_id = users.department_id "
+				+ " WHERE postings.status = 1 ORDER BY RAND() LIMIT 1;");
+
+		ResultSet rs = pstm.executeQuery();
+
+		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
+
+		rs.beforeFirst();
+
+		while(rs.next()){
+			PostingsBean Bean = new PostingsBean();
+			Bean.setTitle(rs.getString("title"));
+			Bean.setDepartment_name(rs.getString("department_name"));
+			Bean.setName(rs.getString("name"));
+			Bean.setImage(rs.getString("image"));
+			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setDate(rs.getString("date"));
+			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setTimelimit(rs.getInt("timelimit"));
+			Bean.setPost_id(rs.getInt("posting_id"));
+			Bean.setPosting_content(rs.getString("posting_content"));
+			table.add(Bean);
+		}
+
+		return table;
+	}
+
 	/** ------------------------- 全件取得 --------------------------------- **/
 	public ArrayList<PostingsBean> getPostings() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
@@ -93,6 +132,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -133,6 +173,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -172,6 +213,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -208,6 +250,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -244,6 +287,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -284,11 +328,11 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
 	/** ------------------------- 締切 --------------------------------- **/
-	//締切
 	public ArrayList<PostingsBean> sortNearDeadline() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
 				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
@@ -320,6 +364,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -358,9 +403,31 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
+	
+	/** ------------------------- プロジェクト許可 --------------------------------- **/
+	public int ProjectOk(String title) throws SQLException {
+		System.out.println("ジャッジするdao到達!!!!!");
+		PreparedStatement update = con
+				.prepareStatement("update postings set status = 3 where title = ?;");
+		update.setString(1, title);
+		System.out.println("ジャッジ側の"+title);
+		return update.executeUpdate();
+	}
+	
+	/** ------------------------- プロジェクト保留 --------------------------------- **/
+	public int ProjectNo(String title) throws SQLException {
+		System.out.println("ジャッジするdao(保留)到達!!!!!");
+		PreparedStatement update = con
+				.prepareStatement("update postings set status = 2 where title = ?;");
+		update.setString(1, title);
+		System.out.println("ジャッジ側の"+title);
+		return update.executeUpdate();
+	}
 
+	
 	/** ------------------------- 評価数が高い --------------------------------- **/
 	//評価数が高い
 	public ArrayList<PostingsBean> sortHigh() throws SQLException{
@@ -392,6 +459,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -429,6 +497,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -464,6 +533,7 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
 
@@ -502,6 +572,28 @@ public class PostingsDao {
 		//クローズ処理
 		rs.close();
 		pstm.close();
+		con.close();
 		return table;
 	}
+	
+	/**
+	 * 接続を閉じる
+	 *
+	 * @throws SQLException
+	 */
+	public void close() throws SQLException {
+		con.close();
+	}
+
+	/**
+	 * コミット
+	 *
+	 * @throws SQLException
+	 */
+	public void commit() throws SQLException {
+		System.out.println("commit到達...");
+		con.commit();
+		System.out.println("commit完了");
+	}
+
 }

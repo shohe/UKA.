@@ -76,7 +76,7 @@ public class UsersDao {
 
 			UsersBean record = new UsersBean();
 
-			record.setMailAddress(result.getString("mailaddress"));
+			record.setMailaddress(result.getString("mailaddress"));
 			record.setPassword(result.getString("password"));
 			record.setName(result.getString("name"));
 			record.setProfileComment(result.getString("profileComment"));
@@ -87,9 +87,13 @@ public class UsersDao {
 			table.add(record);
 		}
 
+<<<<<<< HEAD
 		findAll.cancel();
 		result.close();
 		close();
+=======
+		findAll.close();
+>>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 
 		return table;
 
@@ -105,18 +109,26 @@ public class UsersDao {
 	 * @return table
 	 * @throws SQLException
 	 */
-	public UsersBean findById(String mailaddress,String password) throws SQLException{
+	public List<UsersBean> findById(String mailaddress,String password) throws SQLException{
 
-		PreparedStatement findById = con.prepareStatement("select * from users where mailaddress = ? and password = ?;");
+		PreparedStatement findById = con.prepareStatement("select * from users where mailaddress = ? and password = ?");
+
 		findById.setString(1, mailaddress);
 		findById.setString(2, password);
 
 		ResultSet result = findById.executeQuery();
 
+<<<<<<< HEAD
 		UsersBean record = new UsersBean();
+=======
+		ArrayList<UsersBean> table = new ArrayList<UsersBean>();
+
+>>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 		while(result.next()){
 
-			record.setMailAddress(result.getString("mailaddress"));
+			UsersBean record = new UsersBean();
+
+			record.setMailaddress(result.getString("mailaddress"));
 			record.setPassword(result.getString("password"));
 			record.setName(result.getString("name"));
 			record.setProfileComment(result.getString("profileComment"));
@@ -124,6 +136,7 @@ public class UsersDao {
 			record.setImage(result.getString("image"));
 			record.setStatus(result.getInt("status"));
 
+<<<<<<< HEAD
 		}
 
 		findById.close();
@@ -167,6 +180,14 @@ public class UsersDao {
 		close();
 
 		return record;
+=======
+			table.add(record);
+		}
+
+		findById.close();
+
+		return table;
+>>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 
 	}
 

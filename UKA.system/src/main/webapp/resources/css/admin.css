@@ -1,7 +1,11 @@
 @CHARSET "UTF-8";
 
 body {
+<<<<<<< HEAD
 	background: #fff;
+=======
+    background: #fff;
+>>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 }
 
 .hed {
@@ -90,8 +94,11 @@ nav {
 
 .repmail {
 	margin-left: 50px;
+<<<<<<< HEAD
 }
 
 .postingview {
 	margin-left: 40px
+=======
+>>>>>>> de4495af566f5fac3665f1359d1da3be20851372
 }
