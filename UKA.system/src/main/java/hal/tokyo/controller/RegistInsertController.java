@@ -30,6 +30,11 @@ public class RegistInsertController {
 
 		boolean insert_check = false;
 
+		//画像がアップロードされなかったときNULL
+		if(image.isEmpty() || image == null){
+			image = null;
+		}
+
 		insert_check = rim.RegistInsert(mailaddress, password, name, profileComment, department_Id, image);
 
 		if(insert_check){

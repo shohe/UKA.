@@ -203,7 +203,6 @@ public class UsersDao {
 		int result = insert.executeUpdate();
 
 		insert = null;
-		close();
 
 		return result;
 
@@ -238,7 +237,6 @@ public class UsersDao {
 		int result = update.executeUpdate();
 
 		update = null;
-		close();
 
 		return result;
 
@@ -263,7 +261,6 @@ public class UsersDao {
 		int result = delete.executeUpdate();
 
 		delete = null;
-		close();
 
 		return result;
 

@@ -88,7 +88,7 @@ public class PostingsDao {
 			if(rs.getString("image") != null){
 				Bean.setImage(rs.getString("image"));
 			}else{
-				Bean.setImage("./resource/var/user-blank.jpg");
+				Bean.setImage("./resources/var/user-blank.jpg");
 			}
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));

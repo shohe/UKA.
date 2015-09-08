@@ -62,7 +62,12 @@ public class RegistConfirmController {
 		rc_password = rc.RegistPasswordCheck(password);
 		rc_password_c = rc.RegistPasswordConCheck(password,password_c);
 		rc_profileComment = rc.RegistProfileComment(profileComment);
-		rc_image = rc.RegistFileExtensionCheck(thumbnail.getOriginalFilename());
+		//rc_image = rc.RegistFileExtensionCheck(thumbnail.getOriginalFilename());
+
+		//画像が選択され送られてきたときのみ
+		if(!thumbnail.isEmpty() && thumbnail != null){
+			rc_image = rc.RegistFileExtensionCheck(thumbnail.getOriginalFilename());
+		}
 
 		/** 入力にエラーがないか？ **/
 		if(!rc_name.equals("") ||
