@@ -54,9 +54,9 @@ public class LoginController extends HttpServlet {
 						//認証成功
 						session.setAttribute("Name", record.getName());
 						session.setAttribute("MailAddress", record.getMailaddress());
-						session.setAttribute("Status", "true");
+						session.setAttribute("Status", record.getStatus());
+						System.out.println("ステータス::"+record.getStatus());
 					}else{
-
 						session.setAttribute("Status", "false");
 					}
 				}else{

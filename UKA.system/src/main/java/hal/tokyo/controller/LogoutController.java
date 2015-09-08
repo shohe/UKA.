@@ -31,7 +31,7 @@ public class LogoutController extends HttpServlet {
 				session.removeAttribute("MailAddress");
 				session.removeAttribute("Status");
 			}else{
-
+				
 			}
 
 		ModelAndView mv = new ModelAndView("index");

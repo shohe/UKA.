@@ -42,7 +42,12 @@
                             <div class="knob-label">
                                 <i class="fa fa-male"></i><span>${possession_vote}人が評価しています。</span>
                             </div>
-                            <button type="submit" class="btn btn-primary">気になる！</button>
+                            <c:if test ="${vote_flag == 1}" >
+                            <a class="btn btn-primary" disabled="disabled">気になる！</a>
+                            </c:if>
+                            <c:if test ="${!(vote_flag == 1)}" >
+                            <a class="btn btn-primary" href="detail?post_id=${post_id}&vote_flag=1">気になる！</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>

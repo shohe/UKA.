@@ -81,10 +81,15 @@
                             //</ul>
                         out.println("</div>");
                         out.println("<div class='right'>");
-                        if(session.getAttribute("Status") == "true"){
+                        if(session.getAttribute("Status") == "1" || session.getAttribute("Status") == "2" || session.getAttribute("Status") == "3"){
                             out.println("<button type='submit' class='btn btn-default' name='login' value='logout'>ログアウト</button>");
+                            if(session.getAttribute("Status") == "3"){
+                            	out.println("<button type='submit' class='btn btn-default' name='login' value='login'>管理者ページ</button>");
+                        		
+                        	}
                         }else{
                         	out.println("<button type='submit' class='btn btn-default' name='login' value='login'>ログイン</button>");
+                        	
                         }
                         out.println("</div>");
                     out.println("</form>");

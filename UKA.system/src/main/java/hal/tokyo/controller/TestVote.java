@@ -52,6 +52,7 @@ public class TestVote extends HttpServlet {
 			System.out.println("daoに行く手前");
 			dao = new VotesDao();		
 
+			//CntUpVoteの変更により消滅
 			dao.Voteupdate(post_id);
 			dao.commit();
 			jspName = "/WEB-INF/views/voteok.jsp";
