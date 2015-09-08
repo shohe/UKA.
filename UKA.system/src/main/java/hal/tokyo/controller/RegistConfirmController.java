@@ -104,13 +104,21 @@ public class RegistConfirmController {
 			/** 確認画面へ **/
 			ModelAndView mv = new ModelAndView("regist_confirm");
 
-			/** ファイル操作 **/
-			File file = new File(iu.createUploadPath(),iu.getFileExtention(thumbnail.getOriginalFilename()));
+			if(!thumbnail.isEmpty() && thumbnail != null){
 
-			md.setFile(file);
-			md.setMultipartFile(thumbnail);
-			md.setUrl("/resources/var/"+iu.getFileExtention(thumbnail.getOriginalFilename()));
-			md.upload();
+				/** ファイル操作 **/
+				File file = new File(iu.createUploadPath(),iu.getFileExtention(thumbnail.getOriginalFilename()));
+
+				md.setFile(file);
+				md.setMultipartFile(thumbnail);
+				md.setUrl("/resources/var/"+iu.getFileExtention(thumbnail.getOriginalFilename()));
+				md.upload();
+
+				mv.addObject("image", md.getUrl());
+
+			}else{
+				mv.addObject("image", "/resources/var/user-blank.jpg");
+			}
 
 			/** 入力値 **/
 			mv.addObject("department_Id", department_Id);
@@ -118,7 +126,6 @@ public class RegistConfirmController {
 			mv.addObject("name", name);
 			mv.addObject("password", password);
 			mv.addObject("password_a", rc.HidePassword(password));
-			mv.addObject("image", md.getUrl());
 			mv.addObject("profileComment", profileComment);
 
 			return mv;
