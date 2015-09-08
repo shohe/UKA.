@@ -28,6 +28,7 @@ public class LogoutController extends HttpServlet {
 		HttpSession session = request.getSession();
 			if(request.getParameter("login").equals(Logout)){
 				session.removeAttribute("Name");
+				session.removeAttribute("MailAddress");
 				session.removeAttribute("Status");
 				session.removeAttribute("Judge");
 			}else{

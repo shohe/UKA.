@@ -1,42 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>メール一覧</title>
-</head>
-<body>
-	<h1>メール一覧</h1>
-	<form action="adminTransition" method="post">
-		<input type="submit" name="adtransubmit" value="トップへ戻る">
-	</form>
-	<br />
-	<br />
-	<br />
-
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/views/admin_header.jsp"%>
+<h1>メール一覧</h1>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="admin_main_contents">
 	<!-- 読んだものとそうでないものの色分け -->
-	<table border="1">
+	<table class="table"
+		style="table-layout: fixed; word-break: break-all;">
 		<tr>
-			<th bgcolor="#EE0000"><font color="#FFFFFF">件名</font></th>
-			<th bgcolor="#EE0000" width="150"><font color="#FFFFFF">送信者名</font></th>
-			<th bgcolor="#EE0000" width="200"><font color="#FFFFFF">送信日時</font></th>
+			<th>件名</th>
+			<th>送信者名</th>
+			<th>送信日時</th>
 			<!-- ↓ボタン -->
-			<th bgcolor="#EE0000"><font color="#FFFFFF">詳細とメール作成</font></th>
+			<th>詳細とメール作成</th>
 		</tr>
 
 		<!-- ↓jspでがんばるとこ -->
+		<c:forEach var="mailbox" items="${mailbox}" varStatus="status">
 		<tr>
-			<td bgcolor="#FFF" align="left" nowrap>なんか眠い気がするんですけど</td>
-			<td bgcolor="#FFF" align="center" width="150">安威 卯江雄</td>
-			<td bgcolor="#FFF" align="right" width="200">1919/07/21-07:21:48</td>
-			<td bgcolor="#FFF" align="center" nowrap>
-				<form action="adminTransition" method="post">
-					<input type="submit" name="adtransubmit" value="詳細表示・メール作成">
+			<td><c:out value="${mailbox.enquiry_title}"/></td>
+			<td><c:out value="${mailbox.user_id}"/></td>
+			<td><c:out value="${mailbox.date}"/></td>
+			<td>
+				<form action="AdminMailReplysReturn" method="post">
+				<input type="hidden" name="enquiry_id" value="${mailbox.enquiry_id}">
+					<input type="submit" name="AdminMailReplyServlet" value="メールの詳細を確認">
 				</form>
 			</td>
 		</tr>
+		</c:forEach>
 		<!-- ↑jspでがんばるとこ -->
 	</table>
-</body>
-</html>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<%@ include file="/WEB-INF/views/admin_footer.jsp"%>

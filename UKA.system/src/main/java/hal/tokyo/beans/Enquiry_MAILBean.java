@@ -9,11 +9,14 @@ package hal.tokyo.beans;
  */
 public class Enquiry_MAILBean {
 
+
 	private int enquiry_id;
 	private String date;
 	private String user_id;
-	private String enquiry_type_id;
+	private int enquiry_type_id;
+	private String enquiry_title;
 	private String enquiry_content;
+	
 	public int getEnquiry_id() {
 		return enquiry_id;
 	}
@@ -32,10 +35,10 @@ public class Enquiry_MAILBean {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public String getEnquiry_type_id() {
+	public int getEnquiry_type_id() {
 		return enquiry_type_id;
 	}
-	public void setEnquiry_type_id(String enquiry_type_id) {
+	public void setEnquiry_type_id(int enquiry_type_id) {
 		this.enquiry_type_id = enquiry_type_id;
 	}
 	public String getEnquiry_content() {
@@ -44,7 +47,12 @@ public class Enquiry_MAILBean {
 	public void setEnquiry_content(String enquiry_content) {
 		this.enquiry_content = enquiry_content;
 	}
-
+	public String getEnquiry_title() {
+		return enquiry_title;
+	}
+	public void setEnquiry_title(String enquiry_title) {
+		this.enquiry_title = enquiry_title;
+	}
 
 
 

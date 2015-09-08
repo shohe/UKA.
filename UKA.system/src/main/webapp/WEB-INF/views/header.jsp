@@ -89,7 +89,7 @@
 
                     out.println("</form>");
                     if(session.getAttribute("Status") == "true"){
-                    	if(session.getAttribute("Judge").equals(2)){
+                    	if(session.getAttribute("Judge").equals(3)){
                     		out.println("<form action='adminTransition' method='post'>");
                     		out.println("<button type='submit' class='btn btn-default' name='adtransubmit' value='管理者用トップページ'>管理者画面へ</button>");
                     		out.println("</form>");

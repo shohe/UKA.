@@ -8,27 +8,28 @@
      	<!-- Slider Carousel
         ================================================== -->
         <div class="span8">
-            <a href="#">
+        <c:forEach items="${random}" var="random">
+            <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${random.post_id}" />">
             <div class="top_project">
                 <div class="top_graph">
-                    <input type="text" class="knob" value="85" data-width="240" data-height="240" data-fgColor="#3c8dbc" data-readonly="true"/>
+                    <input type="text" class="knob" value="<c:out value="${random.achievement_percentage}" />" data-width="240" data-height="240" data-fgColor="#3c8dbc" data-readonly="true"/>
                 </div>
                 <div class="top_box">
                     <div class="top_user"><!-- top user -->
                         <div class="col-sm-12">
                             <div class="col-xs-4 col-sm-3">
-                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/stillnotdavid/128.jpg" alt="user image." />
+                                <img src="<c:out value="${random.image}" />" alt="user image." />
                             </div>
                             <div class="col-xs-4 col-sm-9 user_comment">
-                                <span>開発部 : 大谷昇平</span><br/>
-                                仕事大好きです!よろしくお願いします:)
+                                <span><c:out value="${random.department_name}" /> : <c:out value="${random.name}" /></span><br/>
+                                <c:out value="${random.profilecomment}" />
                             </div>
                         </div>
                     </div><!-- /top user -->
 
                     <div class="top_info"><!-- top info -->
-                        <div class="col-sm-6"><i class="fa fa-calendar"></i>残り期間:<span>30</span>日</div>
-                        <div class="col-sm-6"><i class="fa fa-male"></i><span>86</span>人が評価しています。</div>
+                        <div class="col-sm-6"><i class="fa fa-calendar"></i>残り期間:<span><c:out value="${random.timelimit}" /></span>日</div>
+                        <div class="col-sm-6"><i class="fa fa-male"></i><span><c:out value="${random.achievement_vote}" /></span>人が評価しています。</div>
                     </div><!-- /top info -->
                 </div>
             </div>
@@ -38,13 +39,17 @@
         <!-- Headline Text
         ================================================== -->
         <div class="span3 margin-left20">
-        	<h3>燃料電池自動車の本格普及に向けた新プロジェクト</h3>
+        	<h3><c:out value="${random.title}" /></h3>
+        	<form action="adminTransition" method="post">
+		<input type="submit" name="adtransubmit" value="トップへ戻る">
+		</form>
             <p class="lead">
-                燃料電池自動車（FCV）の本格的な普及に向け、燃料電池の飛躍的な高性能化・低コスト化、
-                生産性の抜本的な向上を実現するため新たな研究開発プロジェクトに着手します。
+                <c:out value="${random.posting_content}" />
             </p>
         </div>
-    </div><!-- End Headline -->
+    </div>
+    </c:forEach>
+    <!-- End Headline -->
 
     <div class="row gallery-row"><!-- Begin Gallery Row -->
 
@@ -59,7 +64,7 @@
 
                     <!-- Gallery Item 1 -->
                     <c:forEach items="${result}" var="item">
-                    <a href="#"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
+                    <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${item.post_id}" />"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
@@ -98,4 +103,7 @@
             </div>
 
     </div><!-- End Gallery Row -->
+    <form action="adminTransition" method="post">
+		<input type="submit" name="adtransubmit" value="管理者用トップページ">
+	</form>
 <%@ include file="/WEB-INF/views/footer.jsp" %>

@@ -19,14 +19,17 @@ public class IndexController {
 		ModelAndView mv = new ModelAndView("index");
 		//変数宣言
 		ArrayList<PostingsBean> result = null;
+		ArrayList<PostingsBean> random = null;
 
 		PostingsDao postingsDao = new PostingsDao();
 		try {
+			random = postingsDao.getOneRandom();
 			result = postingsDao.getPostings();
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+		mv.addObject("random", random);
 		mv.addObject("result", result);
 		return mv;
 	}
