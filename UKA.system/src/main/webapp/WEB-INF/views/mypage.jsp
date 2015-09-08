@@ -37,11 +37,9 @@ $('#myTabs li:eq(2) a').tab('show') // Select third tab (0-indexed)
                             <tr><td class="table_left">部署名</td></tr>
                             <tr><td>
                                 <select id="shubetsu" class="form-control" name="department_Id">
-                                  <option value="1">お選びください。</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
+                                  <option value="1">総務部</option>
+                                  <option value="2">開発部</option>
+                                  <option value="3">広報部</option>
                                 </select>
                             </td></tr>
                             <tr><td class="table_left">名前</td></tr>
