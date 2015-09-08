@@ -46,7 +46,7 @@
 				</form>
 			</td>
 			<td bgcolor="#FFF" align="center" width="200">
-				<form action="adminTransition" method="post">
+				<form action="AdminProjectMail" method="post">
 					<input type="submit" class="btn btn-danger" name="admin_mailcreate" value="メール作成">
 					<input type="hidden" name="user_id" value="${result.name}">
 				</form>

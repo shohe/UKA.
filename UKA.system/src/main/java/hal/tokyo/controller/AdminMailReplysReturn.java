@@ -22,4 +22,12 @@ public class AdminMailReplysReturn {
 		mv.addObject("selectmail", md.AdminMailselect(enquiry_id));
 		return mv;
 	}
+	
+	@RequestMapping("/AdminProjectMail")
+	public ModelAndView showMessage1(@RequestParam("user_id") String user_id) throws NamingException, SQLException {
+		ModelAndView mv = new ModelAndView("/admin_projectmailreply");
+		//MailDao md = new MailDao();
+		mv.addObject("admin_projectmailreply");
+		return mv;
+	}
 }
