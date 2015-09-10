@@ -8,8 +8,9 @@ package hal.tokyo.beans;
 *
 */
 public class PostingsBean {
+
 	private int posting_Id;
-	private String user_Id;
+	private String mailaddress;
 	private int post_id;
 	private String date;
 	private int possesion_Vote;
@@ -30,12 +31,13 @@ public class PostingsBean {
 	public void setPosting_Id(int posting_Id) {
 		this.posting_Id = posting_Id;
 	}
-	public String getUser_Id() {
-		return user_Id;
+	public String getMailaddress() {
+		return mailaddress;
 	}
-	public void setUser_Id(String user_Id) {
-		this.user_Id = user_Id;
+	public void setMailaddress(String mailaddress) {
+		this.mailaddress = mailaddress;
 	}
+
 	public int getPost_id() {
 		return post_id;
 	}

@@ -31,6 +31,7 @@
 			<td><c:out value="${result.date}" /></td>
 			<td><c:out value="${result.post_id}" /></td>
 			<td>
+
 				<form action="Adimn" method="post">
 					<input type="submit" class="btn btn-danger" name="" value="詳細ボタン">
 				</form>
@@ -48,7 +49,8 @@
 			<td bgcolor="#FFF" align="center" width="200">
 				<form action="AdminProjectMail" method="post">
 					<input type="submit" class="btn btn-danger" name="admin_mailcreate" value="メール作成">
-					<input type="hidden" name="user_id" value="${result.name}">
+					<input type="hidden" name="name" value="${result.name}">
+					<input type="hidden" name="mailaddress" value="${result.mailaddress}">
 				</form>
 			</td>
 		</tr>

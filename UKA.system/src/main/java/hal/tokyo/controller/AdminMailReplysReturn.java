@@ -24,10 +24,14 @@ public class AdminMailReplysReturn {
 	}
 	
 	@RequestMapping("/AdminProjectMail")
-	public ModelAndView showMessage1(@RequestParam("user_id") String user_id) throws NamingException, SQLException {
+	public ModelAndView showMessage1(@RequestParam("name") String name,@RequestParam("mailaddress") String mailaddress) throws NamingException, SQLException {
 		ModelAndView mv = new ModelAndView("/admin_projectmailreply");
 		//MailDao md = new MailDao();
-		mv.addObject("admin_projectmailreply");
+		mv.addObject("name",name);
+		mv.addObject("mailaddress",mailaddress);
 		return mv;
 	}
+	
+	
+
 }

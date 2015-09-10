@@ -127,6 +127,7 @@ public class PostingsDao {
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
+			Bean.setMailaddress(rs.getString("mailaddress"));
 			table.add(Bean);
 		}
 		//クローズ処理
