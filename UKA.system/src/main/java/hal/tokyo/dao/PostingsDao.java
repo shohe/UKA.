@@ -78,13 +78,17 @@ public class PostingsDao {
 		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
 
 		rs.beforeFirst();
-
 		while(rs.next()){
 			PostingsBean Bean = new PostingsBean();
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setDate(rs.getString("date"));
@@ -115,7 +119,6 @@ public class PostingsDao {
 		ArrayList<PostingsBean> table = new ArrayList<PostingsBean>();
 
 		rs.beforeFirst();
-
 		while(rs.next()){
 			PostingsBean Bean = new PostingsBean();
 			Bean.setTitle(rs.getString("title"));
@@ -407,28 +410,38 @@ public class PostingsDao {
 		con.close();
 		return table;
 	}
-	
+
 	/** ------------------------- プロジェクト許可 --------------------------------- **/
 	public int ProjectOk(String postId) throws SQLException {
 		System.out.println("ジャッジするdao到達!!!!!");
 		PreparedStatement update = con
-				.prepareStatement("update postings set status = 3 where title = ?;");
-		update.setString(1, postId);
-		System.out.println("ジャッジ側の"+postId);
-		return update.executeUpdate();
-	}
-	
-	/** ------------------------- プロジェクト保留 --------------------------------- **/
-	public int ProjectNo(String postId) throws SQLException {
-		System.out.println("ジャッジするdao(保留)到達!!!!!");
-		PreparedStatement update = con
-				.prepareStatement("update postings set status = 2 where title = ?;");
+				.prepareStatement("update postings set is_permit = 3 where posting_id = ?;");
 		update.setString(1, postId);
 		System.out.println("ジャッジ側の"+postId);
 		return update.executeUpdate();
 	}
 
-	
+	/** ------------------------- プロジェクト保留 --------------------------------- **/
+	public int ProjectNo(String postId) throws SQLException {
+		System.out.println("ジャッジするdao(保留)到達!!!!!");
+		PreparedStatement update = con
+				.prepareStatement("update postings set is_permit = 2 where posting_id = ?;");
+		update.setString(1, postId);
+		System.out.println("ジャッジ側の"+postId);
+		return update.executeUpdate();
+	}
+
+	/** ------------------------- プロジェクト完了 --------------------------------- **/
+	public int ProjectEnd(String postId) throws SQLException {
+		System.out.println("ジャッジするdao到達!!!!!");
+		PreparedStatement update = con
+				.prepareStatement("update postings set is_permit = 1 where posting_id = ?;");
+		update.setString(1, postId);
+		System.out.println("ジャッジ側の"+postId);
+		return update.executeUpdate();
+	}
+
+
 	/** ------------------------- 評価数が高い --------------------------------- **/
 	//評価数が高い
 	public ArrayList<PostingsBean> sortHigh() throws SQLException{
@@ -576,7 +589,7 @@ public class PostingsDao {
 		con.close();
 		return table;
 	}
-	
+
 	/**
 	 * 接続を閉じる
 	 *

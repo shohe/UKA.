@@ -135,6 +135,19 @@ public class PostController extends HttpServlet{
 			@RequestParam("title[]") String[] titles,
 			@RequestParam("file[]") MultipartFile[] files) throws IOException {
 		System.out.println("メインタイトル："+muintitle);
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("Status"));
+		if(session.getAttribute("Status").equals("false")){
+
+			//ModelAndView mv = new ModelAndView("post_complete");
+			ModelAndView mv = new ModelAndView("posting_summary");
+			//確認用
+			//mv.addObject("conCre", "<img src=\"../../resorces/var/1435219826718the_screamy_wallpaperl.jpg\">"+conCre);mv.addObject("conCre", "<img src=\"../../resorces/var/1435219826718the_screamy_wallpaperl.jpg\">"+conCre);
+			mv.addObject("sessionErr", "noSession");
+
+			return mv;
+
+		}
 		ArrayList<MultipleData> malBean = new ArrayList<MultipleData>();
 		for (int i=0; i<texts.length; i++) {
 			String regex = "\r\n";
@@ -145,7 +158,7 @@ public class PostController extends HttpServlet{
 			fileBean.setDescription(result);
 			System.out.println("本文："+result);
 			fileBean.setTitle(titles[i]);
-			System.out.println("タイトル："+titles[i]);
+			System.out.println("タイトル："+titles[i]+"\r\na");
 			if (files[i].getOriginalFilename().length() > 4) {
 				File file = new File(createUploadPath(),getFileExtention(files[i].getOriginalFilename()));
 				fileBean.setFile(file);
@@ -164,7 +177,6 @@ public class PostController extends HttpServlet{
 
 		//db登録詳細
 		PostingInput Dao = new PostingInput();
-		HttpSession session = request.getSession();
 		String MailAddress = (String) session.getAttribute("MailAddress");
 		System.out.println(MailAddress);
 		int id = Dao.insertSummary(MailAddress, conCre, muintitle, 1, 1,1);
@@ -187,11 +199,11 @@ public class PostController extends HttpServlet{
 	 */
 	public String contentCreate(String maintitle ,ArrayList<MultipleData> multiArray) {
 		String conCon = "";
-		conCon =  maintitle;
 		for (MultipleData multipleData : multiArray) {
-			conCon += "<br /><h2>"+multipleData.getTitle()+"</h2><br />";
-			conCon += "<p>"+multipleData.getDescription()+"</p>";
-			conCon += "<br /><img src=\""+multipleData.getUrl()+"\"/><br />";
+			conCon += "<h2>"+multipleData.getTitle()+"</h2><br />"+"<p>"+multipleData.getDescription()+"</p><br />";
+			if(multipleData.getUrl()!=null){
+				conCon += "<br /><img src=\""+multipleData.getUrl()+"\"/><br />";
+			}
 		}
 		System.out.println(conCon);
 		return conCon;

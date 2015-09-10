@@ -14,34 +14,55 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ *
+ * マイページに遷移する
+ *
+ * @author UKA.system
+ *
+ */
 @Controller
 public class MypageController {
 
 	@RequestMapping("/mypage")
 	public ModelAndView showMessage(HttpServletRequest request, HttpServletResponse response) throws SQLException, UnsupportedEncodingException {
-		ModelAndView mv = new ModelAndView("mypage");
 
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("utf-8");
 
-		UsersDao ud = new UsersDao();
+		//セッション取得
+		//String mail = (String)session.getAttribute("MailAddress");
 
-		UsersBean ub = new UsersBean();
+		ModelAndView mv;
 
-		String mail = (String)session.getAttribute("MailAddress");
+		if(session.getAttribute("MailAddress") != null){
 
-		System.out.println(mail);
+			mv = new ModelAndView("mypage");
 
-		ub = ud.findByMailaddress(mail);
+			String mail = (String)session.getAttribute("MailAddress");
 
-		mv.addObject("user", ub.getName());
-		mv.addObject("image", ub.getImage());
-		mv.addObject("mail", ub.getMailaddress());
-		mv.addObject("profile", ub.getProfileComment());
+			UsersDao ud = new UsersDao();
 
-		ud.close();
-		ud = null;
-		ub = null;
+			UsersBean ub = new UsersBean();
+
+			System.out.println(mail);
+
+			ub = ud.findByMailaddress(mail);
+
+			mv.addObject("user", ub.getName());
+			mv.addObject("image", ub.getImage());
+			mv.addObject("mail", ub.getMailaddress());
+			mv.addObject("profile", ub.getProfileComment());
+
+			ud.close();
+			ud = null;
+			ub = null;
+
+		}else{
+
+			mv = new ModelAndView("index");
+
+		}
 
 		return mv;
 	}
