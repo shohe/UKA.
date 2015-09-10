@@ -29,6 +29,8 @@ public class IndexController {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+
+		//random.get(0).
 		mv.addObject("random", random);
 		mv.addObject("result", result);
 		return mv;

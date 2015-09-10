@@ -29,7 +29,7 @@
 
                     <div class="top_info"><!-- top info -->
                         <div class="col-sm-6"><i class="fa fa-calendar"></i>残り期間:<span><c:out value="${random.timelimit}" /></span>日</div>
-                        <div class="col-sm-6"><i class="fa fa-male"></i><span><c:out value="${random.achievement_vote}" /></span>人が評価しています。</div>
+                        <div class="col-sm-6"><i class="fa fa-male"></i><span><c:out value="${random.possession_vote}" /></span>人が評価しています。</div>
                     </div><!-- /top info -->
                 </div>
             </div>
@@ -89,7 +89,7 @@
                                         <i class="fa fa-calendar"></i><span>残り期間:<c:out value="${item.timelimit}" />日</span>
                                     </div>
                                     <div class="knob-label">
-                                        <i class="fa fa-male"></i><span><c:out value="${item.achievement_vote}" />人が評価しています。</span>
+                                        <i class="fa fa-male"></i><span><c:out value="${item.possession_vote}" />人が評価しています。</span>
                                     </div>
                                 </div>
                             </div>

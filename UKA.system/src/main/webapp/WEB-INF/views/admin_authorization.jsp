@@ -27,12 +27,16 @@
 			<td><c:out value="${rs.department_name}" /></td>
 			<td><c:out value="${rs.mailaddress}" /></td>
 			<td>
-				<form action="#" method="post">
+				<form action="blockuser" method="post">
+					<input type="hidden" name="status" value="${rs.status}">
+					<input type="hidden" name="name" value="${rs.name}">
 					<input type="submit" class="btn btn-danger" name="" value="ブロックボタン">
 				</form>
 			</td>
 			<td bgcolor="#FFF" align="center" nowrap>
-				<form action="#" method="post">
+				<form action="investauth" method="post">
+					<input type="hidden" name="status" value="${rs.status}">
+					<input type="hidden" name="name" value="${rs.name}">
 					<input type="submit" class="btn btn-danger" name=""
 						value="権限付与・破棄ボタン">
 				</form>

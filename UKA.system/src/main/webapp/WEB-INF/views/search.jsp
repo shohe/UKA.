@@ -68,12 +68,12 @@
 														     <c:if test="${result.achievement_percentage < 100}">
 														         <input type="text" class="knob" value="${result.achievement_percentage}" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true"/>
 														     </c:if>
-                                
+
                                 <div class="knob-label">
                                     <i class="fa fa-calendar"></i><span>残り期間:<c:out value="${result.timelimit}" />日</span>
                                 </div>
                                 <div class="knob-label">
-                                    <i class="fa fa-male"></i><span><c:out value="${result.achievement_vote}" />人が評価しています。</span>
+                                    <i class="fa fa-male"></i><span><c:out value="${result.possession_vote}" />人が評価しています。</span>
                                 </div>
                             </div>
                         </div>
