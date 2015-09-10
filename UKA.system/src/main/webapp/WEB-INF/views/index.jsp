@@ -9,7 +9,7 @@
         ================================================== -->
         <div class="span8">
         <c:forEach items="${random}" var="random">
-            <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${random.post_id}" />">
+            <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${random.post_id}" />&vote_flag=0">
             <div class="top_project">
                 <div class="top_graph">
                     <input type="text" class="knob" value="<c:out value="${random.achievement_percentage}" />" data-width="240" data-height="240" data-fgColor="#3c8dbc" data-readonly="true"/>
@@ -64,7 +64,7 @@
 
                     <!-- Gallery Item 1 -->
                     <c:forEach items="${result}" var="item">
-                    <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${item.post_id}" />"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
+                    <a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${item.post_id}" />&vote_flag=0"><li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
@@ -75,7 +75,7 @@
                                 <div class="row user_info">
                                   <div class="col-sm-12">
                                       <div class="col-xs-4 col-sm-3">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg" alt="user image." />
+                                          <img src="<c:out value="${item.image}" />" alt="user image." />
                                       </div>
                                       <div class="col-xs-4 col-sm-9 user_comment">
                                           <span><c:out value="${item.department_name}" /> : <c:out value="${item.name}" /></span><br/>

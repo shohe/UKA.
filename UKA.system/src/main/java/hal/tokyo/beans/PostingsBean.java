@@ -13,7 +13,7 @@ public class PostingsBean {
 	private String mailaddress;
 	private int post_id;
 	private String date;
-	private int possesion_Vote;
+	private int possession_vote;
 	private int posting_Type_Id;
 	private int status;
 	private String title;
@@ -50,12 +50,6 @@ public class PostingsBean {
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	public int getPossesion_Vote() {
-		return possesion_Vote;
-	}
-	public void setPossesion_Vote(int possesion_Vote) {
-		this.possesion_Vote = possesion_Vote;
 	}
 	public int getPosting_Type_Id() {
 		return posting_Type_Id;
@@ -129,6 +123,12 @@ public class PostingsBean {
 	}
 	public void setIs_permit(int is_permit) {
 		this.is_permit = is_permit;
+	}
+	public int getPossession_vote() {
+		return possession_vote;
+	}
+	public void setPossession_vote(int possession_vote) {
+		this.possession_vote = possession_vote;
 	}
 
 
