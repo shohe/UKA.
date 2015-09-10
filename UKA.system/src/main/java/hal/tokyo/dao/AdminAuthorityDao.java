@@ -29,11 +29,10 @@ public class AdminAuthorityDao {
 		try {
 
 		InitialContext context;
-			context = new InitialContext();
-		DataSource ds;
-			ds = (DataSource) context
-					.lookup("java:comp/env/jdbc/ukasystem");
+		context = new InitialContext();
 
+		DataSource ds;
+		ds = (DataSource) context.lookup("java:comp/env/jdbc/ukasystem");
 		con = ds.getConnection();
 
 		} catch (NamingException e) {
@@ -56,8 +55,8 @@ public class AdminAuthorityDao {
 	public ArrayList<UsersBean> getAllUsers() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
 				//"SELECT users.mailaddress , users.status , users.name , departments.department_name "
-				"SELECT users.mailaddress , users.name , departments.department_name "
-				+ "FROM users JOIN departments on users.department_id = departments.department_id ");
+				"SELECT users.mailaddress , users.name , departments.department_name , users.status "
+				+ "FROM users JOIN departments on users.department_id = departments.department_id ;");
 
 		ResultSet rs = pstm.executeQuery();
 
@@ -85,23 +84,27 @@ public class AdminAuthorityDao {
 	public void  blockUser(int status , String name) throws SQLException{
 
 		PreparedStatement update = con.prepareStatement(
-				"UPDATE users SET status = ?  WHERE name = ? ");
+				"UPDATE users SET status = ? WHERE name = ? ;");
+
+
 
 		if (status == 0) {
 			update.setInt(1, 1);
 			update.setString(2, name);
 			update.executeUpdate();
+			con.commit();
 		}
 
 		if (status == 1) {
 			update.setInt(1, 0);
 			update.setString(2, name);
 			update.executeUpdate();
+			con.commit();
 		}
 
 		//クローズ処理
 		update.close();
-		con.close();
+		//con.close();
 	}
 
 	/** ------------------------- 管理者権限設定 --------------------------------- **/
@@ -115,16 +118,19 @@ public class AdminAuthorityDao {
 			update.setInt(1, 2);
 			update.setString(2, name);
 			update.executeUpdate();
+			con.commit();
 		}
 
 		if (status == 2) {
 			update.setInt(1, 1);
 			update.setString(2, name);
 			update.executeUpdate();
+			con.commit();
 		}
+
 		//クローズ処理
 		update.close();
-		con.close();
+		//con.close();
 	}
 
 }

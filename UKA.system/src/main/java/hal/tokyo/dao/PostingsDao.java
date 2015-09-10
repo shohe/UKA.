@@ -63,7 +63,7 @@ public class PostingsDao {
 
 	public ArrayList<PostingsBean> getOneRandom() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-		"SELECT postings.mailaddress , postings.posting_id , postings.title, departments.department_name, users.name, posting_content.posting_content, "
+		"SELECT postings.mailaddress , postings.posting_id , postings.title, departments.department_name, users.name, posting_content.posting_content, postings.possession_vote ,"
 				+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage , terms.achievement_vote, postings.date , "
 				+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 				+ "FROM postings "
@@ -87,6 +87,7 @@ public class PostingsDao {
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setDate(rs.getString("date"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
@@ -101,7 +102,7 @@ public class PostingsDao {
 	/** ------------------------- 全件取得 --------------------------------- **/
 	public ArrayList<PostingsBean> getPostings() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, postings.possession_vote ,"
 				+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 				+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 				+ "FROM postings "
@@ -125,6 +126,7 @@ public class PostingsDao {
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
 			table.add(Bean);
@@ -142,7 +144,7 @@ public class PostingsDao {
 	public ArrayList<PostingsBean> searchChar(String SearchChar) throws SQLException{
 
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
@@ -165,6 +167,7 @@ public class PostingsDao {
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
@@ -185,7 +188,7 @@ public class PostingsDao {
 	//新着順
 	public ArrayList<PostingsBean> sortNew() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
@@ -205,6 +208,7 @@ public class PostingsDao {
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
@@ -220,7 +224,7 @@ public class PostingsDao {
 	//文字がある時
 	public ArrayList<PostingsBean> sortNew(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
@@ -242,6 +246,7 @@ public class PostingsDao {
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
@@ -259,7 +264,7 @@ public class PostingsDao {
 	//人気順(投票数が多い順)
 	public ArrayList<PostingsBean> sortFavor() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
@@ -279,6 +284,7 @@ public class PostingsDao {
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
@@ -294,7 +300,7 @@ public class PostingsDao {
 	//文字があった場合
 	public ArrayList<PostingsBean> sortFavor(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
@@ -320,6 +326,7 @@ public class PostingsDao {
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
@@ -335,7 +342,7 @@ public class PostingsDao {
 	/** ------------------------- 締切 --------------------------------- **/
 	public ArrayList<PostingsBean> sortNearDeadline() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
@@ -356,6 +363,7 @@ public class PostingsDao {
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
@@ -370,7 +378,7 @@ public class PostingsDao {
 
 	public ArrayList<PostingsBean> sortNearDeadline(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
@@ -395,6 +403,7 @@ public class PostingsDao {
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
@@ -406,7 +415,7 @@ public class PostingsDao {
 		con.close();
 		return table;
 	}
-	
+
 	/** ------------------------- プロジェクト許可 --------------------------------- **/
 	public int ProjectOk(String title) throws SQLException {
 		System.out.println("ジャッジするdao到達!!!!!");
@@ -416,7 +425,7 @@ public class PostingsDao {
 		System.out.println("ジャッジ側の"+title);
 		return update.executeUpdate();
 	}
-	
+
 	/** ------------------------- プロジェクト保留 --------------------------------- **/
 	public int ProjectNo(String title) throws SQLException {
 		System.out.println("ジャッジするdao(保留)到達!!!!!");
@@ -427,12 +436,12 @@ public class PostingsDao {
 		return update.executeUpdate();
 	}
 
-	
+
 	/** ------------------------- 評価数が高い --------------------------------- **/
 	//評価数が高い
 	public ArrayList<PostingsBean> sortHigh() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
@@ -451,6 +460,7 @@ public class PostingsDao {
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
 			Bean.setPost_id(rs.getInt("posting_id"));
@@ -465,7 +475,7 @@ public class PostingsDao {
 
 	public ArrayList<PostingsBean> sortHigh(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
@@ -488,6 +498,7 @@ public class PostingsDao {
 			Bean.setName(rs.getString("name"));
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
@@ -505,7 +516,7 @@ public class PostingsDao {
 	//評価数が低い
 	public ArrayList<PostingsBean> sortLow() throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.posting_id , postings.title, departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings "
@@ -524,6 +535,7 @@ public class PostingsDao {
 			Bean.setName(rs.getString("name"));
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
@@ -539,7 +551,7 @@ public class PostingsDao {
 
 	public ArrayList<PostingsBean> sortLow(String SearchChar) throws SQLException{
 		PreparedStatement pstm = con.prepareStatement(
-				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, "
+				"SELECT postings.mailaddress ,postings.title, postings.posting_id ,departments.department_name, users.name, postings.possession_vote ,"
 						+ "users.image, users.profilecomment, postings.possession_vote / terms.achievement_vote * 100 AS achievement_percentage, terms.achievement_vote, "
 						+ "DATEDIFF( DATE_ADD( ( postings.date ), INTERVAL( SELECT terms.terms_period FROM terms WHERE terms.terms_id = postings.terms_id ) DAY ) , CURRENT_DATE( ) ) AS timelimit "
 						+ "FROM postings JOIN terms ON terms.terms_id = postings.terms_id "
@@ -563,6 +575,7 @@ public class PostingsDao {
 			Bean.setName(rs.getString("name"));
 			Bean.setImage(rs.getString("image"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
+			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
 			Bean.setTimelimit(rs.getInt("timelimit"));
@@ -575,7 +588,7 @@ public class PostingsDao {
 		con.close();
 		return table;
 	}
-	
+
 	/**
 	 * 接続を閉じる
 	 *

@@ -12,7 +12,6 @@ public class PostingsBean {
 	private String user_Id;
 	private int post_id;
 	private String date;
-	private int possesion_Vote;
 	private int posting_Type_Id;
 	private int status;
 	private String title;
@@ -24,6 +23,8 @@ public class PostingsBean {
 	private String image;
 	private String profilecomment;
 	private int timelimit;
+	private int possession_vote;
+
 	public int getPosting_Id() {
 		return posting_Id;
 	}
@@ -47,12 +48,6 @@ public class PostingsBean {
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	public int getPossesion_Vote() {
-		return possesion_Vote;
-	}
-	public void setPossesion_Vote(int possesion_Vote) {
-		this.possesion_Vote = possesion_Vote;
 	}
 	public int getPosting_Type_Id() {
 		return posting_Type_Id;
@@ -120,7 +115,10 @@ public class PostingsBean {
 	public void setTimelimit(int timelimit) {
 		this.timelimit = timelimit;
 	}
-
-
-
+	public int getPossession_vote() {
+		return possession_vote;
+	}
+	public void setPossession_vote(int possession_vote) {
+		this.possession_vote = possession_vote;
+	}
 }
