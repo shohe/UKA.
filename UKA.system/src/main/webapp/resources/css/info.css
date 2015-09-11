@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.left_infomaion img {
+	width: 300px;
+    height: auto;
+}
+
 .left_clm {
     width: 800px;
     height: 500px;
@@ -48,5 +53,4 @@
 
 .left_infomaion {
     margin-top: 20px;
-    background: #aaa;
 }

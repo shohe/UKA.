@@ -202,7 +202,7 @@ public class PostController extends HttpServlet{
 		for (MultipleData multipleData : multiArray) {
 			conCon += "<h2>"+multipleData.getTitle()+"</h2><br />"+"<p>"+multipleData.getDescription()+"</p><br />";
 			if(multipleData.getUrl()!=null){
-				conCon += "<br /><img src=\""+multipleData.getUrl()+"\"/><br />";
+				conCon += "<br /><img class=\"detail_image\" src=\""+multipleData.getUrl()+"\"/><br />";
 			}
 		}
 		System.out.println(conCon);

@@ -109,6 +109,7 @@ blockquote.pull-right {border-right: 5px solid #999;}
 .project-details {color: #6f6f6f;}
 .project-details a {color: #333333;}
 .project-details a:hover {color:#d8450b; text-decoration: none;}
+.detail_image {width:300px; height:auto;}
 
 .project-info {margin: 0px 0px 40px 0px;}
 .project-info li {
