@@ -16,7 +16,6 @@
 	<h3>送信者名</h3>
 	<p>
 		<c:out value="${selectmail.user_id}"/>
-		<c:out value="${selectmail.name}"/>
 		<!--送信者名-->
 	</p>
 	<h3>件名</h3>

@@ -30,10 +30,11 @@
 						</tr>
 						<tr>
 							<td><select id="shubetsu" name="enq_id" class="form-control">
-									<option>お選びください。</option>
 									<option value="1">クレーム</option>
 									<option value="2">問題報告</option>
-									<option value="3">その他</option>
+									<option value="3">お問い合わせ</option>
+									<option value="4">ユーザー報告</option>
+									<option value="5">その他</option>
 							</select></td>
 						</tr>
 						<tr>
