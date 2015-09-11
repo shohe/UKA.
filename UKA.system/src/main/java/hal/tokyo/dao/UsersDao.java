@@ -222,17 +222,16 @@ public class UsersDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int update(String mailaddress,String password,String name,String profileComment,int department_Id,String image,String mailaddress_old) throws SQLException{
+	public int update(String mailaddress,String password,String name,String profileComment,int department_Id,String image) throws SQLException{
 
-		PreparedStatement update = con.prepareStatement("update users set mailaddress = ?, password = ?, name = ?, profileComment = ?, department_Id = ?, image = ? where mailaddress = ?");
+		PreparedStatement update = con.prepareStatement("update users set password = ?, name = ?, profileComment = ?, department_Id = ?, image = ? where mailaddress = ?");
 
-		update.setString(1, mailaddress);
-		update.setString(2, password);
-		update.setString(3, name);
-		update.setString(4, profileComment);
-		update.setInt(5, department_Id);
-		update.setString(6, image);
-		update.setString(7, mailaddress_old);
+		update.setString(1, password);
+		update.setString(2, name);
+		update.setString(3, profileComment);
+		update.setInt(4, department_Id);
+		update.setString(5, image);
+		update.setString(6, mailaddress);
 
 		int result = update.executeUpdate();
 

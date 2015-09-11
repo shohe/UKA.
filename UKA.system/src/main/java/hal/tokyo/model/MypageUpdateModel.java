@@ -8,11 +8,11 @@ public class MypageUpdateModel {
 
 	UsersDao ud = new UsersDao();
 
-	public boolean MypageUpdate(String mailaddress,String password,String name,String profileComment,int department_Id,String image,String mailaddress_old) throws SQLException{
+	public boolean MypageUpdate(String mailaddress,String password,String name,String profileComment,int department_Id,String image) throws SQLException{
 
 		try {
 
-			int count = ud.update(mailaddress, password, name, profileComment, department_Id, image, mailaddress_old);
+			int count = ud.update(mailaddress, password, name, profileComment, department_Id, image);
 
 			if(count > 0){
 
