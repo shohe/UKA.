@@ -32,9 +32,9 @@
 			<td><c:out value="${result.post_id}" /></td>
 			<td>
 
-				<form action="Adimn" method="post">
-					<input type="submit" class="btn btn-danger" name="" value="詳細ボタン">
-				</form>
+
+					<a href="http://localhost:8080/UKA.system/detail?post_id=<c:out value="${result.post_id}" />&vote_flag=0" class="btn btn-danger">詳細ボタン</a>
+
 			</td>
 			<td bgcolor="#FFF" align="center" width="150">
 				<c:choose>

@@ -125,7 +125,11 @@ public class PostingsDao {
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
@@ -168,7 +172,11 @@ public class PostingsDao {
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
@@ -209,7 +217,11 @@ public class PostingsDao {
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
@@ -247,7 +259,11 @@ public class PostingsDao {
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
@@ -285,7 +301,11 @@ public class PostingsDao {
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
@@ -327,7 +347,11 @@ public class PostingsDao {
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
@@ -365,7 +389,11 @@ public class PostingsDao {
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
@@ -405,7 +433,11 @@ public class PostingsDao {
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
@@ -472,7 +504,11 @@ public class PostingsDao {
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
 			Bean.setAchievement_vote(rs.getInt("achievement_vote"));
@@ -510,7 +546,11 @@ public class PostingsDao {
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
@@ -547,7 +587,11 @@ public class PostingsDao {
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));
@@ -587,7 +631,11 @@ public class PostingsDao {
 			Bean.setTitle(rs.getString("title"));
 			Bean.setDepartment_name(rs.getString("department_name"));
 			Bean.setName(rs.getString("name"));
-			Bean.setImage(rs.getString("image"));
+			if(rs.getString("image") != null){
+				Bean.setImage(rs.getString("image"));
+			}else{
+				Bean.setImage("./resources/var/user-blank.jpg");
+			}
 			Bean.setPossession_vote(rs.getInt("possession_vote"));
 			Bean.setProfilecomment(rs.getString("profilecomment"));
 			Bean.setAchievement_percentage(rs.getInt("achievement_percentage"));

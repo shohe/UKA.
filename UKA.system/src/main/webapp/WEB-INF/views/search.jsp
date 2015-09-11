@@ -53,7 +53,7 @@
                             <div class="row user_info">
                               <div class="col-sm-12">
                                   <div class="col-xs-4 col-sm-3">
-                                      <img src="https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg" alt="user image." />
+                                      <img src="<c:out value="${result.image}" />" alt="user image." />
                                   </div>
                                   <div class="col-xs-4 col-sm-9 user_comment">
                                       <span><c:out value="${result.department_name}" /> : <c:out value="${result.name}" /></span><br/>
