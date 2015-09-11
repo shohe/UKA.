@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +36,6 @@ public class MypageModificationController {
 	public ModelAndView showMessage(HttpServletRequest request, HttpServletResponse response,
 									@RequestParam(value = "department_Id",defaultValue = "0") int department_Id,
 									@RequestParam(value = "mailaddress" , required = false) String mailaddress,
-									@RequestParam(value = "mailaddress_old") String mailaddress_old,
 									@RequestParam(value = "name" , required = false) String name,
 									@RequestParam(value = "password" , required = false) String password,
 									@RequestParam(value = "password_new" , required = false) String password_new,
@@ -46,7 +44,7 @@ public class MypageModificationController {
 									@RequestParam(value = "profileComment" , required = false) String profileComment) throws SQLException,Exception{
 
 		/** セッション更新用 **/
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 
 		/** 入力内容チェック **/
 		MypageCheck mc = new MypageCheck();
@@ -74,7 +72,7 @@ public class MypageModificationController {
 		 **/
 		mc_name = mc.MypageNameCheck(name);
 		mc_mailaddress = mc.MypageMailaddressCheck(mailaddress);
-		mc_password = mc.MypageOldPasswordCheck(mailaddress_old, password);
+		mc_password = mc.MypageOldPasswordCheck(mailaddress, password);
 		mc_password_new = mc.MypagePasswordCheck(password_new);
 		mc_profileComment = mc.MypageProfileComment(profileComment);
 		//mc_image = mc.MypageFileExtensionCheck(thumbnail.getOriginalFilename());
@@ -160,7 +158,7 @@ public class MypageModificationController {
 			}
 
 			/** アップデートに成功した場合 **/
-			if(mum.MypageUpdate(mailaddress, password_new, name, profileComment, department_Id, imageUrl, mailaddress_old)){
+			if(mum.MypageUpdate(mailaddress, password_new, name, profileComment, department_Id, imageUrl)){
 
 
 				//画像ファイルが選択されたとき実行
@@ -180,8 +178,8 @@ public class MypageModificationController {
 				mv.addObject("profile", profileComment);
 
 				//	セッションセット
-				session.removeAttribute("MailAddress");
-				session.setAttribute("MailAddress", mailaddress);
+				//session.removeAttribute("MailAddress");
+				//session.setAttribute("MailAddress", mailaddress);
 
 
 				mc = null;
